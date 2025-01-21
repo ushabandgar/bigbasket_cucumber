@@ -83,6 +83,11 @@ public class Keyword {
 
 	}
 
+	public void mouseHoverOn() {
+		Actions actions = new Actions(driver);
+		actions.moveToLocation(200, 0).click().perform();
+	}
+
 	public void switchToChildWindowHandle() {
 		Set<String> allWindows = driver.getWindowHandles();
 		String parentWindow = driver.getWindowHandle();
@@ -162,7 +167,6 @@ public class Keyword {
 		return expectedCategories;
 	}
 
-
 	public void clickOnYourCategory(String categoryNameInLowerCaseOnly) throws InterruptedException {
 		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-");
 		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(", ", "-");
@@ -174,8 +178,7 @@ public class Keyword {
 	}
 
 	public void clickOnBackButtonOfBrowser() {
-				driver.navigate().back();
+		driver.navigate().back();
 	}
 
 }
-
