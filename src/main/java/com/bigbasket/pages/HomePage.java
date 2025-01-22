@@ -230,7 +230,7 @@ public class HomePage {
 	}
 
 	public void verifyNavigatedToHomePageFromCategoryPage() {
-		String urlAfterNavigationToHome=keyword.driver.getCurrentUrl();
+		String urlAfterNavigationToHome=Keyword.driver.getCurrentUrl();
 		assertTrue(urlAfterNavigationToHome.equals("https://www.bigbasket.com/"));
 	}
 }

@@ -175,6 +175,7 @@ public class Keyword {
 				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul/li/a[@href=\"/cl/"
 						+ categoryNameInLowerCaseOnly + "/?nc=nb\"]"));
 		categoryName.click();
+		Thread.sleep(3000);
 	}
 
 	public void clickOnBackButtonOfBrowser() {

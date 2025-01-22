@@ -14,7 +14,6 @@ import com.bigbasket.base.WaitFor;
 public class ShopByCategoryPage {
 
 	Keyword keyword=new Keyword();
-	
 	@FindBy(css="span[class=\"name text-md leading-md xl:leading-sm xl:text-base text-darkOnyx-800\"]")
 	WebElement HomeButtonOnCategoryPage;
 	
@@ -38,8 +37,9 @@ public class ShopByCategoryPage {
 			Assert.assertTrue(categoryNameAfterClick.equalsIgnoreCase("fashion"));
 		}
 	}
-	public void clickOnHomeButton(){
+	public void clickOnHomeButton() throws InterruptedException{
 		keyword.clickOn(HomeButtonOnCategoryPage);
+		Thread.sleep(3000);
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
 	}
 
@@ -57,7 +57,7 @@ public class ShopByCategoryPage {
 	}
 	public void verifyNoProductMessgae(){
 		int productCount=getProductListAfterClickOnCategory();
-		if(productCount>0) {
+		if(productCount==0) {
 		String actualNoProductMessage=getNoProductMessage();
 		String expectedMessage = "We couldn't find anything matching your query. Try something else.";
 		Assert.assertEquals(actualNoProductMessage, expectedMessage);
