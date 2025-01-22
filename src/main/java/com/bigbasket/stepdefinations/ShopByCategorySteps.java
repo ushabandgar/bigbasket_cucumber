@@ -1,9 +1,8 @@
 package com.bigbasket.stepdefinations;
 
-import org.openqa.selenium.By;
-
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
+import com.bigbasket.pages.ShopByCategoryPage;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -60,5 +59,37 @@ public class ShopByCategorySteps {
 	public void clickOutsideTheDropDown() {
 		Keyword keyword=new Keyword();
 		keyword.mouseHoverOn();
+	}
+	@And("I click on {string} category")
+	public void clickOnCategory(String catgeoryNameLowerCase) throws InterruptedException {
+		HomePage homepage=new HomePage();
+        homepage.clickOnCategory(catgeoryNameLowerCase);
+	}
+	@Then("I should see Fashion category page")
+	public void respectiveCategoryPageAfterClick() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifySpecificCatgeoryPageOpens();
+	}
+	@And("I click on Home button")
+	public void clickOnHomeButton() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnHomeButton();
+	}
+	@Then("I should navigated to home Page")
+	public void verifyNavigationToHomePageBytappingOnHomeButton() {
+		HomePage homepage = new HomePage();
+		homepage.verifyNavigatedToHomePageFromCategoryPage();
+	}
+	@And("I click on Back button of the browser")
+	public void clickOnBackButtonOfBrowser() {
+		Keyword keyword=new Keyword();
+		keyword.clickOnBackButtonOfBrowser();
+		HomePage homepage = new HomePage();
+		homepage.verifyNavigatedToHomePageFromCategoryPage();
+	}
+	@Then("I should see {string} message")
+	public void noProductMessageOfCategory(String NoProductMessage) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyNoProductMessgae();
 	}
 }
