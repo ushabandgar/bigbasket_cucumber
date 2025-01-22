@@ -3,8 +3,6 @@ import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ProductDetailPage;
 import com.bigbasket.pages.ProductSearchPage;
-
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
