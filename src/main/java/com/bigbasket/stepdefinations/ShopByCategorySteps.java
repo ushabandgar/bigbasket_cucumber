@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class ShopByCategorySteps {
 
-	@Given("Browser is launched")
+	@Given("Browser is launch")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
 		Keyword keyword=new Keyword();
 		keyword.openBrowser("firefox");
