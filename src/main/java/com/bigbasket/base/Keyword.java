@@ -88,6 +88,10 @@ public class Keyword {
 		actions.moveToLocation(200, 0).click().perform();
 	}
 
+	public void mouseScrollDown() {
+		Actions actions = new Actions(driver);
+		actions.scrollByAmount(0, 500).perform();
+	}
 	public void switchToChildWindowHandle() {
 		Set<String> allWindows = driver.getWindowHandles();
 		String parentWindow = driver.getWindowHandle();
