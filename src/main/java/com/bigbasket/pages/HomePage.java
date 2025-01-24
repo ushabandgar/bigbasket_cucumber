@@ -25,6 +25,9 @@ public class HomePage {
 
 	@FindBy(xpath = "(//input[@placeholder=\"Search for Products...\"])[2]")
 	WebElement searchTextBox;
+	
+	@FindBy(css="svg.mr-3")
+	WebElement clearButton;
 
 	@FindBy(xpath = "//li[@class=\"QuickSearch___StyledMenuItem-sc-rtz2vl-4 ibNDA-d\"]")
 	List<WebElement> results;
@@ -105,7 +108,7 @@ public class HomePage {
 
 	}
 
-	public void verifyThebBehaviourWhenThSearchbBarIsLeftEmptyAndUserPressTheEnter() {
+	public void verifyTheBehaviourOfPageWhenTheSearchBarIsLeftEmptyAndUserPressTheEnter() {
 		String urlBeforeText = getUrlBeforeText();
 		KeepEmptySearchBar();
 		String urlAfterText = getUrlAfterText();
@@ -139,6 +142,21 @@ public class HomePage {
 		softly.assertAll();
 
 	}
+	
+	public  void enterTextIntoTextBox(){
+		searchTextBox.sendKeys("Tomato");
+		String valueAfterEnterText=searchTextBox.getAttribute("value");
+		
+	}
+		public void clickOnClearButton(){
+			clearButton.click();
+			String valueAfterClearText = searchTextBox.getAttribute("value");
+		
+	}
+		public void verifyThatWhenClickTheClearButtonThenSearchBarShouldBeClearOrNot(){
+			//Assert.AssertFalse(valueAfterEnterText==valueAfterClearText);
+			
+		}
 
 	public void verifyShopByCategoryMenuIsAvailable() {
 		String expectedShopByCategoryMenuName = "Shop by";
