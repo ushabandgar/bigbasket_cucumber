@@ -1,5 +1,7 @@
 package com.bigbasket.stepdefinations;
 
+import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
@@ -16,7 +18,7 @@ public class ShopByCategorySteps {
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
 		Keyword keyword = new Keyword();
 		keyword.openBrowser("firefox");
-        keyword.maximizeBrowser();
+		keyword.maximizeBrowser();
 	}
 
 	@And("close the browser")
@@ -54,13 +56,13 @@ public class ShopByCategorySteps {
 		HomePage homepage = new HomePage();
 		homepage.clickOnAllCategoriesOneByOne();
 	}
+
 	@Then("All the categories are clickable")
 	public void verifyAllCatgoriesAreClickable() throws InterruptedException {
 		HomePage homepage = new HomePage();
 		homepage.verifyAllCategoriesAreClickable();
 	}
 
-	
 	@When("I click on {string} menu after expand")
 	public void clickOnShopByCatgeoryMenuAfterExpand(String ShopByCategory) {
 		HomePage homepage = new HomePage();
@@ -135,10 +137,38 @@ public class ShopByCategorySteps {
 		categoryPage.getCountOfSubCategories();
 		categoryPage.verifyShowMoreLinksDisplays();
 	}
+
 	@Then("categoris with less than or equal to 5 subcatgories should not have {string} link")
 	public void verifyShowMorelinkNotDisplays(String ShowMoreLink) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.getCountOfSubCategories();
 		categoryPage.verifyShowMoreLinksDisplays();
 	}
+
+	@And("I get the text before click on Show more +")
+	public void getTextBeforeClickOnshowMore() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getTextBeforeClickOnShowMore();
+
+	}
+
+	@And("I click on {string} link")
+	public void clickOnShowMore(String ShowMore) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnShowMoreLink();
+	}
+
+	@Then("additional categories should be displayed")
+	public void verifyAdditionalCategoriesDisplays() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyAdditionalCategoriesAreDisplayed();
+	}
+
+	@Then("{string} text replaces to {string}")
+	public void showMoreButtonReplacedWithShowLess(String ShowMore, String ShowLess) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyShowMoreButtonReplaceswithShowLess();
+		
+	}
+
 }
