@@ -29,6 +29,8 @@ public class ShopByCategoryPage {
 	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterByCategory___StyledButton-sc-c0pkxv-5 kYQsWi bDIesH\"]")
 	WebElement showMoreLink;
 
+	String textbeforeclick;
+
 	public ShopByCategoryPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -100,13 +102,39 @@ public class ShopByCategoryPage {
 
 	public void verifyShowMoreLinksDisplays() {
 		if (getCountOfSubCategories() > 5) {
-			if(showMoreLink.isDisplayed()) {
-			String ActualShowMoreLinkText=showMoreLink.getText();
-			String expectedShowMoreLinkText="Show more +";
-			Assert.assertEquals(ActualShowMoreLinkText, expectedShowMoreLinkText);
+			if (showMoreLink.isDisplayed()) {
+				String ActualShowMoreLinkText = showMoreLink.getText();
+				String expectedShowMoreLinkText = "Show more +";
+				Assert.assertEquals(ActualShowMoreLinkText, expectedShowMoreLinkText);
 			}
 		} else {
-			Assert.assertFalse(false,"Clicked Categories have less or equal to 5 subcategories in it.");
+			Assert.assertFalse(false, "Clicked Categories have less or equal to 5 subcategories in it.");
 		}
+	}
+
+	public void clickOnShowMoreLink() {
+		
+		keyword.clickOn(showMoreLink);
+	}
+
+	public void getTextBeforeClickOnShowMore() {
+		textbeforeclick=showMoreLink.getText();
+	}
+	public void verifyAdditionalCategoriesAreDisplayed() {
+		int countofSubCategoris = getCountOfSubCategories();
+		List<WebElement> subCategories = keyword.getWebElements(Locator.shopByCatgeorySubCategories);
+
+		for (int i = 4; i <countofSubCategoris; i++) {
+			System.out.println(subCategories.get(i).getText());
+			Assert.assertTrue(subCategories.get(i).isDisplayed());
+		}
+
+	}
+
+	public void verifyShowMoreButtonReplaceswithShowLess() throws InterruptedException {
+		Thread.sleep(3000);
+		String textAfterClickonShowMore=showMoreLink.getText();
+		System.out.println(textAfterClickonShowMore);
+		Assert.assertNotEquals(textbeforeclick, textAfterClickonShowMore);
 	}
 }
