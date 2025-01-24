@@ -89,3 +89,9 @@ Feature: Product Detail Page functionality
     And Click on the product
     Then Switch window on Product detail page
     And verify After click On Product PackSize For 500ml Product Price Will Change
+    
+    
+  Scenario: Ignore for testing
+    Given Browser launched with Url!
+    When User clicks on the search input and searches for a product name
+   
