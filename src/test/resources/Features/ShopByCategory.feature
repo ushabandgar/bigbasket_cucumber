@@ -105,3 +105,13 @@ And I click on "fruits & vegetables" category
 And I get the text before click on Show more +
 And I click on "Show more +" link
 Then "Show more +" text replaces to "Show less -"
+
+
+Scenario: Verify when user clicks on the "Show less -" button collapses additional categories
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+And I click on "Show less -" link
+Then additional categories should be collpased
+

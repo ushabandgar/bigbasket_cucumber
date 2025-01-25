@@ -1,8 +1,5 @@
 package com.bigbasket.stepdefinations;
 
-import org.openqa.selenium.By;
-import org.testng.Assert;
-
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
@@ -12,13 +9,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ShopByCategorySteps {
+public class ShopByCategorySteps{
 
 	@Given("Browser is launched and maximized")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
 		Keyword keyword = new Keyword();
 		keyword.openBrowser("firefox");
 		keyword.maximizeBrowser();
+		keyword.maximizeBrowser();
+
 	}
 
 	@And("close the browser")
@@ -169,6 +168,16 @@ public class ShopByCategorySteps {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyShowMoreButtonReplaceswithShowLess();
 		
+	}
+	/*@And("I click on {string} link")
+	public void clickOnShowLessLink(String showLess){
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnShowLessLink();
+	}*/
+	@Then("additional categories should be collpased")
+	public void additionalCategoriesCollapsed() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyAdditionalCategoriesAreCollapsed();
 	}
 
 }
