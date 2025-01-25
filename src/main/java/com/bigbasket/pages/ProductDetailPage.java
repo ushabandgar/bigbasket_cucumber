@@ -75,8 +75,7 @@ public class ProductDetailPage {
 	}
 
 	public void verifyActualAndExpectedProductPrice() {
-		assertTrue(expectedproductprice.getText().contains("₹"), "Price not match!");
-
+	    assertTrue(expectedproductprice.getText().contains("₹"), "Price not match!");
 	}
 
 	public void CheckProductUrlLoadingSuccessfully() {
@@ -98,13 +97,13 @@ public class ProductDetailPage {
 	}
 
 	public void verifyclickFucntinalityOnProductImageGallaryOnebyOne() throws InterruptedException {
-		WaitFor.untilUrlLoad("https://www.bigbasket.com");
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		for (int i = 0; i <= 4; i++) {
 			String imageSelector = "#thumb-" + i;
 			List<WebElement> productImages = 
 					WaitFor.visibilityOfElements(Keyword.driver.findElements(By.cssSelector(imageSelector)));
 			for (WebElement images : productImages) {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				WaitFor.visibilityOfElement(images);
 				images.click();
 				assertTrue(images.isDisplayed(), "Image is not visible");

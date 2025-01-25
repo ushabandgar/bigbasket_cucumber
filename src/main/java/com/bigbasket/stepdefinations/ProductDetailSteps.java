@@ -3,140 +3,115 @@ import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ProductDetailPage;
 import com.bigbasket.pages.ProductSearchPage;
-
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 public class ProductDetailSteps {
-	
-	@Given("Browser launched with Url!")
+
+	@Given("The user is on the homepage")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
-		Keyword keyword=new Keyword();
+		Keyword keyword = new Keyword();
 		keyword.openBrowser("Firefox");
 		keyword.launchUrl("https://www.bigbasket.com/");
 		keyword.maximizeBrowser();
 	}
-
-	@When("User clicks on the search input and searches for a product name")
-	public void userclicksOnTheSearchInputandSearchesForProductName() {
+	@When("The user searches for {string}")
+	public void userClicksOnTheSearchInputAndSearchesForProductName(String productName) {
 	    HomePage page = new HomePage();
 	    page.clickOnSearchText();
-	    page.sendProductName();   
+	    page.sendProductName(productName);  // Pass the productName parameter to the method
 	}
-
-	@Then("Verify that after clicking the product, the URL should change on the same tab")
-	public void verify_that_after_clicking_the_product_the_url_should_change_on_the_same_tab() {
+	@Then("The URL should change on the same tab")
+	public void verifyThatAfterClickingTheProductTheUrlShouldChangeOnTheSameTab() {
 		HomePage page = new HomePage();
 		page.verifyUrlAfterSearch();
 	}
-	
-	@When("Click on the product")
-	public void click_on_the_product() {
-	   ProductSearchPage productSearchPage = new ProductSearchPage();
-	   productSearchPage.clickOnProduct();
+	@When("The user clicks on the {string}")
+	public void clickOnTheProduct(String productName) {
+	    ProductSearchPage productSearchPage = new ProductSearchPage();
+	    productSearchPage.clickOnProduct(productName);  
 	}
-	
-	@Then("Switch window on Product detail page")
-	public void switch_window_on_product_deatil_page() {
+	@Then("The product page URL should changed")
+	public void verifyThatAfterClickingTheProductProductUrlPageChanged() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
-	}
-
-	@Then("Verify that after clicking the product, Product Url Title Changed")
-	public void verify_that_after_clicking_the_product_product_url_title_changed() {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
-		productDetailPage.verifyAfterClickOnProductThenProductUrlTitleChanged();
-	}
-	@Then("Verify that after clicking the product, Product Page URl Changed")
-	public void verify_that_after_clicking_the_product_product_url_page_changed() {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.verifyAfterClickOnProductThenProductUrlChanged();
 	}
-	@Then("Verify that after clicking the product, Product url loaded Fully")
-	public void verify_that_after_clicking_the_product_product_url_loaded_fully() {
+	@Then("The product page Title should changed")
+	public void verifyThatAfterClickingTheProductProductUrlTitleChanged() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyAfterClickOnProductThenProductUrlTitleChanged();
+	}
+	@Then("The Product url should loaded Fully")
+	public void verifyThatAfterClickingTheProductProductUrlLoadedFully() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.CheckProductUrlLoadingSuccessfully();
 	}
-	@Then("Get Actual Product Text")
-	public void get_actual_prodct_name() {
+	@Then("Check the product title")
+	public void getActualProductName() {
 		ProductSearchPage productSearchPage = new ProductSearchPage();
-		   productSearchPage.getActualSearchProductTitleText();    
+		productSearchPage.getActualSearchProductTitleText();
 	}
-
-	@Then("Get Expected Product Text")
-	public void get_expected_prodct_name() {
+	@Then("The product title on the product detail page should be the same as the product title on the homepage")
+	public void vverifyActualAndExpectedProductTextShouldBeSame() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.getexpectedProductDetailTitleText();
-	}
-	@Then("Verify Actual and Expected product Text should be same")
-	public void verifyActualandExpectedproductTextshouldbesame() {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.verifyActualAndExpectedProductText();
 	}
-	
-	@Then("Get Actual Product Price")
-	public void get_actual_productPrice() {
+	@Then("Check the product Price")
+	public void  getActualProductPrice() {
 		ProductSearchPage productSearchPage = new ProductSearchPage();
-		   productSearchPage.getActualSearchProductTitlePrice();   
+		productSearchPage.getActualSearchProductTitlePrice();
 	}
-
-	@Then("Get Expected Product Price")
-	public void get_expected_productPrice() {
+	@Then("The product Price on the product detail page should be the same as the product price on the homepage")
+	public void verifyActualAndExpectedProductPriceShouldBeSame() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.getExpectedProductDetailPagePrice();
-	}
-	
-	@Then("Verify Actual and Expected product Price should be same")
-	public void verifyActualandExpectedproductPriceShouldbesame() {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.verifyActualAndExpectedProductPrice();
 	}
-	
-	@Then("Verify Product Image display properly")
-		public void verifyImageDisplayProperly() {
+	@Then("The product image on the Product Detail Page should be displayed properly")
+	public void verifyImageDisplayProperly() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.CheckProductImageToverifyImageloadingSuccessfully();
-		}
-	
-	@Then("Hover on Image")
-	public void hover_on_image() {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
-		productDetailPage.hoverOnImage();
 	}
-
-	@Then("Verify Hover functionality works")
-	public void verify_hover_functionality_works() {
+	@Then("The Hover effect should be Work on product Image")
+	public void verifyHoverFunctionalityWorks() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.hoverOnImage();
 		productDetailPage.verifyHoverFeatureWorks();
 	}
-	
-	@Then("verify click Fuctionality On Product Image Gallary One by One")
+	@Then("The user should be able click on gallary images")
 	public void verifyClickFucntinalityOnProductImageGallaryOnebyone() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.verifyclickFucntinalityOnProductImageGallaryOnebyOne();
 	}
-	
-	@And("verify Gallary ImageQuality")
-	public void verifyGallaryImageQuality() {
+	@And("Product Gallary images should be in High Quality")
+	public void verifyGallaryImageQuality() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyclickFucntinalityOnProductImageGallaryOnebyOne();
 		productDetailPage.verifyGallaryImageQuality();
 	}
-	
-    @Then("veriy Price Contain Currency Symbol Like ₹")
-    public void verifyPriceContainCurrencysymbolLike₹() {
-    	ProductDetailPage productDetailPage = new ProductDetailPage();
+	@Then("The price should be displayed with the ₹ currency symbol")
+	public void verifyPriceContainCurrencysymbolLike₹() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.getExpectedProductDetailPagePrice();
 		productDetailPage.verifyPriceContainCurrencySymbolLike₹();
-    }
-    
-    @Then("verify After click On Product PackSize For 500ml Product Price Will Change")
-    public void verifyAfterclickOnProductPacksizeFor500mlProductPriceWillChange() {
-    	ProductDetailPage productDetailPage = new ProductDetailPage();
-    	productDetailPage.verifyAfterclickOnProductPackSizeFor500mlProductPriceWillChange();
-    }
-
-    
-	
-
-
+	}
+	@Then("Product PackSize For 500ml Product Price Will Change")
+	public void verifyAfterclickOnProductPacksizeFor500mlProductPriceWillChange() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyAfterclickOnProductPackSizeFor500mlProductPriceWillChange();
+	}
 }
