@@ -29,6 +29,9 @@ public class ShopByCategoryPage {
 	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterByCategory___StyledButton-sc-c0pkxv-5 kYQsWi bDIesH\"]")
 	WebElement showMoreLink;
 
+	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterByCategory___StyledButton-sc-c0pkxv-5 kYQsWi bDIesH\"]")
+	WebElement showLessLink;
+	
 	String textbeforeclick;
 
 	public ShopByCategoryPage() {
@@ -125,7 +128,6 @@ public class ShopByCategoryPage {
 		List<WebElement> subCategories = keyword.getWebElements(Locator.shopByCatgeorySubCategories);
 
 		for (int i = 4; i <countofSubCategoris; i++) {
-			System.out.println(subCategories.get(i).getText());
 			Assert.assertTrue(subCategories.get(i).isDisplayed());
 		}
 
@@ -136,5 +138,19 @@ public class ShopByCategoryPage {
 		String textAfterClickonShowMore=showMoreLink.getText();
 		System.out.println(textAfterClickonShowMore);
 		Assert.assertNotEquals(textbeforeclick, textAfterClickonShowMore);
+	}
+
+	public void clickOnShowLessLink() {
+
+		keyword.clickOn(showLessLink);
+	}
+
+	public void verifyAdditionalCategoriesAreCollapsed() {
+		int countofSubCategoris = getCountOfSubCategories();
+		List<WebElement> subCategories = keyword.getWebElements(Locator.shopByCatgeorySubCategories);
+
+		for (int i = 4; i <countofSubCategoris; i++) {
+			Assert.assertFalse(subCategories.get(i).isDisplayed());
+		}
 	}
 }
