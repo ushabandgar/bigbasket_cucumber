@@ -26,7 +26,7 @@ public class ProductSearchPage {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
-	public void clickOnProduct() {
+	public void clickOnProduct(String productName) {
 		try {
 			WaitFor.elementToBeClickable(ClickonProduct);
 			ClickonProduct.click();

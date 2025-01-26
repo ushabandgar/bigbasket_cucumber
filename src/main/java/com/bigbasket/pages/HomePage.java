@@ -244,7 +244,7 @@ public class HomePage {
 		System.out.println("Clicked on search text field.");
 	}
 
-	public void sendProductName() {
+	public void sendProductName(String productName) {
 		searchText.sendKeys("Amul Taaza Milk, 1 L Pouch");
 		searchText.sendKeys(Keys.ENTER);
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
