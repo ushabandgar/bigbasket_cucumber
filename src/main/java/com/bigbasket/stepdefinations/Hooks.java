@@ -15,7 +15,6 @@ Keyword keyword=new Keyword();
 		keyword.launchUrl("https://www.bigbasket.com/");
 		keyword.maximizeBrowser();
 	}
-
 	
 	@After
 	public void tearDown() {

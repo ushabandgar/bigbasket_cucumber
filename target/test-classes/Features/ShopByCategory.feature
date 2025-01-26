@@ -97,6 +97,7 @@ And I click on "fruits & vegetables" category
 And I click on "Show more +" link
 Then additional categories should be displayed
 
+
 Scenario: Verify when user clicks on the "Show more +" button changes button text to "Show less -"
 
 Given After entering url, User is on HomePage
@@ -106,12 +107,24 @@ And I get the text before click on Show more +
 And I click on "Show more +" link
 Then "Show more +" text replaces to "Show less -"
 
-@today
+
 Scenario: Verify when user clicks on the "Show less -" button collapses additional categories
 
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
 And I click on "fruits & vegetables" category
-And I click on "Show less -" link
-Then additional categories should be collpased
+And I scroll down
+And I click on "Show more +" link 
+Then I click on Show less - link additional categories should be collpased
+
+@today
+Scenario: Verify when user clicks on the "Show less -" button changes button text to "Show more +"
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+And I scroll down
+And I click on "Show more +" link 
+And I click on "Show less -" link 
+Then "Show less -" text replaces to "Show more +" 
 
