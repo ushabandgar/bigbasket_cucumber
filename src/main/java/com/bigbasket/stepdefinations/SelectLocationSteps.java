@@ -70,4 +70,53 @@ public class SelectLocationSteps {
 
 	}
 
+	@And("User observe Url of the page")
+	public void user_observe_url_of_the_page() {
+		HomePage homepage = new HomePage();
+		homepage.getUrlBeforeEnterTextIntoTextBox();
+
+	}
+
+	@And("User keep empty TextBox")
+	public void user_keep_empty_text_box() {
+		HomePage homepage = new HomePage();
+		homepage.KeepEmptySearchForAreaTextBox();
+
+	}
+
+	@And("User press the enter")
+	public void user_press_the_enter() {
+		HomePage homepage = new HomePage();
+		homepage.getUrlAfterEnterTextIntoTextBox();
+
+	}
+
+	@Then("page should not be redirect on another page")
+	public void page_should_not_be_redirect_on_another_page() {
+		HomePage homepage = new HomePage();
+		homepage.verifyTheBehaviourOfPageWhenTheSearchForAreaTextBoxEmptyAndUserPressTheEnter();
+
+	}
+
+	@And("User enter {string} into search for area text box")
+	public void user_enter_into_search_for_area_text_Box(String Mum) throws InterruptedException {
+		HomePage homepage = new HomePage();
+		homepage.EnterPartialTextIntoSearchForAreaTextBox();
+
+	}
+
+	@And("User get list of  related search results")
+	public void user_get_list_of_related_search_results() {
+		HomePage homepage = new HomePage();
+		homepage.getAllSearchResultDescriptionWhenEnterPartialTextInIntoSearchForAreaTextBox();
+
+	}
+
+	@Then("Address of location results should be contains {string}")
+	public void address_of_location_results_should_be_contains(String Mum) {
+		HomePage homepage = new HomePage();
+		homepage.verifyWhenEnterPartialTextIntoSearchForAreaTextBoxThenResultShouldBeDisplaye();
+
+	}
+
 }

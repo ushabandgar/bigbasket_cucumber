@@ -24,3 +24,18 @@ Feature: This feature file test Select Location functionality
     And User enter "Pune" into TextBox
     And User get list of address locations
     Then Address of location results should be appear which contains "Pune"
+
+  Scenario: Verify behaviour of Homapage when the search bar is left empty and user press the enter
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User observe Url of the page
+    And User keep empty TextBox
+    And User press the enter
+    Then page should not be redirect on another page
+
+  Scenario: Verify that when user enter partial text "Mum" into text box then result should be diaplay
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter "Mum" into search for area text box
+    And User get list of  related search results
+    Then Address of location results should be contains "Mum"

@@ -106,6 +106,59 @@ public class HomePage {
 		softly.assertAll();
 
 	}
+	public String getUrlBeforeEnterTextIntoTextBox() {
+		String urlBeforeText = Keyword.driver.getCurrentUrl();
+		System.out.println(urlBeforeText);
+		return urlBeforeText;
+	}
+
+	public void KeepEmptySearchForAreaTextBox() {
+		Keyword.sendkeys(searchForArea, "");
+		searchForArea.sendKeys(Keys.ENTER);
+
+	}
+
+	public String getUrlAfterEnterTextIntoTextBox() {
+		String urlAfterText = Keyword.driver.getCurrentUrl();
+		System.out.println(urlAfterText);
+		return urlAfterText;
+
+	}
+
+	public void verifyTheBehaviourOfPageWhenTheSearchForAreaTextBoxEmptyAndUserPressTheEnter() {
+		String urlBeforeText = getUrlBeforeText();
+		KeepEmptySearchBar();
+		String urlAfterText = getUrlAfterText();
+		Assert.assertEquals(urlBeforeText, urlAfterText);
+
+	}
+	public void EnterPartialTextIntoSearchForAreaTextBox() throws InterruptedException {
+		Keyword.sendkeys(searchForArea, "Mum");
+		Thread.sleep(3000);
+
+	}
+
+	public List<String> getAllSearchResultDescriptionWhenEnterPartialTextInIntoSearchForAreaTextBox() {
+		List<WebElement> descriptions = results;
+		List<String> searchdescriptions = new ArrayList<String>();
+		for (WebElement description : descriptions) {
+			searchdescriptions.add(description.getText());
+
+		}
+		return searchdescriptions;
+
+	}
+
+	public void verifyWhenEnterPartialTextIntoSearchForAreaTextBoxThenResultShouldBeDisplaye() {
+		SoftAssert softly = new SoftAssert();
+		for (String description : getAllSearchResultDescription()) {
+			softly.assertTrue(description.contains("Mum"));
+
+		}
+		softly.assertAll();
+
+	}
+
 
 	// Test case For search product
 
