@@ -6,9 +6,9 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 public class Hooks {
-	
-Keyword keyword=new Keyword();
-	
+
+	Keyword keyword = new Keyword();
+
 	@Before
 	public void setUp() throws Exception {
 		keyword.openBrowser("Firefox");
@@ -16,11 +16,9 @@ Keyword keyword=new Keyword();
 		keyword.maximizeBrowser();
 	}
 
-	
 	@After
 	public void tearDown() {
-	    if (Keyword.driver != null) {
-	    	keyword.closeBrowser();
-	    }
+		keyword.quitBrowser();
+
 	}
 }
