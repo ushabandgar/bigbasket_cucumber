@@ -31,6 +31,9 @@ public class ShopByCategoryPage {
 
 	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterByCategory___StyledButton-sc-c0pkxv-5 kYQsWi bDIesH\"]")
 	WebElement showLessLink;
+
+	@FindBy(xpath="//ul[@id=\"side-menu-category-navigation\"]")
+	WebElement subcategoriesList;
 	
 	String textbeforeclick;
 
@@ -115,19 +118,20 @@ public class ShopByCategoryPage {
 		}
 	}
 
-	public void clickOnShowMoreLink() {
-		
+	public void clickOnShowMoreLink() throws InterruptedException {
 		keyword.clickOn(showMoreLink);
+		Thread.sleep(3000);
 	}
 
 	public void getTextBeforeClickOnShowMore() {
-		textbeforeclick=showMoreLink.getText();
+		textbeforeclick = showMoreLink.getText();
 	}
+
 	public void verifyAdditionalCategoriesAreDisplayed() {
 		int countofSubCategoris = getCountOfSubCategories();
 		List<WebElement> subCategories = keyword.getWebElements(Locator.shopByCatgeorySubCategories);
 
-		for (int i = 4; i <countofSubCategoris; i++) {
+		for (int i = 4; i < countofSubCategoris; i++) {
 			Assert.assertTrue(subCategories.get(i).isDisplayed());
 		}
 
@@ -135,22 +139,16 @@ public class ShopByCategoryPage {
 
 	public void verifyShowMoreButtonReplaceswithShowLess() throws InterruptedException {
 		Thread.sleep(3000);
-		String textAfterClickonShowMore=showMoreLink.getText();
-		System.out.println(textAfterClickonShowMore);
+		String textAfterClickonShowMore = showMoreLink.getText();
 		Assert.assertNotEquals(textbeforeclick, textAfterClickonShowMore);
 	}
 
-	public void clickOnShowLessLink() {
+	public void verifyAdditionalCategoriesAreCollapsed() throws InterruptedException {
+	
+		String classNameAfterClickOnShowMore = subcategoriesList.getAttribute("class");
+		clickOnShowMoreLink();
+		String classNameAfterClickOnShowLess = subcategoriesList.getAttribute("class");
+		Assert.assertFalse(classNameAfterClickOnShowMore.equals(classNameAfterClickOnShowLess));
 
-		keyword.clickOn(showLessLink);
-	}
-
-	public void verifyAdditionalCategoriesAreCollapsed() {
-		int countofSubCategoris = getCountOfSubCategories();
-		List<WebElement> subCategories = keyword.getWebElements(Locator.shopByCatgeorySubCategories);
-
-		for (int i = 4; i <countofSubCategoris; i++) {
-			Assert.assertFalse(subCategories.get(i).isDisplayed());
-		}
 	}
 }

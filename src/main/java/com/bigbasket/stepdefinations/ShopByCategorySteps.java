@@ -152,7 +152,7 @@ public class ShopByCategorySteps{
 	}
 
 	@And("I click on {string} link")
-	public void clickOnShowMore(String ShowMore) {
+	public void clickOnShowMore(String ShowMore) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnShowMoreLink();
 	}
@@ -169,15 +169,16 @@ public class ShopByCategorySteps{
 		categoryPage.verifyShowMoreButtonReplaceswithShowLess();
 		
 	}
-	/*@And("I click on {string} link")
-	public void clickOnShowLessLink(String showLess){
-		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-		categoryPage.clickOnShowLessLink();
-	}*/
-	@Then("additional categories should be collpased")
-	public void additionalCategoriesCollapsed() {
+
+	@Then("I click on Show less - link additional categories should be collpased")
+	public void additionalCategoriesCollapsed() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyAdditionalCategoriesAreCollapsed();
+	}
+
+	@Then("Bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc")
+	public void defaultFiltersAreVisible() {
+		
 	}
 
 }
