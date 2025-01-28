@@ -176,4 +176,9 @@ public class ShopByCategorySteps{
 		categoryPage.verifyAdditionalCategoriesAreCollapsed();
 	}
 
+	@Then("Bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc")
+	public void defaultFiltersAreVisible() {
+		
+	}
+
 }
