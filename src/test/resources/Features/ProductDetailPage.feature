@@ -1,91 +1,144 @@
 Feature: Product Detail Page functionality
 
-  Scenario: Verify When User Search "Product" After URL Will Change On Same Tab.
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    Then Verify that after clicking the product, the URL should change on the same tab
-    And close the browser
+  Scenario: when User searches "Product", the URL will change on the same tab
+    Given The user is on the homepage
+    When The user searches for "Product"
+    Then The URL should change on the same tab
 
-  Scenario: Verify When User Click On "Product" Then Product Url Title Changed
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Verify that after clicking the product, Product Url Title Changed
+  Scenario: When User clicks on "Product", then the Product Page URL changes
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product page URL should changed
 
-  Scenario: verify When User Click On "Product" Then Product Page URl changed
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Verify that after clicking the product, Product Page URl Changed
+  Scenario: When User clicks on "Product", then the Product Page Title  changes
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product page Title should changed
 
-  Scenario: verify When User Click On "Product" Then Product Url Loaded Fully
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Verify that after clicking the product, Product url loaded Fully
+  Scenario: When User Click On "Product" Then Product Url Loaded Fully
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Product url should loaded Fully
 
-  Scenario: verify When User Click On "Product" Should Display Same "Product Title" On Product Detail Page
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    Then Get Actual Product Text
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Get Expected Product Text
-    Then Verify Actual and Expected product Text should be same
+  Scenario: Verify when User clicks on "Product", the same "Product Title" is displayed on the Product Detail Page
+    Given The user is on the homepage
+    When The user searches for "Product"
+    Then Check the product title
+    When The user clicks on the "Product"
+    Then The product title on the product detail page should be the same as the product title on the homepage
 
-  Scenario: verify When User Click On "Product" Should Display Same "Product Price" On Product Detail Page
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    Then Get Actual Product Price
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Get Expected Product Price
-    Then Verify Actual and Expected product Price should be same
+  Scenario: Verify when User clicks on "Product", the same "Product Price" is displayed on the Product Detail Page
+    Given The user is on the homepage
+    When The user searches for "Product"
+    Then Check the product Price
+    When The user clicks on the "Product"
+    Then The product Price on the product detail page should be the same as the product price on the homepage
 
   Scenario: verify Product "Image" Display Properly On Product Detail Page
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Verify Product Image display properly
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product image on the Product Detail Page should be displayed properly
 
-  Scenario: verify Hover Feature Works When User "Hovers" On Product Image
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Hover on Image
-    Then Verify Hover functionality works
+  Scenario: Verify Hover Feature Works When User "Hovers" On Product Image
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    And The Hover effect should be Work on product Image
 
-  Scenario: verify "Multiple Images" For Product Are Clikable
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then verify click Fuctionality On Product Image Gallary One by One
+  Scenario: verify "multiple images" gallary for a product detail page are clickable
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    And The user should be able click on gallary images
 
-  Scenario: verify "Gallary Images" of Product Are High Quality
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then verify click Fuctionality On Product Image Gallary One by One
-    And verify Gallary ImageQuality
+  Scenario: verify "Gallary Images" of Product Are in High Quality
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then Product Gallary images should be in High Quality
 
   Scenario: verify The "Price Formatting" Follow The Standard Currency Symbol Like ₹
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    Then Get Expected Product Price
-    And veriy Price Contain Currency Symbol Like ₹
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The price should be displayed with the ₹ currency symbol
 
   Scenario: verify Product Price Change While Selecting "Pack Size"
-    Given Browser launched with Url!
-    When User clicks on the search input and searches for a product name
-    And Click on the product
-    Then Switch window on Product detail page
-    And verify After click On Product PackSize For 500ml Product Price Will Change
+    Given The user is on the homepage
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then Product PackSize For 500ml Product Price Will Change
+
+  Scenario: verify the functionality of adding a product to the "Add to basket"
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product was successfully added to the basket
+
+  Scenario: verify "Add to Basket" product quantity Increase When user click on plus btn to add more items
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product quantity Increase When user click on plus btn to add more items
+
+  Scenario: verify that the product price should be calculated as per quantity of product When user click on plus btn to add more items
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product quantity Increase When user click on plus btn to add more items
+
+  Scenario: verify the visual confirmation msg should be appere after "Adding product" to the add to Basket
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then confirmation msg should be appere
+
+  Scenario: verify the visual confirmation msg should be appere after "Removing product" to the add to Basket
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then confirmation Removing msg should be appere
+
+  Scenario: verify user should add multiple product as they want by clicking on plus btn to add more items
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The User should add multiple product as they want
+
+  Scenario: verify no spelling or grammatical errors in the product description for "Amul Taaza Milk, 1 L Pouch"
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then verify that the product description has no spelling or grammatical errors
+
+  Scenario: verify that "Save for Later" btn should be on product detail page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Save for Later btn should be on product detail page
+
+  Scenario: verify that after clicking on "Save for Later" btn user should able to save a product for later
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to save a product for later
+
+  # need to check again
+  #Scenario: Verify when user click "Home","bakery,cakes&dairy","dairy" & "fresh milk" links then user should able to navigate that perticular page.
+  #When The user searches for "Product"
+  #When The user clicks on the "Product"
+  #Then The user should able to navigate that perticular page
+  Scenario: verify user should able to click on media icone Facebook, twitter,gamil
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The social media icons should be clickable
+
+  Scenario: verify user click on Facebook icon, then user should redirect to facebook url
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The facebook page should open
+
+  Scenario: verify user click on Twitter icon, then user should redirect to facebook url
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Twitter page should open
+
+  Scenario: verify user click on Email icon, then user should redirect to facebook url
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Email page should open

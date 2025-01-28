@@ -25,9 +25,12 @@ public class HomePage {
 
 	@FindBy(xpath = "(//input[@placeholder=\"Search for Products...\"])[2]")
 	WebElement searchTextBox;
-	
-	@FindBy(css="svg.mr-3")
+
+	@FindBy(css = "svg.mr-3")
 	WebElement clearButton;
+
+	@FindBy(xpath = "//span[contains(text(),\"No results found for\")]")
+	WebElement noResultMsg;
 
 	@FindBy(xpath = "//li[@class=\"QuickSearch___StyledMenuItem-sc-rtz2vl-4 ibNDA-d\"]")
 	List<WebElement> results;
@@ -38,6 +41,126 @@ public class HomePage {
 	public HomePage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
+
+	@FindBy(xpath = "(//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ ml-1.5 flex-1 text-sm text-darkOnyx-900 truncate font-semibold leading-base\"])[2]")
+	WebElement selectLocation;
+
+	@FindBy(xpath = "(//input[@placeholder=\"Search for area or street name\"])[2]")
+	WebElement searchForArea;
+	
+	@FindBy(xpath="//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ\"]")
+	List<WebElement>addressOfLocations;
+	
+
+	public void verifySelectLoactionBarVisibleOnTheHomepageOrNot() {
+		Assert.assertTrue(selectLocation.isDisplayed());
+
+	}
+
+	public void clickonSelectLocationbar() throws InterruptedException {
+		Thread.sleep(3000);
+		selectLocation.click();
+
+	}
+
+	public void enterTextIntoSearchForAreaTextBox() throws InterruptedException {
+		Keyword.sendkeys(searchForArea, "Pune");
+		Thread.sleep(3000);
+	}
+
+	public void verifyThatUserCanAbleToTypeTextIntosearchForAreaTextBox() {
+		Assert.assertEquals(searchForArea.getAttribute("value"), "Pune");
+	}
+
+	public String getValueOfAttributeBeforeAndAfterEntertext() {
+		String value = searchForArea.getAttribute("value");
+		Keyword.sendkeys(searchForArea, "Pune");
+		String value1 = searchForArea.getAttribute("value");
+		return value;
+
+	}
+
+	public void verifyThePlaceholderTextIsDisplayedWhenTheSeachForAreaTextBoxIsEmpty() {
+		String value = getValueOfAttribute();
+		String value1 = getValueOfAttribute();
+		Assert.assertFalse(value == value1);
+
+	}
+	public List<String> addressOfLoactions() {
+		List<WebElement> descriptions = addressOfLocations;
+		List<String> searchaddressdescriptions = new ArrayList<String>();
+		for (WebElement description : descriptions) {
+			searchaddressdescriptions.add(description.getText());
+
+		}
+		return searchaddressdescriptions;
+
+	}
+
+	public void verifythatAddressOfLocationResultsAreDisplayedWhenValidTextIsEnterIntoTextBOx() {
+		SoftAssert softly = new SoftAssert();
+		for (String description : getAllSearchResultDescription()) {
+			softly.assertTrue(description.contains("Pune"));
+
+		}
+		softly.assertAll();
+
+	}
+	public String getUrlBeforeEnterTextIntoTextBox() {
+		String urlBeforeText = Keyword.driver.getCurrentUrl();
+		System.out.println(urlBeforeText);
+		return urlBeforeText;
+	}
+
+	public void KeepEmptySearchForAreaTextBox() {
+		Keyword.sendkeys(searchForArea, "");
+		searchForArea.sendKeys(Keys.ENTER);
+
+	}
+
+	public String getUrlAfterEnterTextIntoTextBox() {
+		String urlAfterText = Keyword.driver.getCurrentUrl();
+		System.out.println(urlAfterText);
+		return urlAfterText;
+
+	}
+
+	public void verifyTheBehaviourOfPageWhenTheSearchForAreaTextBoxEmptyAndUserPressTheEnter() {
+		String urlBeforeText = getUrlBeforeText();
+		KeepEmptySearchBar();
+		String urlAfterText = getUrlAfterText();
+		Assert.assertEquals(urlBeforeText, urlAfterText);
+
+	}
+	public void EnterPartialTextIntoSearchForAreaTextBox() throws InterruptedException {
+		Keyword.sendkeys(searchForArea, "Mum");
+		Thread.sleep(3000);
+
+	}
+
+	public List<String> getAllSearchResultDescriptionWhenEnterPartialTextInIntoSearchForAreaTextBox() {
+		List<WebElement> descriptions = results;
+		List<String> searchdescriptions = new ArrayList<String>();
+		for (WebElement description : descriptions) {
+			searchdescriptions.add(description.getText());
+
+		}
+		return searchdescriptions;
+
+	}
+
+	public void verifyWhenEnterPartialTextIntoSearchForAreaTextBoxThenResultShouldBeDisplaye() {
+		SoftAssert softly = new SoftAssert();
+		for (String description : getAllSearchResultDescription()) {
+			softly.assertTrue(description.contains("Mum"));
+
+		}
+		softly.assertAll();
+
+	}
+
+
+	// Test case For search product
 
 	public void verifySearchTextBoxVisibleOnThePageOrNot() {
 		Assert.assertTrue(searchTextBox.isDisplayed());
@@ -142,21 +265,70 @@ public class HomePage {
 		softly.assertAll();
 
 	}
-	
-	public  void enterTextIntoTextBox(){
-		searchTextBox.sendKeys("Tomato");
-		String valueAfterEnterText=searchTextBox.getAttribute("value");
-		
+
+	public String enterTextIntoTextBox() {
+		keyword.sendkeys(searchTextBox, "Tomato");
+		String valueAfterEnterText = searchTextBox.getAttribute("value");
+		return valueAfterEnterText;
+
 	}
-		public void clickOnClearButton(){
-			clearButton.click();
-			String valueAfterClearText = searchTextBox.getAttribute("value");
-		
+
+	public String clickOnClearButton() {
+		clearButton.click();
+		String valueAfterClearText = searchTextBox.getAttribute("value");
+		return valueAfterClearText;
 	}
-		public void verifyThatWhenClickTheClearButtonThenSearchBarShouldBeClearOrNot(){
-			//Assert.AssertFalse(valueAfterEnterText==valueAfterClearText);
-			
-		}
+
+	public void verifyThatWhenClickTheClearButtonThenSearchBarShouldBeClearOrNot() {
+		String valueAfterEnterText = enterTextIntoTextBox();
+		String valueAfterClearText = clickOnClearButton();
+		Assert.assertFalse(valueAfterEnterText == valueAfterClearText);
+
+	}
+
+	public void enterSpecialCharacterOnlyIntoSearchTextBox() throws InterruptedException {
+		keyword.sendkeys(searchTextBox, "!@#");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterSpeacialCharacterOnlyIntoSearchBar() {
+		Assert.assertTrue(noResultMsg.isDisplayed());
+
+	}
+
+	public void enterNumberOnlyIntoSearchTextBox() throws InterruptedException {
+		keyword.sendkeys(searchTextBox, "01234569746");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterNumberOnlyIntoSearchBar() {
+		Assert.assertTrue(noResultMsg.isDisplayed());
+
+	}
+
+	public void enterInvalidSpecialCharacterOnlyIntoSearchTextBox() throws InterruptedException {
+		keyword.sendkeys(searchTextBox, "<:>/{};");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterInvalidSpecialCharacterOnlyIntoSearchBar() {
+		Assert.assertTrue(noResultMsg.isDisplayed());
+
+	}
+
+	public void enterExtremelyLargeInvalidTextIntoSearchTextBox() throws InterruptedException {
+		keyword.sendkeys(searchTextBox, "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterExtremelyLargeInvalidTextIntoSearchBar() {
+		Assert.assertTrue(noResultMsg.isDisplayed());
+
+	}
 
 	public void verifyShopByCategoryMenuIsAvailable() {
 		String expectedShopByCategoryMenuName = "Shop by";
@@ -192,7 +364,7 @@ public class HomePage {
 		System.out.println("Clicked on search text field.");
 	}
 
-	public void sendProductName() {
+	public void sendProductName(String productName) {
 		searchText.sendKeys("Amul Taaza Milk, 1 L Pouch");
 		searchText.sendKeys(Keys.ENTER);
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
@@ -206,7 +378,7 @@ public class HomePage {
 	}
 
 	public boolean clickOnAllCategoriesOneByOne() throws InterruptedException {
-		boolean areClickable=false;
+		boolean areClickable = false;
 		keyword.maximizeBrowser();
 		for (WebElement category : categoryList) {
 			WaitFor.visibilityOfElement(category);
@@ -216,8 +388,8 @@ public class HomePage {
 			Thread.sleep(5000);
 			clickOnShopByCategoryMenu();
 			if (categoryNames.equals("Paan Corner")) {
-				areClickable=true;
-				System.out.println("flag after last parent category : "+areClickable);
+				areClickable = true;
+				System.out.println("flag after last parent category : " + areClickable);
 				break;
 			}
 		}
@@ -225,9 +397,9 @@ public class HomePage {
 	}
 
 	public void verifyAllCategoriesAreClickable() throws InterruptedException {
-		boolean flag=clickOnAllCategoriesOneByOne();
-		SoftAssert softlyAssert=new SoftAssert();
-		softlyAssert.assertTrue(flag,"All category are not clickable");
+		boolean flag = clickOnAllCategoriesOneByOne();
+		SoftAssert softlyAssert = new SoftAssert();
+		softlyAssert.assertTrue(flag, "All category are not clickable");
 		softlyAssert.assertAll();
 	}
 
@@ -243,12 +415,12 @@ public class HomePage {
 	}
 
 	public void clickOnCategory(String categoryNameInLowerCaseOnly) throws InterruptedException {
-		 keyword.clickOnYourCategory(categoryNameInLowerCaseOnly);
-		 
+		keyword.clickOnYourCategory(categoryNameInLowerCaseOnly);
+
 	}
 
 	public void verifyNavigatedToHomePageFromCategoryPage() {
-		String urlAfterNavigationToHome=Keyword.driver.getCurrentUrl();
+		String urlAfterNavigationToHome = Keyword.driver.getCurrentUrl();
 		assertTrue(urlAfterNavigationToHome.equals("https://www.bigbasket.com/"));
 	}
 }

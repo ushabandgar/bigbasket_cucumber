@@ -26,7 +26,7 @@ public class ProductSearchPage {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
-	public void clickOnProduct() {
+	public void clickOnProduct(String productName) {
 		try {
 			WaitFor.elementToBeClickable(ClickonProduct);
 			ClickonProduct.click();
@@ -43,8 +43,6 @@ public class ProductSearchPage {
 
 	public void switchDriverOnProductSearchPage() {
 		keyword.switchToChildWindowHandle();
-		String title = Keyword.driver.getTitle();
-		// System.out.println("title: "+ title);
 		System.out.println("driver switch on Product search page");
 	}
 
