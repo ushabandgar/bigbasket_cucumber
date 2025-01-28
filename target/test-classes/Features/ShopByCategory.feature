@@ -106,7 +106,7 @@ And I get the text before click on Show more +
 And I click on "Show more +" link
 Then "Show more +" text replaces to "Show less -"
 
-@today
+
 Scenario: Verify when user clicks on the "Show less -" button collapses additional categories
 
 Given After entering url, User is on HomePage

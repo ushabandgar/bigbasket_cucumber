@@ -43,8 +43,6 @@ public class ProductSearchPage {
 
 	public void switchDriverOnProductSearchPage() {
 		keyword.switchToChildWindowHandle();
-		String title = Keyword.driver.getTitle();
-		// System.out.println("title: "+ title);
 		System.out.println("driver switch on Product search page");
 	}
 

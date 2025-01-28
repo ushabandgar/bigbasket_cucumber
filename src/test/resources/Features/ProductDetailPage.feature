@@ -72,3 +72,73 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then Product PackSize For 500ml Product Price Will Change
+
+  Scenario: verify the functionality of adding a product to the "Add to basket"
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product was successfully added to the basket
+
+  Scenario: verify "Add to Basket" product quantity Increase When user click on plus btn to add more items
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product quantity Increase When user click on plus btn to add more items
+
+  Scenario: verify that the product price should be calculated as per quantity of product When user click on plus btn to add more items
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product quantity Increase When user click on plus btn to add more items
+
+  Scenario: verify the visual confirmation msg should be appere after "Adding product" to the add to Basket
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then confirmation msg should be appere
+
+  Scenario: verify the visual confirmation msg should be appere after "Removing product" to the add to Basket
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then confirmation Removing msg should be appere
+
+  Scenario: verify user should add multiple product as they want by clicking on plus btn to add more items
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The User should add multiple product as they want
+
+  Scenario: verify no spelling or grammatical errors in the product description for "Amul Taaza Milk, 1 L Pouch"
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then verify that the product description has no spelling or grammatical errors
+
+  Scenario: verify that "Save for Later" btn should be on product detail page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Save for Later btn should be on product detail page
+
+  Scenario: verify that after clicking on "Save for Later" btn user should able to save a product for later
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to save a product for later
+
+  # need to check again
+  #Scenario: Verify when user click "Home","bakery,cakes&dairy","dairy" & "fresh milk" links then user should able to navigate that perticular page.
+  #When The user searches for "Product"
+  #When The user clicks on the "Product"
+  #Then The user should able to navigate that perticular page
+  Scenario: verify user should able to click on media icone Facebook, twitter,gamil
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The social media icons should be clickable
+
+  Scenario: verify user click on Facebook icon, then user should redirect to facebook url
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The facebook page should open
+
+  Scenario: verify user click on Twitter icon, then user should redirect to facebook url
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Twitter page should open
+
+  Scenario: verify user click on Email icon, then user should redirect to facebook url
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Email page should open

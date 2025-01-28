@@ -1,5 +1,6 @@
 package com.bigbasket.stepdefinations;
 import com.bigbasket.base.Keyword;
+
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ProductDetailPage;
 import com.bigbasket.pages.ProductSearchPage;
@@ -82,7 +83,7 @@ public class ProductDetailSteps {
 		productDetailPage.CheckProductImageToverifyImageloadingSuccessfully();
 	}
 	@Then("The Hover effect should be Work on product Image")
-	public void verifyHoverFunctionalityWorks() {
+	public void verifyHoverFunctionalityWorks() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.hoverOnImage();
@@ -114,4 +115,92 @@ public class ProductDetailSteps {
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.verifyAfterclickOnProductPackSizeFor500mlProductPriceWillChange();
 	}
+	
+	@Then("The product was successfully added to the basket")
+	 public void verifyProductAddedToTheSasket() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyProductAddedToTheBasket();
+	}
+	
+	@Then("The product quantity Increase When user click on plus btn to add more items")
+	public void verifyProductQuantityIncreaseWhenUserClickOnPlusBtn() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyProductQuantityIncreaseWhenUserClickOnPlusBtn();
+	}
+	
+	@Then("confirmation msg should be appere")
+	public void confirmationMsgShouldBeAppere() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyconfirmationMsgShouldBeAppere();
+	}
+	@Then("confirmation Removing msg should be appere")
+	public void confirmationRemovingMsgShouldBeAppere() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.confirmationRemovingMsgShouldBeAppere();
+	}
+	@Then("The User should add multiple product as they want")
+	public void usershoulAbleToAddMultipleProduct() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.usershoulAbleToAddMultipleProduct();
+	}
+	@Then("verify that the product description has no spelling or grammatical errors")
+	public void noSpellingGrammaticalMistakeInProductDescription() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.noSpellingGrammaticalMistakeInProductDescription();
+	}
+	
+	@Then("The Save for Later btn should be on product detail page")
+	public void saveForLaterBtnShouldBeOnProductDetailPage() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.saveForLaterBtnShouldBeOnProductDetailPage();
+	}
+	
+	@Then("The user should able to save a product for later")
+	public void saveProductForLater() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.saveProductForLater();
+	}
+	@Then("The user should able to navigate that perticular page")
+	public void navigateToPage() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.navigateToPageonebyone();
+	}
+	@Then("The social media icons should be clickable")
+	public void clickOnMediaIcons() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.clickOnMediaIcons();
+	}
+	@Then("The facebook page should open")
+	public void clickOnFacebookIcons() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.clickOnFacebookIcon();
+	}
+	@Then("The Twitter page should open")
+	public void clickOnTwitterIcons() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.clickOnTwitter();
+	}
+	@Then("The Email page should open")
+	public void clickOnEmailIcons() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.clickOnEmailOcon();
+	}
+	
+	
+	
+	
+	
 }
