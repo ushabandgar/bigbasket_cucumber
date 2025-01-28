@@ -42,6 +42,126 @@ public class HomePage {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
+	@FindBy(xpath = "(//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ ml-1.5 flex-1 text-sm text-darkOnyx-900 truncate font-semibold leading-base\"])[2]")
+	WebElement selectLocation;
+
+	@FindBy(xpath = "(//input[@placeholder=\"Search for area or street name\"])[2]")
+	WebElement searchForArea;
+	
+	@FindBy(xpath="//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ\"]")
+	List<WebElement>addressOfLocations;
+	
+
+	public void verifySelectLoactionBarVisibleOnTheHomepageOrNot() {
+		Assert.assertTrue(selectLocation.isDisplayed());
+
+	}
+
+	public void clickonSelectLocationbar() throws InterruptedException {
+		Thread.sleep(3000);
+		selectLocation.click();
+
+	}
+
+	public void enterTextIntoSearchForAreaTextBox() throws InterruptedException {
+		Keyword.sendkeys(searchForArea, "Pune");
+		Thread.sleep(3000);
+	}
+
+	public void verifyThatUserCanAbleToTypeTextIntosearchForAreaTextBox() {
+		Assert.assertEquals(searchForArea.getAttribute("value"), "Pune");
+	}
+
+	public String getValueOfAttributeBeforeAndAfterEntertext() {
+		String value = searchForArea.getAttribute("value");
+		Keyword.sendkeys(searchForArea, "Pune");
+		String value1 = searchForArea.getAttribute("value");
+		return value;
+
+	}
+
+	public void verifyThePlaceholderTextIsDisplayedWhenTheSeachForAreaTextBoxIsEmpty() {
+		String value = getValueOfAttribute();
+		String value1 = getValueOfAttribute();
+		Assert.assertFalse(value == value1);
+
+	}
+	public List<String> addressOfLoactions() {
+		List<WebElement> descriptions = addressOfLocations;
+		List<String> searchaddressdescriptions = new ArrayList<String>();
+		for (WebElement description : descriptions) {
+			searchaddressdescriptions.add(description.getText());
+
+		}
+		return searchaddressdescriptions;
+
+	}
+
+	public void verifythatAddressOfLocationResultsAreDisplayedWhenValidTextIsEnterIntoTextBOx() {
+		SoftAssert softly = new SoftAssert();
+		for (String description : getAllSearchResultDescription()) {
+			softly.assertTrue(description.contains("Pune"));
+
+		}
+		softly.assertAll();
+
+	}
+	public String getUrlBeforeEnterTextIntoTextBox() {
+		String urlBeforeText = Keyword.driver.getCurrentUrl();
+		System.out.println(urlBeforeText);
+		return urlBeforeText;
+	}
+
+	public void KeepEmptySearchForAreaTextBox() {
+		Keyword.sendkeys(searchForArea, "");
+		searchForArea.sendKeys(Keys.ENTER);
+
+	}
+
+	public String getUrlAfterEnterTextIntoTextBox() {
+		String urlAfterText = Keyword.driver.getCurrentUrl();
+		System.out.println(urlAfterText);
+		return urlAfterText;
+
+	}
+
+	public void verifyTheBehaviourOfPageWhenTheSearchForAreaTextBoxEmptyAndUserPressTheEnter() {
+		String urlBeforeText = getUrlBeforeText();
+		KeepEmptySearchBar();
+		String urlAfterText = getUrlAfterText();
+		Assert.assertEquals(urlBeforeText, urlAfterText);
+
+	}
+	public void EnterPartialTextIntoSearchForAreaTextBox() throws InterruptedException {
+		Keyword.sendkeys(searchForArea, "Mum");
+		Thread.sleep(3000);
+
+	}
+
+	public List<String> getAllSearchResultDescriptionWhenEnterPartialTextInIntoSearchForAreaTextBox() {
+		List<WebElement> descriptions = results;
+		List<String> searchdescriptions = new ArrayList<String>();
+		for (WebElement description : descriptions) {
+			searchdescriptions.add(description.getText());
+
+		}
+		return searchdescriptions;
+
+	}
+
+	public void verifyWhenEnterPartialTextIntoSearchForAreaTextBoxThenResultShouldBeDisplaye() {
+		SoftAssert softly = new SoftAssert();
+		for (String description : getAllSearchResultDescription()) {
+			softly.assertTrue(description.contains("Mum"));
+
+		}
+		softly.assertAll();
+
+	}
+
+
+	// Test case For search product
+
 	public void verifySearchTextBoxVisibleOnThePageOrNot() {
 		Assert.assertTrue(searchTextBox.isDisplayed());
 
