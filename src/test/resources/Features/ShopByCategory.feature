@@ -143,7 +143,7 @@ And I click on "fruits & vegetables" category
 Then I check if the filter section is scrollable
 
 @today
-Scenario: Verify products are filtered by the selected brand
+Scenario: Verify product brands are selectable
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
 And I click on "fashion" category
