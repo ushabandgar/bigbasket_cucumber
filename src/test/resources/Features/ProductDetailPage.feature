@@ -118,11 +118,6 @@ Feature: Product Detail Page functionality
     When The user clicks on the "Product"
     Then The user should able to save a product for later
 
-  # need to check again
-  #Scenario: Verify when user click "Home","bakery,cakes&dairy","dairy" & "fresh milk" links then user should able to navigate that perticular page.
-  #When The user searches for "Product"
-  #When The user clicks on the "Product"
-  #Then The user should able to navigate that perticular page
   Scenario: verify user should able to click on media icone Facebook, twitter,gamil
     When The user searches for "Product"
     When The user clicks on the "Product"
@@ -142,3 +137,8 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The Email page should open
+
+  Scenario: verify when user click "Home","bakery,cakes&dairy","dairy" & "fresh milk" links then user should able to navigate that perticular page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to navigate that perticular page

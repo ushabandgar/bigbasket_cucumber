@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class SelectLocationSteps {
+	int areacode;
 
 	@Then("{string} bar should be display on HomePage")
 	public void bar_should_be_display_on_home_page(String SelectLocation) {
@@ -116,6 +117,57 @@ public class SelectLocationSteps {
 	public void address_of_location_results_should_be_contains(String Mum) {
 		HomePage homepage = new HomePage();
 		homepage.verifyWhenEnterPartialTextIntoSearchForAreaTextBoxThenResultShouldBeDisplaye();
+
+	}
+
+	@And("User enter {string} into textBox")
+	public void user_enter_into_text_box(String Mumbai) {
+		HomePage homepage = new HomePage();
+		homepage.enterTextIntoSearchForAreaTextbox();
+
+	}
+
+	@And("User click on clear button")
+	public void user_click_on_clear_button() {
+		HomePage homepage = new HomePage();
+		homepage.clickOnClearButtonIntoSearchForAreaTextBox();
+
+	}
+
+	@Then("{string} text should be remove from textbox")
+	public void text_should_be_remove_from_textbox(String Mumbai) {
+		HomePage homepage = new HomePage();
+		homepage.verifyThatWhenClickOnClearButtonThenSearchForAreaTextBoxShouldBeClear();
+
+	}
+
+	@When("User enter  speacial character {string} only into search for area  text box")
+	public void user_enter_speacial_character_only_into_search_for_area_text_box(String string)
+			throws InterruptedException {
+		HomePage homepage = new HomePage();
+		homepage.enterSpecialCharacterOnlyIntoSearchForAreaTextBox();
+
+	}
+
+	@Then("{string} message should be display")
+	public void message_should_be_display(String SorryWedontdeliverinthislocation) {
+		HomePage homepage = new HomePage();
+		homepage.verifyWhenEnterSpeacialCharacterOnlyIntoSearchForAreaTextBox();
+
+	}
+
+	
+	@When("User enter {string} into search for area  text box")
+	public void user_enter_into_search_for_area_textbox(String string) throws InterruptedException {
+		HomePage homepage = new HomePage();
+		homepage.enterLargeNumberOnlyIntoSearchForAreaTextBox();
+	    
+	}
+
+	@Then("{string} result message should be display")
+	public void message_should_be_display_on_page(String SorryWedontdeliverinthislocation) {
+		HomePage homepage = new HomePage();
+		homepage.verifyWhenEnterOnlyLargeNumberIntoSearchForAreaTextBox();
 
 	}
 

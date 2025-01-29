@@ -30,7 +30,7 @@ public class ProductDetailSteps {
 		page.verifyUrlAfterSearch();
 	}
 	@When("The user clicks on the {string}")
-	public void clickOnTheProduct(String productName) {
+	public void clickOnTheProduct(String productName) throws InterruptedException {
 	    ProductSearchPage productSearchPage = new ProductSearchPage();
 	    productSearchPage.clickOnProduct(productName);  
 	}
@@ -162,18 +162,14 @@ public class ProductDetailSteps {
 		productDetailPage.saveForLaterBtnShouldBeOnProductDetailPage();
 	}
 	
+	
 	@Then("The user should able to save a product for later")
 	public void saveProductForLater() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.saveProductForLater();
 	}
-	@Then("The user should able to navigate that perticular page")
-	public void navigateToPage() throws InterruptedException {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
-		productDetailPage.switchWindowOnproductDetailPage();
-		productDetailPage.navigateToPageonebyone();
-	}
+	
 	@Then("The social media icons should be clickable")
 	public void clickOnMediaIcons() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
@@ -199,7 +195,13 @@ public class ProductDetailSteps {
 		productDetailPage.clickOnEmailOcon();
 	}
 	
-	
+	@Then("The user should able to navigate that perticular page")
+	public void navigateToPage() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.navigateToPageOneByOne();
+		Thread.sleep(5000);
+	}
 	
 	
 	
