@@ -47,10 +47,15 @@ public class HomePage {
 
 	@FindBy(xpath = "(//input[@placeholder=\"Search for area or street name\"])[2]")
 	WebElement searchForArea;
+
+	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ\"]")
+	List<WebElement> addressOfLocations;
+
+	@FindBy(css = "svg.mr-3")
+	WebElement clearButtonOfSearchForAreaTextBox;
 	
-	@FindBy(xpath="//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ\"]")
-	List<WebElement>addressOfLocations;
-	
+	@FindBy(xpath = "//img[@src=\"https://www.bbassets.com/bb2assets/images/svg/no-delivery.svg?tr=w-undefined,q-80\"]")
+	WebElement noResultMsgForDeliveryLocatrion;
 
 	public void verifySelectLoactionBarVisibleOnTheHomepageOrNot() {
 		Assert.assertTrue(selectLocation.isDisplayed());
@@ -86,6 +91,7 @@ public class HomePage {
 		Assert.assertFalse(value == value1);
 
 	}
+
 	public List<String> addressOfLoactions() {
 		List<WebElement> descriptions = addressOfLocations;
 		List<String> searchaddressdescriptions = new ArrayList<String>();
@@ -106,6 +112,7 @@ public class HomePage {
 		softly.assertAll();
 
 	}
+
 	public String getUrlBeforeEnterTextIntoTextBox() {
 		String urlBeforeText = Keyword.driver.getCurrentUrl();
 		System.out.println(urlBeforeText);
@@ -132,6 +139,7 @@ public class HomePage {
 		Assert.assertEquals(urlBeforeText, urlAfterText);
 
 	}
+
 	public void EnterPartialTextIntoSearchForAreaTextBox() throws InterruptedException {
 		Keyword.sendkeys(searchForArea, "Mum");
 		Thread.sleep(3000);
@@ -158,6 +166,48 @@ public class HomePage {
 		softly.assertAll();
 
 	}
+	public String enterTextIntoSearchForAreaTextbox() {
+		keyword.sendkeys(searchForArea, "Mumbai");
+		String valueAfterEnterText = searchForArea.getAttribute("value");
+		return valueAfterEnterText;
+
+	}
+
+	public String clickOnClearButtonIntoSearchForAreaTextBox() {
+		clearButtonOfSearchForAreaTextBox.click();
+		String valueAfterClearText = searchForArea.getAttribute("value");
+		return valueAfterClearText;
+	}
+
+	public void verifyThatWhenClickOnClearButtonThenSearchForAreaTextBoxShouldBeClear() {
+		String valueAfterEnterText = enterTextIntoSearchForAreaTextbox();
+		String valueAfterClearText = clickOnClearButtonIntoSearchForAreaTextBox();
+		Assert.assertFalse(valueAfterEnterText == valueAfterClearText);
+
+	}
+	
+	public void enterSpecialCharacterOnlyIntoSearchForAreaTextBox() throws InterruptedException {
+		keyword.sendkeys(searchForArea, "!@#");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterSpeacialCharacterOnlyIntoSearchForAreaTextBox() {
+		Assert.assertTrue (noResultMsgForDeliveryLocatrion.isDisplayed());
+
+	}
+	
+	public void enterLargeNumberOnlyIntoSearchForAreaTextBox() throws InterruptedException {
+		keyword.sendkeys(searchForArea, "07676476337565");
+		Thread.sleep(3000);
+
+	}
+	
+	public void verifyWhenEnterOnlyLargeNumberIntoSearchForAreaTextBox() {
+		Assert.assertTrue (noResultMsgForDeliveryLocatrion.isDisplayed());
+
+	}
+
 
 
 	// Test case For search product
