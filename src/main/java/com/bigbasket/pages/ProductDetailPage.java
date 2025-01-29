@@ -3,6 +3,8 @@ package com.bigbasket.pages;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+
+import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -43,29 +45,28 @@ public class ProductDetailPage {
 
 	@FindBy(css = "div.kiucsj section.border-silverSurfer-400 div section.iDeFak  div:nth-child(1) div.flex button.TvAgf")
 	WebElement AddToBasketRemovingBtn;
-	
+
 	@FindBy(css = "div.kiucsj section.border-silverSurfer-400 div section.iDeFak  div:nth-child(2) button")
 	WebElement SaveForLaterBtn;
-	
+
 	@FindBy(css = "div.opacity-100 div.px-12 span")
 	WebElement LoginSignup;
-	
-	@FindBy(css="div.hlQOJm div")
+
+	@FindBy(css = "div.hlQOJm div")
 	List<WebElement> CheckoutPage;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button.gXeHMp")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button.gXeHMp")
 	WebElement facebookIcon;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button.bUcDsU")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button.bUcDsU")
 	WebElement twitter;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button.jGRTco")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button.jGRTco")
 	WebElement email;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button")
 	List<WebElement> SocialMediaIcons;
-	
-	
+
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -237,69 +238,71 @@ public class ProductDetailPage {
 	public void noSpellingGrammaticalMistakeInProductDescription() throws InterruptedException {
 		Thread.sleep(2000);
 		String expectedCorrectDescription = "Amul Taaza Milk, 1 L Pouch";
-	    assertTrue(expectedProductTitleText.getText().equals(expectedCorrectDescription), "Description contains spelling or grammatical errors");
+		assertTrue(expectedProductTitleText.getText().equals(expectedCorrectDescription),
+				"Description contains spelling or grammatical errors");
 	}
 
 	public void saveForLaterBtnShouldBeOnProductDetailPage() throws InterruptedException {
 		Thread.sleep(1000);
 		assertTrue(Keyword.driver.getCurrentUrl().contains("pd/"), " saveForLater btn Not on product detail page");
-		assertTrue(SaveForLaterBtn.isDisplayed(),"Not display!");	
+		assertTrue(SaveForLaterBtn.isDisplayed(), "Not display!");
 	}
 
 	public void saveProductForLater() throws InterruptedException {
 		Thread.sleep(1000);
 		SaveForLaterBtn.click();
-		//afer Login/Signup page open
+		// afer Login/Signup page open
 		WaitFor.visibilityOfElement(LoginSignup);
 		System.out.println(LoginSignup.getText());
-	
-	}
 
-	public void navigateToPageonebyone() throws InterruptedException {
-	    Thread.sleep(1000);
-	    for (WebElement checkoutPage : CheckoutPage) {
-	        try {
-	            Thread.sleep(2000); 
-	            checkoutPage.click();
-	            System.out.println("Clicked on: " + checkoutPage.getText());
-	            Keyword.driver.navigate().back();
-	            Thread.sleep(2000); 
-	            
-	        } catch (StaleElementReferenceException e) {
-	        	 System.out.println("StaleElementReferenceException caught. Re-querying and clicking again.");
-		     
-	        }
-	    }
 	}
 
 	public void clickOnMediaIcons() throws InterruptedException {
-	Thread.sleep(1000);
-	for(WebElement icons : SocialMediaIcons) {
 		Thread.sleep(1000);
-		icons.click();
-		assertTrue(icons.isEnabled(), "Icons not clickable");
-	}
-		
+		for (WebElement icons : SocialMediaIcons) {
+			Thread.sleep(1000);
+			icons.click();
+			assertTrue(icons.isEnabled(), "Icons not clickable");
+		}
+
 	}
 
 	public void clickOnFacebookIcon() throws InterruptedException {
 		Thread.sleep(2000);
 		facebookIcon.click();
 		assertTrue(facebookIcon.isEnabled());
-		
+
 	}
+
 	public void clickOnTwitter() throws InterruptedException {
 		Thread.sleep(2000);
 		twitter.click();
 		assertTrue(twitter.isEnabled());
 	}
+
 	public void clickOnEmailOcon() throws InterruptedException {
 		Thread.sleep(2000);
 		email.click();
 		assertTrue(email.isEnabled());
 	}
-	
-	
 
+	public void navigateToPageOneByOne() throws InterruptedException {
+		WaitFor.visibilityOfElements(CheckoutPage);
+		for (int i = 0; i < 3; i++) {
+			try {
+				for (WebElement CheckoutPageOption : CheckoutPage) {
+					CheckoutPageOption.click();
+					Thread.sleep(2000);
+					assertTrue(CheckoutPageOption.isDisplayed(),
+							"CheckoutPage Links are not visible after navigating back");
+					Keyword.driver.navigate().back();
+					Thread.sleep(2000);
+				}
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Stale element encountered, retrying...");
+				continue;
+			}
+		}
 
+	}
 }
