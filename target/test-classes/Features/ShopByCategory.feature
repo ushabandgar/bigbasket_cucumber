@@ -129,8 +129,11 @@ And I click on "Show more +" link
 And I click on "Show less -" link 
 Then "Show less -" text replaces to "Show more +" 
 
+<<<<<<< HEAD
+=======
 ----------------In progress----
 @today
+>>>>>>> master
 Scenario: Verify on Category Page bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
@@ -142,6 +145,50 @@ Scenario: Verify that the filter section is scrollable on Category page
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
 And I click on "fruits & vegetables" category
+<<<<<<< HEAD
+Then I check if the filter section is scrollable
+
+
+Scenario: Verify product brands are selectable
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the brand "Adidas T-shirt" from the brand filter
+Then I should see "Adidas T-shirt" brand is selected
+
+
+Scenario: Verify product brands are deselectable
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the brand "Adidas T-shirt" from the brand filter
+And I click on checkbox of already selcted brand "Adidas T-shirt"
+Then I should see "Adidas T-shirt" brand is deselected
+
+
+Scenario: Verify mulitple brands are selectable
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the multiple brands from the brand filter
+Then I should see multiple brands are selected
+
+
+Scenario: Verify products are filtered by the selected brand
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the brand "Adidas T-shirt" from the brand filter
+Then I should only see products from "Adidas T-shirt"
+    
+@today
+Scenario: Filter products by multiple brands
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the multiple brands from the brand filter    
+Then the displayed products should only belong to the selected brands
+=======
 When I check if the filter section is scrollable
 Then I should be able to scroll the filter section
 
@@ -390,3 +437,4 @@ Then I should be able to scroll the filter section
     And I click on "fashion" category
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should "Adidas T-shirt" see brand is selected
+>>>>>>> master

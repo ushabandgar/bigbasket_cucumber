@@ -1,12 +1,5 @@
 package com.bigbasket.stepdefinations;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
@@ -23,7 +16,6 @@ public class ShopByCategorySteps {
 		Keyword keyword = new Keyword();
 		keyword.openBrowser("firefox");
 		keyword.maximizeBrowser();
-		keyword.maximizeBrowser();
 
 	}
 
@@ -36,6 +28,8 @@ public class ShopByCategorySteps {
 	public void userIsOnHomePage() {
 		Keyword keyword = new Keyword();
 		keyword.launchUrl("https://www.bigbasket.com/");
+		keyword.maximizeBrowser();
+
 	}
 
 	@Then("SHOP BY CATEGORY should be displayed on HomePage")
@@ -202,16 +196,53 @@ public class ShopByCategorySteps {
 
 	@When("I select the brand {string} from the brand filter")
 	public void selectBrand(String brandNameFromList) throws InterruptedException {
-		 ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-		 categoryPage.clickOnYourBrand(brandNameFromList);
-	
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnYourBrand(brandNameFromList);
+
 	}
 
-	@Then("I should {string} see brand is selected")
+	@And("I click on checkbox of already selcted brand {string}")
+	public void clickOnAlreadySelctedBrandToDeselct(String brandNameFromList) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.deSelectBrand(brandNameFromList);
+	}
+
+	@Then("I should see {string} brand is selected")
 	public void isBrandSelected(String brandNameFromList) {
-		 ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-		 categoryPage.verifyBrandIsSelected(brandNameFromList);
-		
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyBrandIsSelected(brandNameFromList);
+
+	}
+
+	@Then("I should see {string} brand is deselected")
+	public void isBrandDeselected(String brandNameFromList) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyBrandIsDeselected(brandNameFromList);
+
+	}
+
+	@Then("I should only see products from {string}")
+	public void verifyProductListOfSelectedBrand(String brandNameFromList) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyProductListIsOfSelectedBrandOnly(brandNameFromList);
+	}
+
+	@When("I select the multiple brands from the brand filter")
+	public void selectMultipleBrands() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.selectMultipleBrands();
+	}
+
+	@Then("I should see multiple brands are selected")
+	public void verifyMultipleBrandsSelected() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyMultipleBrandsAreSelected();
+	}
+	@Then("the displayed products should only belong to the selected brands")
+	public void verifyProductListBelongToMultpleSelctedBrandsOnly() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getSelectedBrandNames();
+		categoryPage.verifyProductListForMultipleBrands();
 	}
 
 }

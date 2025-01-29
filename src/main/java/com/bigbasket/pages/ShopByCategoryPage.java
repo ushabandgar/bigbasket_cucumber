@@ -1,6 +1,10 @@
 package com.bigbasket.pages;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -42,7 +46,17 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 FilterSelection___StyledLabel-sc-1d3okpu-0 gJxZPQ ffRDqB\"]")
 	List<WebElement> filters;
 
+	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 BrandName___StyledLabel2-sc-hssfrl-1 gJxZPQ keQNWn\"]")
+	WebElement brandNameOnProductDesc;
+
+	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 BrandName___StyledLabel2-sc-hssfrl-1 gJxZPQ keQNWn\"]")
+	List<WebElement> brandNamesOnProductDesc;
+
+	@FindBy(xpath = "//div[@id=\"side-filter-by-rating\"][2]/div[2]/span/label")
+	List<WebElement> selectedBrandNames;
+
 	String textbeforeclick;
+	String brandName;
 
 	public ShopByCategoryPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -180,17 +194,117 @@ public class ShopByCategoryPage {
 		keyword.mouseScrollDown();
 		brandNameFromList = brandNameFromList.replace(" ", "");
 		brandNameFromList = "i-" + brandNameFromList;
-	    WebElement brandName = HomePage.shopByCategoryMenu.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
+		WebElement brandName = HomePage.shopByCategoryMenu
+				.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
 		brandName.click();
 		Thread.sleep(3000);
 	}
-	public void verifyBrandIsSelected(String brandNameFromList) {
 
+	public void deSelectBrand(String brandNameFromList) throws InterruptedException {
 		brandNameFromList = brandNameFromList.replace(" ", "");
 		brandNameFromList = "i-" + brandNameFromList;
-	    WebElement brandName = HomePage.shopByCategoryMenu.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
-		if(brandName.isSelected()) {
+		WebElement brandName = HomePage.shopByCategoryMenu
+				.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
+		brandName.click();
+		Thread.sleep(3000);
+	}
+
+	public void verifyBrandIsSelected(String brandNameFromList) {
+
+		boolean flag = getBrandNameElement(brandNameFromList).isSelected();
+		if (flag == true) {
 			Assert.assertTrue(true);
 		}
+	}
+
+	public WebElement getBrandNameElement(String brandNameFromList) {
+		brandNameFromList = brandNameFromList.replace(" ", "");
+		brandNameFromList = "i-" + brandNameFromList;
+		WebElement brandName = HomePage.shopByCategoryMenu
+				.findElement(By.xpath("//label[@for=\"" + brandNameFromList + "\"]"));
+		return brandName;
+	}
+
+	public String getBrandNameOnProductDesc() {
+		String brandNameOnProduct = brandNameOnProductDesc.getText();
+		return brandNameOnProduct;
+	}
+
+	public List<String> getBrandNamesFromProducts() {
+		ArrayList<String> BrandNameList = new ArrayList<String>();
+		for (WebElement brandNameOnProduct : brandNamesOnProductDesc) {
+			BrandNameList.add(brandNameOnProduct.getText());
+		}
+		return BrandNameList;
+	}
+
+	public List<String> getSelectedBrandNames() throws InterruptedException {
+		ArrayList<String> selectedBrand = new ArrayList<String>();
+
+		List<WebElement> brandListCheckboxes = keyword.getWebElements(Locator.brandListCheckbox);
+		List<WebElement> brandListNames = keyword.getWebElements(Locator.brandListNames);
+		for (int i = 0; i < brandListCheckboxes.size(); i++) {
+			String brandName = brandListNames.get(i).getText();
+			boolean flag = brandListCheckboxes.get(i).isSelected();
+			if (flag == true) {
+				selectedBrand.add(brandName);
+			}
+		}
+		return selectedBrand;
+	}
+
+	public void verifyProductListIsOfSelectedBrandOnly(String brandNameFromList) {
+
+		String selectedBrandName = getBrandNameElement(brandNameFromList).getText();
+		Assert.assertTrue(selectedBrandName.contains(getBrandNameOnProductDesc()));
+	}
+
+	public void verifyBrandIsDeselected(String brandNameFromList) {
+		boolean flag = getBrandNameElement(brandNameFromList).isSelected();
+		if (flag == false) {
+			Assert.assertTrue(true);
+		}
+	}
+
+	public void selectMultipleBrands() throws InterruptedException {
+		Thread.sleep(3000);
+		keyword.mouseScrollDown();
+		List<WebElement> brandListCheckboxes = keyword.getWebElements(Locator.brandListCheckbox);
+		List<WebElement> brandListNames = keyword.getWebElements(Locator.brandListNames);
+		for (int i = 0; i < brandListCheckboxes.size(); i++) {
+			String brandName = brandListNames.get(i).getText();
+			if (brandName.contains("Adidas") || brandName.contains("Brodees")) {
+				brandListCheckboxes.get(i).click();
+				Thread.sleep(3000);
+				brandListNames = keyword.getWebElements(Locator.brandListNames);
+				brandListCheckboxes = keyword.getWebElements(Locator.brandListCheckbox);
+			}
+		}
+	}
+
+	public void verifyMultipleBrandsAreSelected() {
+		List<WebElement> brandListCheckboxes = keyword.getWebElements(Locator.brandListCheckbox);
+		List<WebElement> brandListNames = keyword.getWebElements(Locator.brandListNames);
+		for (int i = 0; i < brandListCheckboxes.size(); i++) {
+			String brandName = brandListNames.get(i).getText();
+			boolean flag = brandListCheckboxes.get(i).isSelected();
+			if (brandName.contains("Adidas") || brandName.contains("Brodees")) {
+				Assert.assertTrue(flag);
+			} else {
+				Assert.assertFalse(flag);
+			}
+		}
+	}
+
+	public void verifyProductListForMultipleBrands() throws InterruptedException {
+		List<String> brandSelected = getSelectedBrandNames();
+		List<String> brandsOnP = getBrandNamesFromProducts();
+
+		Set<String> brandsOnPSet = new HashSet<String>(brandsOnP);
+		List<String> list = new ArrayList<String>(brandsOnPSet);
+		Collections.sort(list);
+		SoftAssert softlyAssert = new SoftAssert();
+		softlyAssert.assertEquals(brandSelected, list);
+		softlyAssert.assertAll();
 	}
 }
