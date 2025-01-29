@@ -88,8 +88,8 @@ public class Keyword {
 	}
 
 	public void mouseScrollDown() {
-		Actions actions = new Actions(driver);
-		actions.scrollByAmount(0, 500).perform();
+		Actions action = new Actions(driver);
+		action.scrollByAmount(0, 700).perform();
 	}
 
 	public void switchToChildWindowHandle() {

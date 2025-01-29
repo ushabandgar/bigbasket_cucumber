@@ -128,7 +128,6 @@ And I click on "Show more +" link
 And I click on "Show less -" link 
 Then "Show less -" text replaces to "Show more +" 
 
-@today
 Scenario: Verify on Category Page bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
@@ -142,10 +141,43 @@ When I click on SHOP BY CATEBORY menu
 And I click on "fruits & vegetables" category
 Then I check if the filter section is scrollable
 
-@today
+
 Scenario: Verify product brands are selectable
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
 And I click on "fashion" category
 When I select the brand "Adidas T-shirt" from the brand filter
-Then I should "Adidas T-shirt" see brand is selected
+Then I should see "Adidas T-shirt" brand is selected
+
+
+Scenario: Verify product brands are deselectable
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the brand "Adidas T-shirt" from the brand filter
+And I click on checkbox of already selcted brand "Adidas T-shirt"
+Then I should see "Adidas T-shirt" brand is deselected
+
+
+Scenario: Verify mulitple brands are selectable
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the multiple brands from the brand filter
+Then I should see multiple brands are selected
+
+
+Scenario: Verify products are filtered by the selected brand
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the brand "Adidas T-shirt" from the brand filter
+Then I should only see products from "Adidas T-shirt"
+    
+@today
+Scenario: Filter products by multiple brands
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+When I select the multiple brands from the brand filter    
+Then the displayed products should only belong to the selected brands
