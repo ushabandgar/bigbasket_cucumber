@@ -1,5 +1,12 @@
 package com.bigbasket.stepdefinations;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
@@ -9,7 +16,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ShopByCategorySteps{
+public class ShopByCategorySteps {
 
 	@Given("Browser is launched and maximized")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
@@ -167,7 +174,7 @@ public class ShopByCategorySteps{
 	public void showMoreButtonReplacedWithShowLess(String ShowMore, String ShowLess) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyShowMoreButtonReplaceswithShowLess();
-		
+
 	}
 
 	@Then("I click on Show less - link additional categories should be collpased")
@@ -178,6 +185,32 @@ public class ShopByCategorySteps{
 
 	@Then("Bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc")
 	public void defaultFiltersAreVisible() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyListOfFilter();
+	}
+
+	@When("I check if the filter section is scrollable")
+	public void filterSectionScrollable() throws InterruptedException {
+
+		Keyword keyword = new Keyword();
+		Thread.sleep(4000);
+		keyword.moveCurser();
+		Thread.sleep(5000);
+		keyword.mouseScrollDown();
+
+	}
+
+	@When("I select the brand {string} from the brand filter")
+	public void selectBrand(String brandNameFromList) throws InterruptedException {
+		 ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		 categoryPage.clickOnYourBrand(brandNameFromList);
+	
+	}
+
+	@Then("I should {string} see brand is selected")
+	public void isBrandSelected(String brandNameFromList) {
+		 ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		 categoryPage.verifyBrandIsSelected(brandNameFromList);
 		
 	}
 

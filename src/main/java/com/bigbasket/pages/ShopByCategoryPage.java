@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.Locator;
@@ -32,9 +33,15 @@ public class ShopByCategoryPage {
 	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterByCategory___StyledButton-sc-c0pkxv-5 kYQsWi bDIesH\"]")
 	WebElement showLessLink;
 
-	@FindBy(xpath="//ul[@id=\"side-menu-category-navigation\"]")
+	@FindBy(xpath = "//ul[@id=\"side-menu-category-navigation\"]")
 	WebElement subcategoriesList;
-	
+
+	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 FilterByRating___StyledLabel-sc-17wxy9s-0 gJxZPQ jKZfbM\"]")
+	WebElement ProductRatingFilter;
+
+	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 FilterSelection___StyledLabel-sc-1d3okpu-0 gJxZPQ ffRDqB\"]")
+	List<WebElement> filters;
+
 	String textbeforeclick;
 
 	public ShopByCategoryPage() {
@@ -144,11 +151,46 @@ public class ShopByCategoryPage {
 	}
 
 	public void verifyAdditionalCategoriesAreCollapsed() throws InterruptedException {
-	
+
 		String classNameAfterClickOnShowMore = subcategoriesList.getAttribute("class");
 		clickOnShowMoreLink();
 		String classNameAfterClickOnShowLess = subcategoriesList.getAttribute("class");
 		Assert.assertFalse(classNameAfterClickOnShowMore.equals(classNameAfterClickOnShowLess));
 
+	}
+
+//	public void getDefaultFilterList() {
+//		for(WebElement filter:filters) {
+//			System.out.println(filter.getText());
+//		}
+//		
+//	}
+	public void verifyListOfFilter() {
+		SoftAssert softlyAssert = new SoftAssert();
+		softlyAssert.assertTrue(ProductRatingFilter.isDisplayed());
+		for (WebElement filter : filters) {
+			System.out.println(filter.getText());
+			softlyAssert.assertTrue(filter.isDisplayed());
+		}
+		softlyAssert.assertAll();
+	}
+
+	public void clickOnYourBrand(String brandNameFromList) throws InterruptedException {
+		Thread.sleep(3000);
+		keyword.mouseScrollDown();
+		brandNameFromList = brandNameFromList.replace(" ", "");
+		brandNameFromList = "i-" + brandNameFromList;
+	    WebElement brandName = HomePage.shopByCategoryMenu.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
+		brandName.click();
+		Thread.sleep(3000);
+	}
+	public void verifyBrandIsSelected(String brandNameFromList) {
+
+		brandNameFromList = brandNameFromList.replace(" ", "");
+		brandNameFromList = "i-" + brandNameFromList;
+	    WebElement brandName = HomePage.shopByCategoryMenu.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
+		if(brandName.isSelected()) {
+			Assert.assertTrue(true);
+		}
 	}
 }
