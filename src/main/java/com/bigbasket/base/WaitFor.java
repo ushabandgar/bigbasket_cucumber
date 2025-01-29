@@ -28,7 +28,7 @@ public class WaitFor {
 
 			wait.until(ExpectedConditions.visibilityOf(element));
 		}
-	}
+	} 
 
 	// Wait until all elements are visible
 	public static List<WebElement> visibilityOfElements(List<WebElement> elements) {
