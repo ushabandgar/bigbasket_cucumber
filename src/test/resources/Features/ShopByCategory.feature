@@ -1,12 +1,10 @@
 Feature: This feature file test the "SHOP BY CATEGORY" functionality
 
-<<<<<<< HEAD
 Scenario: verify "SHOP BY CATEGORY" menu displayed on HomePage
 
 Given Browser is launched and maximized
 When After entering url, User is on HomePage
 Then SHOP BY CATEGORY should be displayed on HomePage
-
 
 Scenario: verify "SHOP BY CATEGORY" menu displayes all the categories and their names properly
 
@@ -175,15 +173,14 @@ And I click on "fashion" category
 When I select the brand "Adidas T-shirt" from the brand filter
 Then I should only see products from "Adidas T-shirt"
     
-@today
 Scenario: Filter products by multiple brands
 Given After entering url, User is on HomePage
 When I click on SHOP BY CATEBORY menu
 And I click on "fashion" category
 When I select the multiple brands from the brand filter    
 Then the displayed products should only belong to the selected brands
-=======
-  Scenario: verify "SHOP BY CATEGORY" menu displayed on HomePage
+
+ Scenario: verify "SHOP BY CATEGORY" menu displayed on HomePage
     Given Browser is launched and maximized
     When After entering url, User is on HomePage
     Then SHOP BY CATEGORY should be displayed on HomePage
@@ -421,11 +418,11 @@ Then the displayed products should only belong to the selected brands
     And I click on "fruits & vegetables" category
     Then I check if the filter section is scrollable
 
-  @today
+ 
   Scenario: Verify product brands are selectable
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEBORY menu
     And I click on "fashion" category
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should "Adidas T-shirt" see brand is selected
->>>>>>> master
+
