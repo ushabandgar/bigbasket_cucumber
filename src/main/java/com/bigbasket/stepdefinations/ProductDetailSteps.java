@@ -19,7 +19,7 @@ public class ProductDetailSteps {
 		keyword.maximizeBrowser();
 	}
 	@When("The user searches for {string}")
-	public void userClicksOnTheSearchInputAndSearchesForProductName(String productName) {
+	public void userClicksOnTheSearchInputAndSearchesForProductName(String productName) throws InterruptedException {
 	    HomePage page = new HomePage();
 	    page.clickOnSearchText();
 	    page.sendProductName(productName);  // Pass the productName parameter to the method
