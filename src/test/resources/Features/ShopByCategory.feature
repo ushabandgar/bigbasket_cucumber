@@ -123,13 +123,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "fruits & vegetables" category
     Then I check if the filter section is scrollable
 
-  Scenario: Verify product brands are selectable
-    Given After entering url, User is on HomePage
-    When I click on SHOP BY CATEGORY menu
-    And I click on "fashion" category
-    When I select the brand "Adidas T-shirt" from the brand filter
-    Then I should see "Adidas T-shirt" brand is selected
-
   Scenario: Verify product brands are deselectable
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -159,6 +152,12 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When I select the multiple brands from the brand filter
     Then the displayed products should only belong to the selected brands
 
+  Scenario: Verify product brands are selectable
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    When I select the brand "Adidas T-shirt" from the brand filter
+    Then I should see "Adidas T-shirt" brand is selected
 
   Scenario: Verify "Filters" section is displayed after applying a filter
     Given After entering url, User is on HomePage
@@ -166,21 +165,17 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "fashion" category
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should see "Filters" section should be displayed and enabled
-    
-   
+
   Scenario: Verify "Clear" button should be available for applied filters section only once we applied filters
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "fashion" category
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should see "Clear" button should be displayed in Filters Section.
-    
-   
+
   Scenario: Verify Once you apply any Filter, "Filters" section should have applied filters only
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "fashion" category
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should see "Adidas T-shirt" as applied Filters in Filter section.
-    
-  
