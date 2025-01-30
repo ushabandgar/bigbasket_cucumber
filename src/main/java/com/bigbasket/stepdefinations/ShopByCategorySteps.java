@@ -39,7 +39,7 @@ public class ShopByCategorySteps {
 
 	}
 
-	@When("I click on SHOP BY CATEBORY menu")
+	@When("I click on SHOP BY CATEGORY menu")
 	public void clickOnShopByCatgeoryMenuAfterExpand() {
 		HomePage homepage = new HomePage();
 		homepage.clickOnShopByCategoryMenu();
@@ -163,6 +163,13 @@ public class ShopByCategorySteps {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyAdditionalCategoriesAreDisplayed();
 	}
+	@Then("additional categories should be collapased")
+	public void verifyAddiotionalCategoriesCollapsed() {
+		
+		
+		
+		//need to write code
+	}
 
 	@Then("{string} text replaces to {string}")
 	public void showMoreButtonReplacedWithShowLess(String ShowMore, String ShowLess) throws InterruptedException {
@@ -238,11 +245,32 @@ public class ShopByCategorySteps {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyMultipleBrandsAreSelected();
 	}
+
 	@Then("the displayed products should only belong to the selected brands")
 	public void verifyProductListBelongToMultpleSelctedBrandsOnly() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.getSelectedBrandNames();
 		categoryPage.verifyProductListForMultipleBrands();
 	}
+
+	@Then("I should see {string} section should be displayed and enabled")
+	public void verifyFiltersSectionDisplayedAfterApplyingFilter(String Filters) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyFiltersSectionEnabledAfterApplyingFilter(Filters);
+	}
+
+	@Then("I should see {string} button should be displayed in Filters Section.")
+	public void verifyClearButtonIsDisplayedInFiltersSection(String Clear) {
+
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyClearButtonDisplayed(Clear);
+	}
+	
+    @Then("I should see {string} as applied Filters in Filter section.")
+    public void verifyAppliedFiltersListInFiltersSection(String AdidasTShirt) {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	//categoryPage.getAppliedFilterListInFilterSection();
+		categoryPage.AppliedFilterInFilterSection(AdidasTShirt);
+    }
 
 }

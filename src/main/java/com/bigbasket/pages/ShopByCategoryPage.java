@@ -55,6 +55,15 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//div[@id=\"side-filter-by-rating\"][2]/div[2]/span/label")
 	List<WebElement> selectedBrandNames;
 
+	@FindBy(css = "div[class=\"p-2.5 mt-5 flex flex-col bg-white border border-silverSurfer-200 rounded-2xs\"]")
+	WebElement FiltersSection;
+
+	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 gJxZPQ text-base font-semibold leading-sm tracking-xs text-darkOnyx-900\"]")
+	WebElement FiltersText;
+
+	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterSelected___StyledButton-sc-bx06kz-0 kYQsWi dwgfcn\"]")
+	WebElement ClearButton;
+
 	String textbeforeclick;
 	String brandName;
 
@@ -306,5 +315,46 @@ public class ShopByCategoryPage {
 		SoftAssert softlyAssert = new SoftAssert();
 		softlyAssert.assertEquals(brandSelected, list);
 		softlyAssert.assertAll();
+	}
+
+	public void verifyFiltersSectionEnabledAfterApplyingFilter(String Filters) {
+
+		SoftAssert softlyAssert = new SoftAssert();
+		softlyAssert.assertTrue(FiltersSection.isDisplayed());
+		softlyAssert.assertTrue(FiltersSection.isEnabled());
+		softlyAssert.assertTrue(FiltersText.getText().equals(Filters));
+		softlyAssert.assertAll();
+	}
+
+	public void verifyClearButtonDisplayed(String Clear) {
+
+		SoftAssert softlyAssert = new SoftAssert();
+		softlyAssert.assertTrue(ClearButton.isDisplayed());
+		softlyAssert.assertTrue(ClearButton.getText().equals(Clear));
+		softlyAssert.assertAll();
+
+	}
+
+	public List<String> getAppliedFilterListInFilterSection(){
+		ArrayList<String> FilterListInFilterSection=new ArrayList<String>();
+	List<WebElement> AppliedFilterListInFilterSection=Keyword.driver.findElements(By.cssSelector("span[class=\"Label-sc-15v1nk5-0 FilterSelected___StyledLabel2-sc-bx06kz-5 gJxZPQ fTfejP\"]"));
+		for(WebElement AppliedFlter:AppliedFilterListInFilterSection) {
+			FilterListInFilterSection.add(AppliedFlter.getText());
+		}
+		System.out.println(FilterListInFilterSection);
+		return FilterListInFilterSection;
+	}
+	
+	public List<String> getAppliedFiltersListFromIndividualFilter() {
+		ArrayList<String> FilterListFromSpecificFilter=new ArrayList<String>();
+
+		Keyword.driver.findElements(By.xpath("//input[@id=\"i-Rs101toRs200\" and @checked=\"\"]"));
+		return FilterListFromSpecificFilter;
+	}
+	public void AppliedFilterInFilterSection(String AdidasTShirt) {
+
+		AdidasTShirt="Adidas T-shirt";
+		Assert.assertTrue(getAppliedFilterListInFilterSection().contains(AdidasTShirt));
+		
 	}
 }
