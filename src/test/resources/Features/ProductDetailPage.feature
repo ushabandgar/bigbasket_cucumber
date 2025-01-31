@@ -130,3 +130,28 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The user should able to navigate that perticular page
+
+  Scenario: verify "similiar product" list should be appere on product detail page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see similar product list
+
+  Scenario: verify "similiar product" list should be appere when user scroll down to the page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see similar product list after scrolling down page
+
+  Scenario: verify "About the Product" description should be appere on PIP page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see About the Product description
+
+  Scenario: verify "Other Product Info" details should be appere on PIP page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see Other Product Info details
+
+  Scenario: verify user should able to click on "-" and "+" to see "Other Product Info"
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to to click on "-" and "+" option to see Other Product Info

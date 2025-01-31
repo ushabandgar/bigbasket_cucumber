@@ -27,10 +27,10 @@ public class ProductSearchPage {
 	}
 
 	public void clickOnProduct(String productName) throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		try {
-			//WaitFor.elementToBeClickable(ClickonProduct);
-			Thread.sleep(3000);			
+			WaitFor.elementToBeClickable(ClickonProduct);
+			//Thread.sleep(1000);			
 			ClickonProduct.click();
 			System.out.println("Clicked on product.");
 		} catch (StaleElementReferenceException e) {

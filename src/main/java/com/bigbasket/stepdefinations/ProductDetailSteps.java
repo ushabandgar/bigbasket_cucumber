@@ -200,7 +200,38 @@ public class ProductDetailSteps {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.navigateToPageOneByOne();
-		Thread.sleep(5000);
+	}
+	@Then("The user should able to see similar product list")
+	public void similarProdutList() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.similarProductList();
+	}
+	
+	@Then("The user should able to see similar product list after scrolling down page")
+	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.scrollPageToseeSimiliarProductList();
+	}
+	@Then("The user should able to see About the Product description")
+	public void aboutTheProdutDescription() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.aboutTheProdutDescription();
+	}
+	@Then("The user should able to see Other Product Info details")
+	public void otherProductInfo() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.otherProductInfo();
+	}
+	
+	@Then("The user should able to to click on \"-\" and \"+\" option to see Other Product Info")
+	public void clickOnOtherProductInfoIcons() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.clickOnOtherProductInfoIcons();
 	}
 	
 	
