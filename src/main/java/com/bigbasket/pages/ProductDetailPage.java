@@ -1,18 +1,13 @@
 package com.bigbasket.pages;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
-
 import java.time.Duration;
-import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -86,7 +81,7 @@ public class ProductDetailPage {
 	
 	@FindBy(css = "button.fNKyNB")
 	WebElement otherProductInfoIcons;
-
+	
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -368,4 +363,5 @@ public class ProductDetailPage {
 		assertTrue(otherProductInfoIcons.isEnabled(), "Icon are not clickable.");
 		
 	}
+
 }

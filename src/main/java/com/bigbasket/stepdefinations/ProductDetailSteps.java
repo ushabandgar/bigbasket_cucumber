@@ -200,6 +200,7 @@ public class ProductDetailSteps {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.navigateToPageOneByOne();
+
 	}
 	@Then("The user should able to see similar product list")
 	public void similarProdutList() throws InterruptedException {
@@ -232,6 +233,8 @@ public class ProductDetailSteps {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.clickOnOtherProductInfoIcons();
+		Thread.sleep(5000);
+
 	}
 	
 	

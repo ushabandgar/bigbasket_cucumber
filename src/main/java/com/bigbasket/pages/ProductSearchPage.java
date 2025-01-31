@@ -1,11 +1,11 @@
 package com.bigbasket.pages;
+
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.WaitFor;
-
 
 public class ProductSearchPage {
 	@FindBy(css = "div.SKUDeck___StyledDiv-sc-1e5d9gk-0")
@@ -29,8 +29,8 @@ public class ProductSearchPage {
 	public void clickOnProduct(String productName) throws InterruptedException {
 		Thread.sleep(1000);
 		try {
-			WaitFor.elementToBeClickable(ClickonProduct);
-			//Thread.sleep(1000);			
+			//WaitFor.elementToBeClickable(ClickonProduct);
+			Thread.sleep(3000);			
 			ClickonProduct.click();
 			System.out.println("Clicked on product.");
 		} catch (StaleElementReferenceException e) {
@@ -40,6 +40,7 @@ public class ProductSearchPage {
 			System.out.println("Clicked on product after handling StaleElementReferenceException.");
 		} catch (Exception e) {
 			System.out.println("Failed to click on product. Error: " + e.getMessage());
+		
 		}
 	}
 

@@ -135,6 +135,7 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The user should able to see similar product list
+
   Scenario: verify that the "similar product" list should appear when user scrolls down to the page
     When The user searches for "Product"
     When The user clicks on the "Product"

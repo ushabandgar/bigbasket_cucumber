@@ -19,7 +19,10 @@ public class WaitFor {
 		wait.withTimeout(Duration.ofSeconds(20));
 		wait.ignoring(NoSuchElementException.class);
 		wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(20));
+<<<<<<< HEAD
 		wait1.ignoring(ElementNotInteractableException.class);
+=======
+>>>>>>> master
 	}
 	
 	     
