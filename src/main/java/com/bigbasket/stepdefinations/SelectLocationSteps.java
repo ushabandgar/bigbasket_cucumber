@@ -157,7 +157,7 @@ public class SelectLocationSteps {
 	}
 
 	
-	@When("User enter {string} into search for area  text box")
+	@And("User enter {string} into search for area  text box")
 	public void user_enter_into_search_for_area_textbox(String string) throws InterruptedException {
 		HomePage homepage = new HomePage();
 		homepage.enterLargeNumberOnlyIntoSearchForAreaTextBox();
@@ -169,6 +169,31 @@ public class SelectLocationSteps {
 		HomePage homepage = new HomePage();
 		homepage.verifyWhenEnterOnlyLargeNumberIntoSearchForAreaTextBox();
 
+	}
+	@And("User enter {string} into text box")
+	public void user_enter_into_Textbox(String string) throws InterruptedException {
+		HomePage homepage = new HomePage();
+		homepage.enterInvalidSpecialCharacterOnlyIntoSearchForAreaTextBox();
+	    
+	}
+	
+	@Then("{string} result message should be display on page")
+	public void result_message_should_be_display_on_page(String string) {
+		HomePage homepage = new HomePage();
+		homepage.verifyWhenEnterInvalidSpecialCharacterOnlyIntoSearchForAreatTextBox();
+	   
+	}
+	@And("User enter {string} into select Location bar")
+	public void user_enter_into_select_Location_bar(String hjfhfjwehjdwjdsooudiqwufiyf) throws InterruptedException {
+		HomePage homepage = new HomePage();
+		homepage.enterExtremelyLargeInvalidTextIntoearchForAreaTextBox(); 
+	    
+	}
+	@Then("{string} result message should be displayed on page")
+	public void result_message_should_be_displayed_on_page(String hjfhfjwehjdwjdsooudiqwufiyf) {
+		HomePage homepage = new HomePage();
+		homepage.verifyWhenEnterExtremelyLargeInvalidTextIntoearchForAreaTextBox();
+	    
 	}
 
 }

@@ -207,6 +207,27 @@ public class HomePage {
 		Assert.assertTrue (noResultMsgForDeliveryLocatrion.isDisplayed());
 
 	}
+	public void enterInvalidSpecialCharacterOnlyIntoSearchForAreaTextBox() throws InterruptedException {
+		keyword.sendkeys(searchForArea, "<:>/{};");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterInvalidSpecialCharacterOnlyIntoSearchForAreatTextBox() {
+		Assert.assertTrue(noResultMsgForDeliveryLocatrion.isDisplayed());
+
+	}
+	
+	public void enterExtremelyLargeInvalidTextIntoearchForAreaTextBox() throws InterruptedException {
+		keyword.sendkeys(searchForArea, "hjfhfjwehjdwjdsooudiqwufiyf");
+		Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterExtremelyLargeInvalidTextIntoearchForAreaTextBox() {
+		Assert.assertTrue(noResultMsgForDeliveryLocatrion.isDisplayed());
+
+	}
 
 
 

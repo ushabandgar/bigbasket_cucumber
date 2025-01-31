@@ -58,3 +58,15 @@ Feature: This feature file test Select Location functionality
     When User click on select location bar
     And User enter "07676476337565" into search for area  text box
     Then "Sorry,we dont deliver in this location" result message should be display
+
+  Scenario: Verify when user enter invalid speacial character "<:>/{};" only into search bar
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter "<:>/{};" into text box
+    Then "Sorry,we dont deliver in this location" result message should be display on page
+
+  Scenario: Verify when extremely large invalid text "hjfhfjwehjdwjdsooudiqwufiyf" enter into select location  bar
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter "hjfhfjwehjdwjdsooudiqwufiyf" into select Location bar
+    Then "Sorry,we dont deliver in this location" result message should be displayed on page
