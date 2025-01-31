@@ -179,3 +179,36 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "fashion" category
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should see "Adidas T-shirt" as applied Filters in Filter section.
+
+  Scenario: verify After cliking on "Clear" button in applied filter section, clear all filters
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    When I select the brand "Adidas T-shirt" from the brand filter
+    And I click on "Clear" button in Filter Section
+    Then I should see all filters should be cleared.
+
+  Scenario: verify After cliking on "Clear" button in applied filter section, showing original product list
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    When I select the brand "Adidas T-shirt" from the brand filter
+    And i get product count for applied filter
+    And I click on "Clear" button in Filter Section
+    Then I should see original product list.
+
+  Scenario: verify product count after clciking on any category
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I scroll until all products are loaded
+    And i get count of product for that category
+    And Fashion category showing 68 count with category heading
+    Then Both count should match
+
+  Scenario: Verify if selected any subcategory then in category hierarchy that subcategory name should be added
+  Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Women's Apparel" subcategory
+    Then I should see that subcategory should be added in Category hierarchy.

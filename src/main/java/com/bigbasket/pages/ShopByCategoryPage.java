@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -64,6 +65,9 @@ public class ShopByCategoryPage {
 	@FindBy(css = "button[class=\"Button-sc-1dr2sn8-0 FilterSelected___StyledButton-sc-bx06kz-0 kYQsWi dwgfcn\"]")
 	WebElement ClearButton;
 
+	@FindBy(xpath = "//div[@class=\"flex justify-start items-center\"]/a/span")
+	List<WebElement> SelectedCategoryHierarchy;
+
 	String textbeforeclick;
 	String brandName;
 
@@ -78,7 +82,7 @@ public class ShopByCategoryPage {
 	}
 
 	public void verifySpecificCatgeoryPageOpens() throws InterruptedException {
-		Thread.sleep(3000);
+		WaitFor.untilUrlLoad("fashion");
 		if (Keyword.driver.getCurrentUrl().contains("fashion")) {
 			String categoryNameAfterClick = getNameOfCategoryAfterClick("fashion");
 			Assert.assertTrue(categoryNameAfterClick.equalsIgnoreCase("fashion"));
@@ -335,26 +339,84 @@ public class ShopByCategoryPage {
 
 	}
 
-	public List<String> getAppliedFilterListInFilterSection(){
-		ArrayList<String> FilterListInFilterSection=new ArrayList<String>();
-	List<WebElement> AppliedFilterListInFilterSection=Keyword.driver.findElements(By.cssSelector("span[class=\"Label-sc-15v1nk5-0 FilterSelected___StyledLabel2-sc-bx06kz-5 gJxZPQ fTfejP\"]"));
-		for(WebElement AppliedFlter:AppliedFilterListInFilterSection) {
+	public List<String> getAppliedFilterListInFilterSection() {
+		ArrayList<String> FilterListInFilterSection = new ArrayList<String>();
+		List<WebElement> AppliedFilterListInFilterSection = Keyword.driver.findElements(By.cssSelector(
+				"span[class=\"Label-sc-15v1nk5-0 FilterSelected___StyledLabel2-sc-bx06kz-5 gJxZPQ fTfejP\"]"));
+		for (WebElement AppliedFlter : AppliedFilterListInFilterSection) {
 			FilterListInFilterSection.add(AppliedFlter.getText());
 		}
-		System.out.println(FilterListInFilterSection);
 		return FilterListInFilterSection;
 	}
-	
+
 	public List<String> getAppliedFiltersListFromIndividualFilter() {
-		ArrayList<String> FilterListFromSpecificFilter=new ArrayList<String>();
+		ArrayList<String> FilterListFromSpecificFilter = new ArrayList<String>();
 
 		Keyword.driver.findElements(By.xpath("//input[@id=\"i-Rs101toRs200\" and @checked=\"\"]"));
 		return FilterListFromSpecificFilter;
 	}
+
 	public void AppliedFilterInFilterSection(String AdidasTShirt) {
 
-		AdidasTShirt="Adidas T-shirt";
+		AdidasTShirt = "Adidas T-shirt";
 		Assert.assertTrue(getAppliedFilterListInFilterSection().contains(AdidasTShirt));
-		
+
 	}
+
+	public void clickOnClearButton() throws InterruptedException {
+		ClearButton.click();
+		waitForSomeTime();
+	}
+
+	public void verifyClearAllFilters() {
+
+		boolean isClearedFilterList = getAppliedFilterListInFilterSection().isEmpty();
+		Assert.assertTrue(isClearedFilterList);
+	}
+
+	public int getOriginalProductCountAfterClickingOnCategory() {
+		int originalProductCount = WaitFor.visibilityOfElements(
+				Keyword.driver.findElements(By.xpath("//div[@class=\"SKUDeck___StyledDiv-sc-1e5d9gk-0 eA-dmzP\"]")))
+				.size();
+		return originalProductCount;
+	}
+
+	public int getProductCountAfterApplyingFilter() {
+		int productCountAfterFilter = Keyword.driver
+				.findElements(By.xpath("//div[@class=\"SKUDeck___StyledDiv-sc-1e5d9gk-0 eA-dmzP\"]")).size();
+		return productCountAfterFilter;
+	}
+
+	public int getProductCountShowingWithCatgeoryNames() {
+		String productCountWithCategory = Keyword.driver
+				.findElement(
+						By.xpath("//span[@class=\"Label-sc-15v1nk5-0 Title___StyledLabel-sc-800s46-0 gJxZPQ lnIjdY\"]"))
+				.getText();
+		productCountWithCategory = productCountWithCategory.replace("(", "").replace(")", "");
+		int productCountWithCategoryName = Integer.parseInt(productCountWithCategory);
+		return productCountWithCategoryName;
+	}
+
+	public void verifyActualProductCountAndCountShowingWithCategoryName() {
+		Assert.assertEquals(getProductCountShowingWithCatgeoryNames(), getProductCountAfterApplyingFilter());
+	}
+
+	public void waitForSomeTime() throws InterruptedException {
+		Thread.sleep(2000);
+	}
+
+	public List<String> getSelectedCategoryHierarchy() {
+		ArrayList<String> SelectedCategoryHierarchyList = new ArrayList<String>();
+		for (WebElement SelectedCategory : SelectedCategoryHierarchy) {
+			SelectedCategoryHierarchyList.add(SelectedCategory.getText());
+		}
+		return SelectedCategoryHierarchyList;
+	}
+
+	public void verifyCategoryTagsAfterClickingOnSubActegory() {
+		String ExpectedSUbCategoryInCategoryHierahcy = "Women's Apparel";
+		Assert.assertTrue(getSelectedCategoryHierarchy().contains(ExpectedSUbCategoryInCategoryHierahcy));
+
+	}
+
 }

@@ -1,6 +1,17 @@
 package com.bigbasket.stepdefinations;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 import com.bigbasket.base.Keyword;
+import com.bigbasket.base.Locator;
+import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
 
@@ -10,6 +21,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ShopByCategorySteps {
+	int countAfterFilter;
 
 	@Given("Browser is launched and maximized")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
@@ -163,12 +175,11 @@ public class ShopByCategorySteps {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyAdditionalCategoriesAreDisplayed();
 	}
+
 	@Then("additional categories should be collapased")
 	public void verifyAddiotionalCategoriesCollapsed() {
-		
-		
-		
-		//need to write code
+
+		// need to write code
 	}
 
 	@Then("{string} text replaces to {string}")
@@ -265,12 +276,79 @@ public class ShopByCategorySteps {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyClearButtonDisplayed(Clear);
 	}
-	
-    @Then("I should see {string} as applied Filters in Filter section.")
-    public void verifyAppliedFiltersListInFiltersSection(String AdidasTShirt) {
-    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-    	//categoryPage.getAppliedFilterListInFilterSection();
-		categoryPage.AppliedFilterInFilterSection(AdidasTShirt);
-    }
 
+	@Then("I should see {string} as applied Filters in Filter section.")
+	public void verifyAppliedFiltersListInFiltersSection(String AdidasTShirt) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		// categoryPage.getAppliedFilterListInFilterSection();
+		categoryPage.AppliedFilterInFilterSection(AdidasTShirt);
+	}
+
+	@And("I click on {string} button in Filter Section")
+	public void clearFilter(String Clear) throws InterruptedException {
+
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnClearButton();
+	}
+
+	@Then("I should see all filters should be cleared.")
+	public void verifyClearedAllTheFiltersInFilterSection() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyClearAllFilters();
+
+	}
+
+	@And("I scroll until all products are loaded")
+	public void scrollDownUntillProductsLoaded() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		Keyword keyword = new Keyword();
+		WebElement footer = keyword.getWebElement(Locator.footer);
+		keyword.scrollDownTillSpecificElement(footer);
+		categoryPage.waitForSomeTime();
+
+	}
+
+	@And("Fashion category showing 68 count with category heading")
+	public void getCategoryShowingCountWithHeading() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getProductCountShowingWithCatgeoryNames();
+	}
+
+	@And("i get count of product for that category")
+	public void originalProductCountAfterClickOnCategory() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getOriginalProductCountAfterClickingOnCategory();
+	}
+
+	@Then("Both count should match")
+	public void verifyBothCountMathches() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyActualProductCountAndCountShowingWithCategoryName();
+	}
+
+	@And("i get product count for applied filter")
+	public void getProductCountAfterApplyingFilter() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		countAfterFilter = categoryPage.getProductCountAfterApplyingFilter();
+	}
+
+	@Then("I should see original product list.")
+	public void getOriginalProductListWithoutFilter() throws InterruptedException {
+		scrollDownUntillProductsLoaded();
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		int countOriginal = categoryPage.getOriginalProductCountAfterClickingOnCategory();
+		Assert.assertNotEquals(countAfterFilter, countOriginal);
+	}
+
+	@And("I click on {string} subcategory")
+	public void clickOnYourSubCategory(String SubCategoryName) throws InterruptedException {
+		Keyword keyword = new Keyword();
+		keyword.clickOnYourSubCategory(SubCategoryName);
+	}
+
+    @Then("I should see that subcategory should be added in Category hierarchy.")
+    public void verifySubCategoryAddedInCategoryHierarchy() {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyCategoryTagsAfterClickingOnSubActegory();
+    }
 }
