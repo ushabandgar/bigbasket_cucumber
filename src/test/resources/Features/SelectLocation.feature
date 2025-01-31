@@ -39,3 +39,22 @@ Feature: This feature file test Select Location functionality
     And User enter "Mum" into search for area text box
     And User get list of  related search results
     Then Address of location results should be contains "Mum"
+
+  Scenario: Verify that when click on clear button then search for area text box should be clear
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter "Mumbai" into textBox
+    And User click on clear button
+    Then "Mumbai" text should be remove from textbox
+
+  Scenario: Verify when user enter speacial character "!@#$%^&*" only into text box
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter  speacial character "!@#$%^&*" only into search for area  text box
+    Then "Sorry,we dont deliver in this location" message should be display
+
+  Scenario: Verify when user enter invalid large number "07676476337565" only into text box
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter "07676476337565" into search for area  text box
+    Then "Sorry,we dont deliver in this location" result message should be display

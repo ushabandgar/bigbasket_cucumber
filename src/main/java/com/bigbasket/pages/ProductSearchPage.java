@@ -26,9 +26,11 @@ public class ProductSearchPage {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
-	public void clickOnProduct(String productName) {
+	public void clickOnProduct(String productName) throws InterruptedException {
+		Thread.sleep(1000);
 		try {
 			WaitFor.elementToBeClickable(ClickonProduct);
+			//Thread.sleep(1000);			
 			ClickonProduct.click();
 			System.out.println("Clicked on product.");
 		} catch (StaleElementReferenceException e) {

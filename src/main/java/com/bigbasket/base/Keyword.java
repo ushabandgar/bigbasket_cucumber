@@ -20,7 +20,6 @@ import com.bigbasket.pages.HomePage;
 public class Keyword {
 
 	public static RemoteWebDriver driver;
-
 	public void openBrowser(@Optional String browserName) {
 		if (browserName == null) {
 			System.out.println("Launching Chrome by default");
@@ -89,9 +88,10 @@ public class Keyword {
 	}
 
 	public void mouseScrollDown() {
-		Actions actions = new Actions(driver);
-		actions.scrollByAmount(0, 500).perform();
+		Actions action = new Actions(driver);
+		action.scrollByAmount(0, 700).perform();
 	}
+
 	public void switchToChildWindowHandle() {
 		Set<String> allWindows = driver.getWindowHandles();
 		String parentWindow = driver.getWindowHandle();
@@ -186,4 +186,13 @@ public class Keyword {
 		driver.navigate().back();
 	}
 
+	public void moveCurser() {
+		WebElement filterSection = getWebElement(Locator.shopByCatgeorySubCategories);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(filterSection).perform();
+	}
+
+	
+	
+	
 }

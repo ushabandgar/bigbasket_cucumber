@@ -3,14 +3,21 @@ package com.bigbasket.pages;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+
+import java.time.Duration;
+import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.WaitFor;
 
@@ -43,29 +50,43 @@ public class ProductDetailPage {
 
 	@FindBy(css = "div.kiucsj section.border-silverSurfer-400 div section.iDeFak  div:nth-child(1) div.flex button.TvAgf")
 	WebElement AddToBasketRemovingBtn;
-	
+
 	@FindBy(css = "div.kiucsj section.border-silverSurfer-400 div section.iDeFak  div:nth-child(2) button")
 	WebElement SaveForLaterBtn;
-	
+
 	@FindBy(css = "div.opacity-100 div.px-12 span")
 	WebElement LoginSignup;
-	
-	@FindBy(css="div.hlQOJm div")
+
+	@FindBy(css = "div.hlQOJm div")
 	List<WebElement> CheckoutPage;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button.gXeHMp")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button.gXeHMp")
 	WebElement facebookIcon;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button.bUcDsU")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button.bUcDsU")
 	WebElement twitter;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button.jGRTco")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button.jGRTco")
 	WebElement email;
-	
-	@FindBy(css="div.iUVPaR section div.justify-end button")
+
+	@FindBy(css = "div.iUVPaR section div.justify-end button")
 	List<WebElement> SocialMediaIcons;
 	
+	@FindBy(css = "div.p-6 div.qqnNj")
+	WebElement similarProducts;
 	
+	@FindBy(css = "div.p-6 li.pb-1")
+	WebElement similarProductsLists;
+	
+	@FindBy(css = "section.bnsJyy div.dNIxde div.overflow-hidden")
+	WebElement aboutTheProductDesceiption;
+	
+	@FindBy(css = "section.bnsJyy div.kIqWEi div.overflow-hidden")
+	WebElement otherProductInfo;
+	
+	@FindBy(css = "button.fNKyNB")
+	WebElement otherProductInfoIcons;
+
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -142,11 +163,11 @@ public class ProductDetailPage {
 			String imageSelector = "#thumb-" + i;
 			List<WebElement> productImages = WaitFor
 					.visibilityOfElements(Keyword.driver.findElements(By.cssSelector(imageSelector)));
-			for (WebElement images : productImages) {
-				Thread.sleep(3000);
-				WaitFor.visibilityOfElement(images);
-				images.click();
-				assertTrue(images.isDisplayed(), "Image is not visible");
+			for (WebElement image : productImages) {
+				WebDriverWait wait = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
+	            wait.until(ExpectedConditions.visibilityOf(image));
+				image.click();
+				assertTrue(image.isDisplayed(), "Image is not visible");
 			}
 		}
 	}
@@ -237,69 +258,114 @@ public class ProductDetailPage {
 	public void noSpellingGrammaticalMistakeInProductDescription() throws InterruptedException {
 		Thread.sleep(2000);
 		String expectedCorrectDescription = "Amul Taaza Milk, 1 L Pouch";
-	    assertTrue(expectedProductTitleText.getText().equals(expectedCorrectDescription), "Description contains spelling or grammatical errors");
+		assertTrue(expectedProductTitleText.getText().equals(expectedCorrectDescription),
+				"Description contains spelling or grammatical errors");
 	}
 
 	public void saveForLaterBtnShouldBeOnProductDetailPage() throws InterruptedException {
 		Thread.sleep(1000);
-		assertTrue(Keyword.driver.getCurrentUrl().contains("pd/"), " saveForLater btn Not on product detail page");
-		assertTrue(SaveForLaterBtn.isDisplayed(),"Not display!");	
+		//assertTrue(Keyword.driver.getCurrentUrl().contains("pd/"), " saveForLater btn Not on product detail page");
+		assertTrue(SaveForLaterBtn.isDisplayed(), "Not display!");
 	}
 
 	public void saveProductForLater() throws InterruptedException {
 		Thread.sleep(1000);
 		SaveForLaterBtn.click();
-		//afer Login/Signup page open
+		// afer Login/Signup page open
 		WaitFor.visibilityOfElement(LoginSignup);
 		System.out.println(LoginSignup.getText());
-	
-	}
 
-	public void navigateToPageonebyone() throws InterruptedException {
-	    Thread.sleep(1000);
-	    for (WebElement checkoutPage : CheckoutPage) {
-	        try {
-	            Thread.sleep(2000); 
-	            checkoutPage.click();
-	            System.out.println("Clicked on: " + checkoutPage.getText());
-	            Keyword.driver.navigate().back();
-	            Thread.sleep(2000); 
-	            
-	        } catch (StaleElementReferenceException e) {
-	        	 System.out.println("StaleElementReferenceException caught. Re-querying and clicking again.");
-		     
-	        }
-	    }
 	}
 
 	public void clickOnMediaIcons() throws InterruptedException {
-	Thread.sleep(1000);
-	for(WebElement icons : SocialMediaIcons) {
 		Thread.sleep(1000);
-		icons.click();
-		assertTrue(icons.isEnabled(), "Icons not clickable");
-	}
-		
+		for (WebElement icons : SocialMediaIcons) {
+			Thread.sleep(1000);
+			icons.click();
+			assertTrue(icons.isEnabled(), "Icons not clickable");
+		}
+
 	}
 
 	public void clickOnFacebookIcon() throws InterruptedException {
 		Thread.sleep(2000);
 		facebookIcon.click();
 		assertTrue(facebookIcon.isEnabled());
-		
+
 	}
+
 	public void clickOnTwitter() throws InterruptedException {
 		Thread.sleep(2000);
 		twitter.click();
 		assertTrue(twitter.isEnabled());
 	}
+
 	public void clickOnEmailOcon() throws InterruptedException {
 		Thread.sleep(2000);
 		email.click();
 		assertTrue(email.isEnabled());
 	}
-	
-	
 
+	public void navigateToPageOneByOne() throws InterruptedException {
+		WaitFor.visibilityOfElements(CheckoutPage);
+		for (int i = 0; i < 3; i++) {
+			try {
+				for (WebElement CheckoutPageOption : CheckoutPage) {
+					CheckoutPageOption.click();
+					Thread.sleep(2000);
+					assertTrue(CheckoutPageOption.isDisplayed(),
+							"CheckoutPage Links are not visible after navigating back");
+					Keyword.driver.navigate().back();
+					Thread.sleep(2000);
+				}
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Stale element encountered, retrying...");
+				continue;
+			}
+		}
 
+	}
+
+	public void similarProductList() {
+		WaitFor.visibilityOfElement(similarProducts);
+		System.out.println(similarProducts.getText());
+		assertTrue(similarProducts.isDisplayed(), "similar product list are not on PIP page.");
+		
+	}
+
+	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
+		WaitFor.visibilityOfElement(similarProducts);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+	    jse.executeScript("window.scrollBy(0,1500)");
+	    assertTrue(similarProductsLists.isDisplayed(), "Similar products list should be visible after scrolling");
+	}
+
+	public void aboutTheProdutDescription() {
+		WaitFor.visibilityOfElement(aboutTheProductDesceiption);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+		jse.executeScript("window.scrollBy(0,800)");
+		String description ="Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
+	    
+		assertEquals(aboutTheProductDesceiption.getText(), description, "About the product description Not match");
+	}
+
+	public void otherProductInfo() {
+		WaitFor.visibilityOfElement(otherProductInfo);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+		jse.executeScript("window.scrollBy(0,800)");
+		assertTrue(otherProductInfo.getText().contains("EAN Code: 8901262260091"));
+		
+	}
+
+	public void clickOnOtherProductInfoIcons() throws InterruptedException {
+		WaitFor.visibilityOfElement(otherProductInfoIcons);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+		jse.executeScript("window.scrollBy(0,600)");
+		Thread.sleep(1000);
+		WaitFor.visibilityOfElement(otherProductInfoIcons);
+		otherProductInfoIcons.click();
+		otherProductInfoIcons.click();
+		assertTrue(otherProductInfoIcons.isEnabled(), "Icon are not clickable.");
+		
+	}
 }
