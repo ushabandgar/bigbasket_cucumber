@@ -1,20 +1,20 @@
 Feature: Product Detail Page functionality
-
-  Scenario: when User searches "Product", the URL will change on the same tab
+@today
+  Scenario: verify User searches "Product", the URL will change on the same tab
     When The user searches for "Product"
     Then The URL should change on the same tab
-
-  Scenario: When User clicks on "Product", then the Product Page URL changes
+@today
+  Scenario: verify User clicks on "Product", then the Product Page URL changes
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The product page URL should changed
-
-  Scenario: When User clicks on "Product", then the Product Page Title  changes
+@today
+  Scenario: verify User clicks on "Product", then the Product Page Title  changes
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The product page Title should changed
 
-  Scenario: When User Click On "Product" Then Product Url Loaded Fully
+  Scenario: verify User Click On "Product" Then Product Url Loaded Fully
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The Product url should loaded Fully
