@@ -227,7 +227,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     Then I should see Hide Filter text replaces with "Show Filter".
 
-  @today
+ 
   Scenario: Verify on click of "Show Filter", all filters should be shown
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -243,3 +243,14 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     And I click on "Show Filter"
     Then I should see Show Filter text replaces with "Hide Filter".
+
+  Scenario: Verify products list should be displayed as per price filter
+   Given User is on Category Page
+   When User click on "Rs 101 to Rs 200" price filter
+  Then User should see products list of price between 101 and 200
+  @today
+  Scenario: Verify products list should be displayed properly if applied More Than Rs 500 filter
+   Given User is on Category Page
+   When User click on "More than Rs 500" price filter
+  Then User should see products list of price should be greater than 500
+  
