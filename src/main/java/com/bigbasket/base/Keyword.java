@@ -21,11 +21,8 @@ import com.bigbasket.pages.HomePage;
 public class Keyword {
 
 	public static RemoteWebDriver driver;
-<<<<<<< HEAD
-    private static final Logger LOG = LogManager.getLogger(Keyword.class);
-=======
->>>>>>> master
 
+    private static final Logger LOG = LogManager.getLogger(Keyword.class);
 	public void openBrowser(@Optional String browserName) {
 		if (browserName == null) {
 			System.out.println("Launching Chrome by default");
