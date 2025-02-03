@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,7 +21,10 @@ import com.bigbasket.pages.HomePage;
 public class Keyword {
 
 	public static RemoteWebDriver driver;
+<<<<<<< HEAD
     private static final Logger LOG = LogManager.getLogger(Keyword.class);
+=======
+>>>>>>> master
 
 	public void openBrowser(@Optional String browserName) {
 		if (browserName == null) {
@@ -94,6 +98,11 @@ public class Keyword {
 	public void mouseScrollDown() {
 		Actions action = new Actions(driver);
 		action.scrollByAmount(0, 700).perform();
+	}
+
+	public void scrollDownTillSpecificElement(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) Keyword.driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
 	public void switchToChildWindowHandle() {
@@ -186,6 +195,17 @@ public class Keyword {
 		Thread.sleep(3000);
 	}
 
+	public void clickOnYourSubCategory(String SubCategoryName) throws InterruptedException {
+		List<WebElement> ListOfSubCategories = getWebElements(Locator.shopByCatgeorySubCategories);
+		for (WebElement SubCategory : ListOfSubCategories) {
+			String SubCategoryNames = SubCategory.getText();
+			if (SubCategoryNames.equalsIgnoreCase(SubCategoryName)) {
+				SubCategory.click();
+				Thread.sleep(3000);
+			}
+		}
+	}
+
 	public void clickOnBackButtonOfBrowser() {
 		driver.navigate().back();
 	}
@@ -196,7 +216,4 @@ public class Keyword {
 		actions.moveToElement(filterSection).perform();
 	}
 
-	
-	
-	
 }
