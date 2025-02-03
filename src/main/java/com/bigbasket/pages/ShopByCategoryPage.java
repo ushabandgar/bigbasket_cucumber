@@ -68,8 +68,16 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//div[@class=\"flex justify-start items-center\"]/a/span")
 	List<WebElement> SelectedCategoryHierarchy;
 
+	@FindBy(xpath = "//button[contains(@class,\"FilterToggler___StyledButton\")]")
+	WebElement HideFilterButton;
+
+	@FindBy(xpath="//section[contains(@class,\"slug___StyledMotionSection\")]")
+	WebElement FilterSection;
+	
 	String textbeforeclick;
 	String brandName;
+	String TextBeforeClickOnHideFilter;
+	String TextAfterClickOnHideFilter;
 
 	public ShopByCategoryPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -417,6 +425,32 @@ public class ShopByCategoryPage {
 		String ExpectedSUbCategoryInCategoryHierahcy = "Women's Apparel";
 		Assert.assertTrue(getSelectedCategoryHierarchy().contains(ExpectedSUbCategoryInCategoryHierahcy));
 
+	}
+
+	public void clickOnHideFiltersButton() throws InterruptedException {
+		String buttonName=HideFilterButton.getText();
+		HideFilterButton.click();
+		
+		System.out.println("clicked on : "+buttonName);
+		Thread.sleep(3000);
+		
+	}
+
+	public String getClassNameBeforeHideFilter() {
+		String classNameBeforeHideFilter = FilterSection.getDomAttribute("class");
+		return classNameBeforeHideFilter;
+	}
+
+	public String getClassNameAfterHideFilter() {
+		String classNameAfterHideFilter = FilterSection.getDomAttribute("class");
+		return classNameAfterHideFilter;
+	}
+
+	public void verifyHideFiltersTextReplacesWithShowFiltersAfterClick(String ExpectedText) {
+		String TextAfterClickOnHideFilter=HideFilterButton.getText();
+		System.out.println("TextAfterClickOnHideFilter: "+TextAfterClickOnHideFilter);
+		System.out.println("ExpectedText: "+ExpectedText);
+		Assert.assertEquals(TextAfterClickOnHideFilter, ExpectedText);
 	}
 
 }

@@ -180,7 +180,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When I select the brand "Adidas T-shirt" from the brand filter
     Then I should see "Adidas T-shirt" as applied Filters in Filter section.
 
-  Scenario: verify After cliking on "Clear" button in applied filter section, clear all filters
+  Scenario: verify After clicking on "Clear" button in applied filter section, clear all filters
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "fashion" category
@@ -188,7 +188,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Clear" button in Filter Section
     Then I should see all filters should be cleared.
 
-  Scenario: verify After cliking on "Clear" button in applied filter section, showing original product list
+  Scenario: verify After clicking on "Clear" button in applied filter section, showing original product list
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "fashion" category
@@ -197,7 +197,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Clear" button in Filter Section
     Then I should see original product list.
 
-  Scenario: verify product count after clciking on any category
+  Scenario: verify product count after clicking on any category
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "fashion" category
@@ -207,8 +207,39 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     Then Both count should match
 
   Scenario: Verify if selected any subcategory then in category hierarchy that subcategory name should be added
-  Given After entering url, User is on HomePage
+    Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "fashion" category
     And I click on "Women's Apparel" subcategory
     Then I should see that subcategory should be added in Category hierarchy.
+
+  Scenario: Verify on click of "Hide Filter", all filters should get hided
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Hide Filter"
+    Then I should see All Filters should get hided.
+
+  Scenario: Verify on click of "Hide Filter", it replaces with "Show Filter"
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Hide Filter"
+    Then I should see Hide Filter text replaces with "Show Filter".
+
+  @today
+  Scenario: Verify on click of "Show Filter", all filters should be shown
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Hide Filter"
+    And I click on "Show Filter"
+    Then I should see All Filters should be shown.
+
+  Scenario: Verify on click of "Show Filter", it replaces with "Hide Filter"
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Hide Filter"
+    And I click on "Show Filter"
+    Then I should see Show Filter text replaces with "Hide Filter".

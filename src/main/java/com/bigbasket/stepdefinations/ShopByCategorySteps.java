@@ -22,6 +22,7 @@ import io.cucumber.java.en.When;
 
 public class ShopByCategorySteps {
 	int countAfterFilter;
+	String classNameBeforeHideFilter,classNameAfterHideFilter;
 
 	@Given("Browser is launched and maximized")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
@@ -346,9 +347,41 @@ public class ShopByCategorySteps {
 		keyword.clickOnYourSubCategory(SubCategoryName);
 	}
 
-    @Then("I should see that subcategory should be added in Category hierarchy.")
-    public void verifySubCategoryAddedInCategoryHierarchy() {
-    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+	@Then("I should see that subcategory should be added in Category hierarchy.")
+	public void verifySubCategoryAddedInCategoryHierarchy() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyCategoryTagsAfterClickingOnSubActegory();
-    }
+	}
+
+	@And("I click on {string}")
+	public void clickOnHideFilters(String HideFilters) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		classNameBeforeHideFilter = categoryPage.getClassNameBeforeHideFilter();
+		categoryPage.clickOnHideFiltersButton();
+	}
+
+	@Then("I should see All Filters should get hided.")
+	public void verifyAllFiltersAreHidedAfterTapOnHideFilters() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		String classNameAfterHideFilter=categoryPage.getClassNameAfterHideFilter();
+		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
+	}
+
+	@Then("I should see Hide Filter text replaces with {string}.")
+	public void verifyHideFiltersReplacesWithShowFiltersOnTapOfIt(String ExpectedText) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
+	}
+	
+    @Then("I should see Show Filter text replaces with {string}.")
+	public void verifyShowFiltersReplacesWithHideFiltersOnTapOfIt(String ExpectedText) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
+	}
+    @Then("I should see All Filters should be shown.")
+	public void verifyAllFiltersShownAfterTapOnShowFilters() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		String classNameAfterHideFilter=categoryPage.getClassNameAfterHideFilter();
+		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
+	}
 }
