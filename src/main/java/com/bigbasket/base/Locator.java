@@ -7,4 +7,5 @@ public interface Locator {
 	String filterSection = "xpath##//section[@class=\"slug___StyledMotionSection-sc-1pgl3kl-1 gzSUtc\"]";
 	String brandListCheckbox = "xpath##//div[@id=\"side-filter-by-rating\"][2]/div[2]/span/input";
 	String brandListNames = "xpath##//div[@id=\"side-filter-by-rating\"][2]/div[2]/span/label";
+	String footer = "xpath##//a[@href=\"https://www.bigbasket.com/about-us/?nc=bt\"]";
 }
