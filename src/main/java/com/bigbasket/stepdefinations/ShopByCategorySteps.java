@@ -1,6 +1,17 @@
 package com.bigbasket.stepdefinations;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 import com.bigbasket.base.Keyword;
+import com.bigbasket.base.Locator;
+import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
 
@@ -9,13 +20,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ShopByCategorySteps{
+public class ShopByCategorySteps {
+	int countAfterFilter;
+	String classNameBeforeHideFilter,classNameAfterHideFilter;
 
 	@Given("Browser is launched and maximized")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
 		Keyword keyword = new Keyword();
 		keyword.openBrowser("firefox");
-		keyword.maximizeBrowser();
 		keyword.maximizeBrowser();
 
 	}
@@ -29,6 +41,8 @@ public class ShopByCategorySteps{
 	public void userIsOnHomePage() {
 		Keyword keyword = new Keyword();
 		keyword.launchUrl("https://www.bigbasket.com/");
+		keyword.maximizeBrowser();
+
 	}
 
 	@Then("SHOP BY CATEGORY should be displayed on HomePage")
@@ -38,7 +52,7 @@ public class ShopByCategorySteps{
 
 	}
 
-	@When("I click on SHOP BY CATEBORY menu")
+	@When("I click on SHOP BY CATEGORY menu")
 	public void clickOnShopByCatgeoryMenuAfterExpand() {
 		HomePage homepage = new HomePage();
 		homepage.clickOnShopByCategoryMenu();
@@ -163,11 +177,17 @@ public class ShopByCategorySteps{
 		categoryPage.verifyAdditionalCategoriesAreDisplayed();
 	}
 
+	@Then("additional categories should be collapased")
+	public void verifyAddiotionalCategoriesCollapsed() {
+
+		// need to write code
+	}
+
 	@Then("{string} text replaces to {string}")
 	public void showMoreButtonReplacedWithShowLess(String ShowMore, String ShowLess) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyShowMoreButtonReplaceswithShowLess();
-		
+
 	}
 
 	@Then("I click on Show less - link additional categories should be collpased")
@@ -178,7 +198,190 @@ public class ShopByCategorySteps{
 
 	@Then("Bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc")
 	public void defaultFiltersAreVisible() {
-		
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyListOfFilter();
 	}
 
+	@When("I check if the filter section is scrollable")
+	public void filterSectionScrollable() throws InterruptedException {
+
+		Keyword keyword = new Keyword();
+		Thread.sleep(4000);
+		keyword.moveCurser();
+		Thread.sleep(5000);
+		keyword.mouseScrollDown();
+
+	}
+
+	@When("I select the brand {string} from the brand filter")
+	public void selectBrand(String brandNameFromList) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnYourBrand(brandNameFromList);
+
+	}
+
+	@And("I click on checkbox of already selcted brand {string}")
+	public void clickOnAlreadySelctedBrandToDeselct(String brandNameFromList) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.deSelectBrand(brandNameFromList);
+	}
+
+	@Then("I should see {string} brand is selected")
+	public void isBrandSelected(String brandNameFromList) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyBrandIsSelected(brandNameFromList);
+
+	}
+
+	@Then("I should see {string} brand is deselected")
+	public void isBrandDeselected(String brandNameFromList) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyBrandIsDeselected(brandNameFromList);
+
+	}
+
+	@Then("I should only see products from {string}")
+	public void verifyProductListOfSelectedBrand(String brandNameFromList) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyProductListIsOfSelectedBrandOnly(brandNameFromList);
+	}
+
+	@When("I select the multiple brands from the brand filter")
+	public void selectMultipleBrands() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.selectMultipleBrands();
+	}
+
+	@Then("I should see multiple brands are selected")
+	public void verifyMultipleBrandsSelected() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyMultipleBrandsAreSelected();
+	}
+
+	@Then("the displayed products should only belong to the selected brands")
+	public void verifyProductListBelongToMultpleSelctedBrandsOnly() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getSelectedBrandNames();
+		categoryPage.verifyProductListForMultipleBrands();
+	}
+
+	@Then("I should see {string} section should be displayed and enabled")
+	public void verifyFiltersSectionDisplayedAfterApplyingFilter(String Filters) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyFiltersSectionEnabledAfterApplyingFilter(Filters);
+	}
+
+	@Then("I should see {string} button should be displayed in Filters Section.")
+	public void verifyClearButtonIsDisplayedInFiltersSection(String Clear) {
+
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyClearButtonDisplayed(Clear);
+	}
+
+	@Then("I should see {string} as applied Filters in Filter section.")
+	public void verifyAppliedFiltersListInFiltersSection(String AdidasTShirt) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		// categoryPage.getAppliedFilterListInFilterSection();
+		categoryPage.AppliedFilterInFilterSection(AdidasTShirt);
+	}
+
+	@And("I click on {string} button in Filter Section")
+	public void clearFilter(String Clear) throws InterruptedException {
+
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnClearButton();
+	}
+
+	@Then("I should see all filters should be cleared.")
+	public void verifyClearedAllTheFiltersInFilterSection() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyClearAllFilters();
+
+	}
+
+	@And("I scroll until all products are loaded")
+	public void scrollDownUntillProductsLoaded() throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		Keyword keyword = new Keyword();
+		WebElement footer = keyword.getWebElement(Locator.footer);
+		keyword.scrollDownTillSpecificElement(footer);
+		categoryPage.waitForSomeTime();
+
+	}
+
+	@And("Fashion category showing 68 count with category heading")
+	public void getCategoryShowingCountWithHeading() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getProductCountShowingWithCatgeoryNames();
+	}
+
+	@And("i get count of product for that category")
+	public void originalProductCountAfterClickOnCategory() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getOriginalProductCountAfterClickingOnCategory();
+	}
+
+	@Then("Both count should match")
+	public void verifyBothCountMathches() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyActualProductCountAndCountShowingWithCategoryName();
+	}
+
+	@And("i get product count for applied filter")
+	public void getProductCountAfterApplyingFilter() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		countAfterFilter = categoryPage.getProductCountAfterApplyingFilter();
+	}
+
+	@Then("I should see original product list.")
+	public void getOriginalProductListWithoutFilter() throws InterruptedException {
+		scrollDownUntillProductsLoaded();
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		int countOriginal = categoryPage.getOriginalProductCountAfterClickingOnCategory();
+		Assert.assertNotEquals(countAfterFilter, countOriginal);
+	}
+
+	@And("I click on {string} subcategory")
+	public void clickOnYourSubCategory(String SubCategoryName) throws InterruptedException {
+		Keyword keyword = new Keyword();
+		keyword.clickOnYourSubCategory(SubCategoryName);
+	}
+
+	@Then("I should see that subcategory should be added in Category hierarchy.")
+	public void verifySubCategoryAddedInCategoryHierarchy() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyCategoryTagsAfterClickingOnSubActegory();
+	}
+
+	@And("I click on {string}")
+	public void clickOnHideFilters(String HideFilters) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		classNameBeforeHideFilter = categoryPage.getClassNameBeforeHideFilter();
+		categoryPage.clickOnHideFiltersButton();
+	}
+
+	@Then("I should see All Filters should get hided.")
+	public void verifyAllFiltersAreHidedAfterTapOnHideFilters() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		String classNameAfterHideFilter=categoryPage.getClassNameAfterHideFilter();
+		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
+	}
+
+	@Then("I should see Hide Filter text replaces with {string}.")
+	public void verifyHideFiltersReplacesWithShowFiltersOnTapOfIt(String ExpectedText) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
+	}
+	
+    @Then("I should see Show Filter text replaces with {string}.")
+	public void verifyShowFiltersReplacesWithHideFiltersOnTapOfIt(String ExpectedText) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
+	}
+    @Then("I should see All Filters should be shown.")
+	public void verifyAllFiltersShownAfterTapOnShowFilters() {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		String classNameAfterHideFilter=categoryPage.getClassNameAfterHideFilter();
+		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
+	}
 }

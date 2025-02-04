@@ -3,8 +3,8 @@ package com.bigbasket.base;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,13 +14,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.Optional;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.bigbasket.pages.HomePage;
 
 public class Keyword {
 
 	public static RemoteWebDriver driver;
 
+    private static final Logger LOG = LogManager.getLogger(Keyword.class);
 	public void openBrowser(@Optional String browserName) {
 		if (browserName == null) {
 			System.out.println("Launching Chrome by default");
@@ -34,15 +36,17 @@ public class Keyword {
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
 		} else {
-			System.out.println("Invalid browser name");
+			LOG.error("Invalid browser name");
+			//System.err.println("Invalid browser name");
 		}
-
-		System.out.println("Launched " + browserName + " browser");
+		//System.out.println("Launched " + browserName + " browser");
+		LOG.info("Launched " + browserName + " browser");
 
 	}
 
 	public void launchUrl(String url) {
 		driver.get(url);
+		LOG.info("Lauched url");
 	}
 
 	public void clickOn(WebElement element) {
@@ -89,9 +93,15 @@ public class Keyword {
 	}
 
 	public void mouseScrollDown() {
-		Actions actions = new Actions(driver);
-		actions.scrollByAmount(0, 500).perform();
+		Actions action = new Actions(driver);
+		action.scrollByAmount(0, 700).perform();
 	}
+
+	public void scrollDownTillSpecificElement(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) Keyword.driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
 	public void switchToChildWindowHandle() {
 		Set<String> allWindows = driver.getWindowHandles();
 		String parentWindow = driver.getWindowHandle();
@@ -182,8 +192,25 @@ public class Keyword {
 		Thread.sleep(3000);
 	}
 
+	public void clickOnYourSubCategory(String SubCategoryName) throws InterruptedException {
+		List<WebElement> ListOfSubCategories = getWebElements(Locator.shopByCatgeorySubCategories);
+		for (WebElement SubCategory : ListOfSubCategories) {
+			String SubCategoryNames = SubCategory.getText();
+			if (SubCategoryNames.equalsIgnoreCase(SubCategoryName)) {
+				SubCategory.click();
+				Thread.sleep(3000);
+			}
+		}
+	}
+
 	public void clickOnBackButtonOfBrowser() {
 		driver.navigate().back();
+	}
+
+	public void moveCurser() {
+		WebElement filterSection = getWebElement(Locator.shopByCatgeorySubCategories);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(filterSection).perform();
 	}
 
 }

@@ -46,11 +46,13 @@ Feature: This feature file test Search For Produtcs functionality
     When User enter special character only into search text box
     Then "No Result found" message should be displayed on page
 
+ 
   Scenario: verify when user enter Number only "01234569746" into Search Bar
     Given After enter url, User on HomePage
     When User enter Number only into search text box
     Then "No Result found" message should be display on page
 
+ 
   Scenario: verify when user enter invalid special character only "<:>/{};" into Search Bar
     Given After enter url, User on HomePage
     When User enter invalid special character only into search text box

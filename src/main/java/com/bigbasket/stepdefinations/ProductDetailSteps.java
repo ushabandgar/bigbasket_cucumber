@@ -19,7 +19,7 @@ public class ProductDetailSteps {
 		keyword.maximizeBrowser();
 	}
 	@When("The user searches for {string}")
-	public void userClicksOnTheSearchInputAndSearchesForProductName(String productName) {
+	public void userClicksOnTheSearchInputAndSearchesForProductName(String productName) throws InterruptedException {
 	    HomePage page = new HomePage();
 	    page.clickOnSearchText();
 	    page.sendProductName(productName);  // Pass the productName parameter to the method
@@ -30,7 +30,7 @@ public class ProductDetailSteps {
 		page.verifyUrlAfterSearch();
 	}
 	@When("The user clicks on the {string}")
-	public void clickOnTheProduct(String productName) {
+	public void clickOnTheProduct(String productName) throws InterruptedException {
 	    ProductSearchPage productSearchPage = new ProductSearchPage();
 	    productSearchPage.clickOnProduct(productName);  
 	}
@@ -162,18 +162,14 @@ public class ProductDetailSteps {
 		productDetailPage.saveForLaterBtnShouldBeOnProductDetailPage();
 	}
 	
+	
 	@Then("The user should able to save a product for later")
 	public void saveProductForLater() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.saveProductForLater();
 	}
-	@Then("The user should able to navigate that perticular page")
-	public void navigateToPage() throws InterruptedException {
-		ProductDetailPage productDetailPage = new ProductDetailPage();
-		productDetailPage.switchWindowOnproductDetailPage();
-		productDetailPage.navigateToPageonebyone();
-	}
+	
 	@Then("The social media icons should be clickable")
 	public void clickOnMediaIcons() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
@@ -199,7 +195,47 @@ public class ProductDetailSteps {
 		productDetailPage.clickOnEmailOcon();
 	}
 	
+	@Then("The user should able to navigate that perticular page")
+	public void navigateToPage() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.navigateToPageOneByOne();
+
+	}
+	@Then("The user should able to see similar product list")
+	public void similarProdutList() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.similarProductList();
+	}
 	
+	@Then("The user should able to see similar product list after scrolling down page")
+	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.scrollPageToseeSimiliarProductList();
+	}
+	@Then("The user should able to see About the Product description")
+	public void aboutTheProdutDescription() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.aboutTheProdutDescription();
+	}
+	@Then("The user should able to see Other Product Info details")
+	public void otherProductInfo() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.otherProductInfo();
+	}
+	
+	@Then("The user should able to to click on \"-\" and \"+\" option to see Other Product Info")
+	public void clickOnOtherProductInfoIcons() throws InterruptedException {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.clickOnOtherProductInfoIcons();
+		Thread.sleep(5000);
+
+	}
 	
 	
 	

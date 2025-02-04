@@ -435,10 +435,13 @@ public class HomePage {
 		System.out.println("Clicked on search text field.");
 	}
 
-	public void sendProductName(String productName) {
+	public void sendProductName(String productName) throws InterruptedException {
 		searchText.sendKeys("Amul Taaza Milk, 1 L Pouch");
 		searchText.sendKeys(Keys.ENTER);
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
+		//WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
+		Thread.sleep(2000);
+
 	}
 
 	public void verifyShopByCategoryCollapsesOnClickAfterExapands() {
