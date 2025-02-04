@@ -2,6 +2,8 @@ package com.bigbasket.base;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,10 +19,8 @@ public class WaitFor {
 		wait.withTimeout(Duration.ofSeconds(20));
 		wait.ignoring(NoSuchElementException.class);
 		wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(20));
+		wait1.ignoring(ElementNotInteractableException.class);
 	}
-	
-	     
-	
 
 	public static void elementTobeVisible(WebElement element) {
 		wait1.until(ExpectedConditions.visibilityOf(element));

@@ -1,20 +1,20 @@
 Feature: Product Detail Page functionality
-
-  Scenario: when User searches "Product", the URL will change on the same tab
+@today
+  Scenario: verify User searches "Product", the URL will change on the same tab
     When The user searches for "Product"
     Then The URL should change on the same tab
-
-  Scenario: When User clicks on "Product", then the Product Page URL changes
+@today
+  Scenario: verify User clicks on "Product", then the Product Page URL changes
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The product page URL should changed
-
-  Scenario: When User clicks on "Product", then the Product Page Title  changes
+@today
+  Scenario: verify User clicks on "Product", then the Product Page Title  changes
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The product page Title should changed
 
-  Scenario: When User Click On "Product" Then Product Url Loaded Fully
+  Scenario: verify User Click On "Product" Then Product Url Loaded Fully
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The Product url should loaded Fully
@@ -130,3 +130,28 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The user should able to navigate that perticular page
+
+  Scenario: verify "similar product" list should be appear on the product detail page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see similar product list
+
+  Scenario: verify that the "similar product" list should appear when user scrolls down to the page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see similar product list after scrolling down page
+
+  Scenario: verify that the "About the Product" description should appear on the PIP page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see About the Product description
+
+  Scenario: verify "Other Product Info" details should appear on the PIP page
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see Other Product Info details
+
+  Scenario: verify user should able to click on "-" and "+" to see "Other Product Info"
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to to click on "-" and "+" option to see Other Product Info
