@@ -389,7 +389,7 @@ public class ShopByCategorySteps {
 		}
 	}
 
-	@When("User click on {string} price filter")
+	@When("User click on {string} filter")
 	public void userClickOnPriceFilter(String filterNameFromList) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnYourFilter(filterNameFromList);
@@ -399,11 +399,28 @@ public class ShopByCategorySteps {
 	public void user_should_see_products_list_of_price_filter_only(Integer minPrice, Integer maxPrice) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.getProductPrice();
-		categoryPage.verifyProductPriceAfterPriceFilter(minPrice,maxPrice);
+		categoryPage.verifyProductPriceAfterPriceFilter(minPrice, maxPrice);
 	}
+
 	@Then("User should see products list of price should be greater than {int}")
 	public void userShouldSeeProductPriceGreaterThanFiveHundered(Integer MoreThanFiveHunderedFilter) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyProductPriceMoreThanFiveHundered(MoreThanFiveHunderedFilter);
 	}
+
+	@Then("User should see products list of having discount More than {int}%")
+	public void verifyProductListHavingDiscountMoreThantwentyFive(Integer discountOnProduct) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getDiscountOnProduct();
+		categoryPage.verifyDiscountOnProductMoreThanTwentyFivePercentage(discountOnProduct);
+	}
+
+	@Then("User should see products list of having discount between {int}% - {int}%")
+	public void verifyProductListHavingDiscountBetweenSelectedRange(Integer MinDiscountOnProduct,
+			Integer MaxDiscountOnProduct) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getDiscountOnProduct();
+		categoryPage.verifyDiscountOnProductBetweenSelectedRange(MinDiscountOnProduct, MaxDiscountOnProduct);
+	}
+
 }

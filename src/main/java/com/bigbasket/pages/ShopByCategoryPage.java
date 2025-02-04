@@ -79,11 +79,18 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//div[@class=\"Pricing___StyledDiv-sc-pldi2d-0 bUnUzR\"]/span[1]")
 	List<WebElement> productPriceText;
 
+	@FindBy(xpath = "//span[@class=\"font-semibold lg:text-xs xl:text-sm leading-xxl xl:leading-md\"]")
+	List<WebElement> DiscountOnProduct;
+
+	@FindBy(xpath = "//div[@id=\"side-filter-by-rating\"][2]/div[2]")
+	WebElement brandSection;
+
 	String textbeforeclick;
 	String brandName;
 	String TextBeforeClickOnHideFilter;
 	String TextAfterClickOnHideFilter;
 	int ProductPrice;
+	String filterNameFromList;
 
 	public ShopByCategoryPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -448,16 +455,29 @@ public class ShopByCategoryPage {
 		Assert.assertEquals(TextAfterClickOnHideFilter, ExpectedText);
 	}
 
-	public void clickOnYourFilter(String filterNameFromList) throws InterruptedException {
-		keyword.scrollDownTillSpecificElement(priceFilterText);
 
+	public void clickOnYourFilter(String filterNameFromList) throws InterruptedException {
+
+		/*
+		 * filterNameFromList = filterNameFromList.replace(" ", ""); filterNameFromList
+		 * = "i-" + filterNameFromList; WebElement filterName =
+		 * HomePage.shopByCategoryMenu .findElement(By.xpath("//input[@id=\"" +
+		 * filterNameFromList + "\"]"));
+		 */
+		WebElement filterName = getFilterNameElementFromFilterList(filterNameFromList);
+		keyword.scrollDownTillSpecificElement(filterName);
+		filterName.click();
+		System.out.println("Selected filter: "+filterName);
+		Thread.sleep(3000);
+
+	}
+
+	public WebElement getFilterNameElementFromFilterList(String filterNameFromList) {
 		filterNameFromList = filterNameFromList.replace(" ", "");
 		filterNameFromList = "i-" + filterNameFromList;
 		WebElement filterName = HomePage.shopByCategoryMenu
 				.findElement(By.xpath("//input[@id=\"" + filterNameFromList + "\"]"));
-		filterName.click();
-		Thread.sleep(3000);
-
+		return filterName;
 	}
 
 	public List<String> getProductPrice() {
@@ -468,7 +488,7 @@ public class ShopByCategoryPage {
 		return productPriceList;
 	}
 
-	public void verifyProductPriceAfterPriceFilter(int minPrice,int maxPrice) {
+	public void verifyProductPriceAfterPriceFilter(int minPrice, int maxPrice) {
 		List<String> prices = getProductPrice();
 		for (int i = 0; i < prices.size(); i++) {
 			String price = prices.get(i);
@@ -476,7 +496,7 @@ public class ShopByCategoryPage {
 			ProductPrice = Integer.parseInt(price);
 			System.out.println("Price on products: " + ProductPrice);
 			SoftAssert softlyassert = new SoftAssert();
-			softlyassert.assertTrue(ProductPrice>=minPrice && ProductPrice<=maxPrice);
+			softlyassert.assertTrue(ProductPrice >= minPrice && ProductPrice <= maxPrice);
 			softlyassert.assertAll();
 		}
 	}
@@ -489,9 +509,44 @@ public class ShopByCategoryPage {
 			ProductPrice = Integer.parseInt(price);
 			System.out.println("Price on products: " + ProductPrice);
 			SoftAssert softlyassert = new SoftAssert();
-			softlyassert.assertTrue(ProductPrice>moreThanFiveHunderedFilter);
+			softlyassert.assertTrue(ProductPrice > moreThanFiveHunderedFilter);
 			softlyassert.assertAll();
 		}
-		
+
+	}
+
+	public List<String> getDiscountOnProduct() {
+		ArrayList<String> DiscountOnProducts = new ArrayList<String>();
+		for (WebElement discount : DiscountOnProduct) {
+			DiscountOnProducts.add(discount.getText());
+		}
+		return DiscountOnProducts;
+	}
+
+	public void verifyDiscountOnProductMoreThanTwentyFivePercentage(Integer discountOnProduct) {
+		List<String> discounts = getDiscountOnProduct();
+		for (int i = 0; i < discounts.size(); i++) {
+			String discount = discounts.get(i);
+			discount = discount.replace("%", "").replace(" OFF", "");
+			int ProductDiscount = Integer.parseInt(discount);
+			System.out.println("Discount on products: " + ProductDiscount);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(ProductDiscount > discountOnProduct);
+			softlyassert.assertAll();
+		}
+	}
+
+	public void verifyDiscountOnProductBetweenSelectedRange(Integer minDiscountOnProduct,
+			Integer maxDiscountOnProduct) {
+		List<String> discounts = getDiscountOnProduct();
+		for (int i = 0; i < discounts.size(); i++) {
+			String discount = discounts.get(i);
+			discount = discount.replace("%", "").replace(" OFF", "");
+			int ProductDiscount = Integer.parseInt(discount);
+			System.out.println("Discount on products: " + ProductDiscount);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(ProductDiscount > minDiscountOnProduct && ProductDiscount < maxDiscountOnProduct);
+			softlyassert.assertAll();
+		}
 	}
 }
