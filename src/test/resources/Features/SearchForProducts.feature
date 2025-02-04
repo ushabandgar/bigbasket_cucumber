@@ -13,7 +13,7 @@ Feature: This feature file test Search For Produtcs functionality
   Scenario: verify placeholder text "Search for Products" is displayed when Search Text box is empty
     Given After enter url, User on HomePage
     When "Search for Products" is appear in Text BOX when text box is empty
-    And User enter "Apple" into empty text Box
+    And User enter "Fruite" into empty text Box
     And Observe "Search for Products" is not  appear in Text BOX
     Then verify placeholder text is displayed when Search Text box is empty
 
