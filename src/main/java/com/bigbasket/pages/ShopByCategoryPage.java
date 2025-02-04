@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -71,13 +70,27 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//button[contains(@class,\"FilterToggler___StyledButton\")]")
 	WebElement HideFilterButton;
 
-	@FindBy(xpath="//section[contains(@class,\"slug___StyledMotionSection\")]")
+	@FindBy(xpath = "//section[contains(@class,\"slug___StyledMotionSection\")]")
 	WebElement FilterSection;
-	
+
+	@FindBy(xpath = "//span[text()=\"Price\"]")
+	WebElement priceFilterText;
+
+	@FindBy(xpath = "//div[@class=\"Pricing___StyledDiv-sc-pldi2d-0 bUnUzR\"]/span[1]")
+	List<WebElement> productPriceText;
+
+	@FindBy(xpath = "//span[@class=\"font-semibold lg:text-xs xl:text-sm leading-xxl xl:leading-md\"]")
+	List<WebElement> DiscountOnProduct;
+
+	@FindBy(xpath = "//div[@id=\"side-filter-by-rating\"][2]/div[2]")
+	WebElement brandSection;
+
 	String textbeforeclick;
 	String brandName;
 	String TextBeforeClickOnHideFilter;
 	String TextAfterClickOnHideFilter;
+	int ProductPrice;
+	String filterNameFromList;
 
 	public ShopByCategoryPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -208,17 +221,6 @@ public class ShopByCategoryPage {
 			softlyAssert.assertTrue(filter.isDisplayed());
 		}
 		softlyAssert.assertAll();
-	}
-
-	public void clickOnYourBrand(String brandNameFromList) throws InterruptedException {
-		Thread.sleep(3000);
-		keyword.mouseScrollDown();
-		brandNameFromList = brandNameFromList.replace(" ", "");
-		brandNameFromList = "i-" + brandNameFromList;
-		WebElement brandName = HomePage.shopByCategoryMenu
-				.findElement(By.xpath("//input[@id=\"" + brandNameFromList + "\"]"));
-		brandName.click();
-		Thread.sleep(3000);
 	}
 
 	public void deSelectBrand(String brandNameFromList) throws InterruptedException {
@@ -428,12 +430,12 @@ public class ShopByCategoryPage {
 	}
 
 	public void clickOnHideFiltersButton() throws InterruptedException {
-		String buttonName=HideFilterButton.getText();
+		String buttonName = HideFilterButton.getText();
 		HideFilterButton.click();
-		
-		System.out.println("clicked on : "+buttonName);
+
+		System.out.println("clicked on : " + buttonName);
 		Thread.sleep(3000);
-		
+
 	}
 
 	public String getClassNameBeforeHideFilter() {
@@ -447,10 +449,104 @@ public class ShopByCategoryPage {
 	}
 
 	public void verifyHideFiltersTextReplacesWithShowFiltersAfterClick(String ExpectedText) {
-		String TextAfterClickOnHideFilter=HideFilterButton.getText();
-		System.out.println("TextAfterClickOnHideFilter: "+TextAfterClickOnHideFilter);
-		System.out.println("ExpectedText: "+ExpectedText);
+		String TextAfterClickOnHideFilter = HideFilterButton.getText();
+		System.out.println("TextAfterClickOnHideFilter: " + TextAfterClickOnHideFilter);
+		System.out.println("ExpectedText: " + ExpectedText);
 		Assert.assertEquals(TextAfterClickOnHideFilter, ExpectedText);
 	}
 
+
+	public void clickOnYourFilter(String filterNameFromList) throws InterruptedException {
+
+		/*
+		 * filterNameFromList = filterNameFromList.replace(" ", ""); filterNameFromList
+		 * = "i-" + filterNameFromList; WebElement filterName =
+		 * HomePage.shopByCategoryMenu .findElement(By.xpath("//input[@id=\"" +
+		 * filterNameFromList + "\"]"));
+		 */
+		WebElement filterName = getFilterNameElementFromFilterList(filterNameFromList);
+		keyword.scrollDownTillSpecificElement(filterName);
+		filterName.click();
+		System.out.println("Selected filter: "+filterName);
+		Thread.sleep(3000);
+
+	}
+
+	public WebElement getFilterNameElementFromFilterList(String filterNameFromList) {
+		filterNameFromList = filterNameFromList.replace(" ", "");
+		filterNameFromList = "i-" + filterNameFromList;
+		WebElement filterName = HomePage.shopByCategoryMenu
+				.findElement(By.xpath("//input[@id=\"" + filterNameFromList + "\"]"));
+		return filterName;
+	}
+
+	public List<String> getProductPrice() {
+		ArrayList<String> productPriceList = new ArrayList<String>();
+		for (WebElement productPrice : productPriceText) {
+			productPriceList.add(productPrice.getText());
+		}
+		return productPriceList;
+	}
+
+	public void verifyProductPriceAfterPriceFilter(int minPrice, int maxPrice) {
+		List<String> prices = getProductPrice();
+		for (int i = 0; i < prices.size(); i++) {
+			String price = prices.get(i);
+			price = price.replace("₹", "");
+			ProductPrice = Integer.parseInt(price);
+			System.out.println("Price on products: " + ProductPrice);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(ProductPrice >= minPrice && ProductPrice <= maxPrice);
+			softlyassert.assertAll();
+		}
+	}
+
+	public void verifyProductPriceMoreThanFiveHundered(Integer moreThanFiveHunderedFilter) {
+		List<String> prices = getProductPrice();
+		for (int i = 0; i < prices.size(); i++) {
+			String price = prices.get(i);
+			price = price.replace("₹", "");
+			ProductPrice = Integer.parseInt(price);
+			System.out.println("Price on products: " + ProductPrice);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(ProductPrice > moreThanFiveHunderedFilter);
+			softlyassert.assertAll();
+		}
+
+	}
+
+	public List<String> getDiscountOnProduct() {
+		ArrayList<String> DiscountOnProducts = new ArrayList<String>();
+		for (WebElement discount : DiscountOnProduct) {
+			DiscountOnProducts.add(discount.getText());
+		}
+		return DiscountOnProducts;
+	}
+
+	public void verifyDiscountOnProductMoreThanTwentyFivePercentage(Integer discountOnProduct) {
+		List<String> discounts = getDiscountOnProduct();
+		for (int i = 0; i < discounts.size(); i++) {
+			String discount = discounts.get(i);
+			discount = discount.replace("%", "").replace(" OFF", "");
+			int ProductDiscount = Integer.parseInt(discount);
+			System.out.println("Discount on products: " + ProductDiscount);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(ProductDiscount > discountOnProduct);
+			softlyassert.assertAll();
+		}
+	}
+
+	public void verifyDiscountOnProductBetweenSelectedRange(Integer minDiscountOnProduct,
+			Integer maxDiscountOnProduct) {
+		List<String> discounts = getDiscountOnProduct();
+		for (int i = 0; i < discounts.size(); i++) {
+			String discount = discounts.get(i);
+			discount = discount.replace("%", "").replace(" OFF", "");
+			int ProductDiscount = Integer.parseInt(discount);
+			System.out.println("Discount on products: " + ProductDiscount);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(ProductDiscount > minDiscountOnProduct && ProductDiscount < maxDiscountOnProduct);
+			softlyassert.assertAll();
+		}
+	}
 }

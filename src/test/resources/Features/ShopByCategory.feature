@@ -123,6 +123,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "fruits & vegetables" category
     Then I check if the filter section is scrollable
 
+
   Scenario: Verify product brands are deselectable
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -138,6 +139,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When I select the multiple brands from the brand filter
     Then I should see multiple brands are selected
 
+    
   Scenario: Verify products are filtered by the selected brand
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -227,7 +229,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     Then I should see Hide Filter text replaces with "Show Filter".
 
- 
   Scenario: Verify on click of "Show Filter", all filters should be shown
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -243,3 +244,24 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     And I click on "Show Filter"
     Then I should see Show Filter text replaces with "Hide Filter".
+
+  Scenario: Verify products list should be displayed as per price filter
+    Given User is on Category Page
+    When User click on "Rs 101 to Rs 200" filter
+    Then User should see products list of price between 101 and 200
+
+  Scenario: Verify products list should be displayed properly if applied More Than Rs 500 filter
+    Given User is on Category Page
+    When User click on "More than Rs 500" filter
+    Then User should see products list of price should be greater than 500
+
+  Scenario: Verify offers products list should be displayed as per discount selected
+    Given User is on Category Page
+    When User click on "More than 25%" filter
+    Then User should see products list of having discount More than 25%
+
+  #bug
+  Scenario: Verify offers products list should be displayed as per discount selected
+    Given User is on Category Page
+    When User click on "5% - 10%" filter
+    Then User should see products list of having discount between 5% - 10%
