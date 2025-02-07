@@ -94,8 +94,9 @@ public class ShopByCategorySteps {
 	}
 
 	@And("I click on {string} category")
-	public void clickOnCategory(String catgeoryNameLowerCase) throws InterruptedException {
+	public void clickOnCategory(String catgeoryName) throws InterruptedException {
 		HomePage homepage = new HomePage();
+		String catgeoryNameLowerCase=catgeoryName.toLowerCase();
 		homepage.clickOnCategory(catgeoryNameLowerCase);
 	}
 
@@ -390,7 +391,7 @@ public class ShopByCategorySteps {
 	}
 
 	@When("User click on {string} filter")
-	public void userClickOnPriceFilter(String filterNameFromList) throws InterruptedException {
+	public void userClickOnFilter(String filterNameFromList) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnYourFilter(filterNameFromList);
 	}
@@ -422,5 +423,33 @@ public class ShopByCategorySteps {
 		categoryPage.getDiscountOnProduct();
 		categoryPage.verifyDiscountOnProductBetweenSelectedRange(MinDiscountOnProduct, MaxDiscountOnProduct);
 	}
+
+    @Then("User should see products list of size {string}")
+    public void verifyPorductListOfSizeFromFilter(String sizeFromFilter) {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.getProductSizeOrPackSize();
+		categoryPage.verifyPorductListHavingSizeFromFilterOnly(sizeFromFilter);
+    }
+
+    @Then("User should see products list of {string}")
+    public void verifyPorductListOfPackSizeFilter(String packSizeFromFilter) {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.getProductSizeOrPackSize();
+		categoryPage.verifyPorductListHavingPackSizeFromFilterOnly(packSizeFromFilter);
+    }
+    
+    @And("User click on {int} star rating filter")
+    public void clickOnYourRatingFilter(Integer ratingNumber) throws InterruptedException {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.clickOnRatingFilter(ratingNumber);
+    }
+    
+    @Then("User should see products list of {string} star ratings only")
+    public void verifyProductListWithRatingFilterSelcted(String ratingSelected) throws InterruptedException {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.getRatingOnProductList();
+    	categoryPage.verifyProductRatingsOnProductDescritpion(ratingSelected);
+    }
+
 
 }

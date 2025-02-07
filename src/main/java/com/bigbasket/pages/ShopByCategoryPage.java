@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -84,6 +86,20 @@ public class ShopByCategoryPage {
 
 	@FindBy(xpath = "//div[@id=\"side-filter-by-rating\"][2]/div[2]")
 	WebElement brandSection;
+
+	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ truncate\"]")
+	List<WebElement> sizeOnPorductList;
+
+	@FindBy(xpath = "//h3[@class=\"block m-0 line-clamp-2 font-regular text-base leading-sm text-darkOnyx-800 pt-0.5 h-full\"]")
+	List<WebElement> productDescriptionFromProductList;
+	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 FilterByRating___StyledLabel-sc-17wxy9s-0 gJxZPQ jKZfbM\"]")
+	WebElement productRating;
+
+	@FindBy(css = "footer[class=\"sm:hidden w-full pt-13 mt-6 text-md text-silverSurfer-300 bg-darkOnyx-900 footer\"]")
+	WebElement footerSection;
+
+	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 Badges___StyledLabel-sc-1k3p1ug-0 gJxZPQ kAyiFy leading-xxs\"]/span")
+	List<WebElement> productRatingsFromProdDescription;
 
 	String textbeforeclick;
 	String brandName;
@@ -207,12 +223,6 @@ public class ShopByCategoryPage {
 
 	}
 
-//	public void getDefaultFilterList() {
-//		for(WebElement filter:filters) {
-//			System.out.println(filter.getText());
-//		}
-//		
-//	}
 	public void verifyListOfFilter() {
 		SoftAssert softlyAssert = new SoftAssert();
 		softlyAssert.assertTrue(ProductRatingFilter.isDisplayed());
@@ -455,20 +465,14 @@ public class ShopByCategoryPage {
 		Assert.assertEquals(TextAfterClickOnHideFilter, ExpectedText);
 	}
 
-
 	public void clickOnYourFilter(String filterNameFromList) throws InterruptedException {
 
-		/*
-		 * filterNameFromList = filterNameFromList.replace(" ", ""); filterNameFromList
-		 * = "i-" + filterNameFromList; WebElement filterName =
-		 * HomePage.shopByCategoryMenu .findElement(By.xpath("//input[@id=\"" +
-		 * filterNameFromList + "\"]"));
-		 */
 		WebElement filterName = getFilterNameElementFromFilterList(filterNameFromList);
 		keyword.scrollDownTillSpecificElement(filterName);
+		WaitFor.elementToBeClickable(filterName);
 		filterName.click();
-		System.out.println("Selected filter: "+filterName);
-		Thread.sleep(3000);
+		// Thread.sleep(3000);
+		WaitFor.elementToBeVisible(HideFilterButton);
 
 	}
 
@@ -539,14 +543,91 @@ public class ShopByCategoryPage {
 	public void verifyDiscountOnProductBetweenSelectedRange(Integer minDiscountOnProduct,
 			Integer maxDiscountOnProduct) {
 		List<String> discounts = getDiscountOnProduct();
+		SoftAssert softlyassert = new SoftAssert();
+
 		for (int i = 0; i < discounts.size(); i++) {
 			String discount = discounts.get(i);
 			discount = discount.replace("%", "").replace(" OFF", "");
 			int ProductDiscount = Integer.parseInt(discount);
 			System.out.println("Discount on products: " + ProductDiscount);
-			SoftAssert softlyassert = new SoftAssert();
 			softlyassert.assertTrue(ProductDiscount > minDiscountOnProduct && ProductDiscount < maxDiscountOnProduct);
-			softlyassert.assertAll();
 		}
+		softlyassert.assertAll();
+
+	}
+
+	ArrayList<String> SizeOnProducts = new ArrayList<String>();
+
+	public List<String> getProductSizeOrPackSize() {
+		for (WebElement size : sizeOnPorductList) {
+			SizeOnProducts.add(size.getText());
+		}
+
+		return SizeOnProducts;
+	}
+
+	public void verifyPorductListHavingSizeFromFilterOnly(String sizeFromFilter) {
+		List<String> sizeOnProductLists = getProductSizeOrPackSize();
+		SoftAssert softlyassert = new SoftAssert();
+
+		for (int i = 0; i < sizeOnProductLists.size(); i++) {
+			String sizeOnProduct = sizeOnProductLists.get(i);
+			System.out.println(sizeFromFilter);
+			System.out.println("SizeOnProducts: " + sizeOnProduct);
+			softlyassert.assertTrue(sizeOnProduct.contains(sizeFromFilter));
+
+		}
+		softlyassert.assertAll();
+
+	}
+
+	public void verifyPorductListHavingPackSizeFromFilterOnly(String packSizeFromFilter) {
+		List<String> sizeOnProductLists = getProductSizeOrPackSize();
+		SoftAssert softlyassert = new SoftAssert();
+
+		for (int i = 0; i < sizeOnProductLists.size(); i++) {
+			String packSizeOnProduct = sizeOnProductLists.get(i);
+			System.out.println(packSizeFromFilter);
+			System.out.println("packSizeOnProduct: " + packSizeOnProduct);
+			softlyassert.assertTrue(packSizeOnProduct.contains(packSizeFromFilter));
+
+		}
+		softlyassert.assertAll();
+	}
+
+	public void clickOnRatingFilter(Integer ratingNumber) throws InterruptedException {
+
+		WaitFor.elementTobeVisible(HideFilterButton);
+		keyword.scrollDownTillSpecificElement(productRating);
+		WebElement ratingFilte = Keyword.driver.findElement(By.xpath(
+				"//input[@class=\"Checkbox-sc-aryd7b-0 FilterByRating___StyledCheckbox-sc-17wxy9s-2 dOzoNh fevZOS form-checkbox cursor-pointer\" and @id=\""
+						+ ratingNumber + "\"]"));
+		ratingFilte.click();
+
+	}
+
+	public List<String> getRatingOnProductList() throws InterruptedException {
+		keyword.scrollDownTillSpecificElement(productRating);
+		WaitFor.visibilityOfElements(productDescriptionFromProductList);
+		ArrayList<String> productRatings = new ArrayList<String>();
+		for (WebElement prodRating : productRatingsFromProdDescription) {
+			productRatings.add(prodRating.getText());
+		}
+		return productRatings;
+	}
+
+	public void verifyProductRatingsOnProductDescritpion(String ratingSelected) throws InterruptedException {
+		List<String> ratingsOnProductLists = getRatingOnProductList();
+		SoftAssert softlyassert = new SoftAssert();
+
+		for (int i = 0; i < ratingsOnProductLists.size(); i++) {
+			String ratingOnProduct = ratingsOnProductLists.get(i);
+			System.out.println("ratingOnProduct: "+ratingOnProduct);
+			System.out.println("ratingSelected: "+ratingSelected);
+			softlyassert.assertTrue(ratingOnProduct.equals(ratingSelected));
+
+		}
+		softlyassert.assertAll();
+		
 	}
 }

@@ -36,6 +36,7 @@ public class Keyword {
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
 		} else {
+
 			LOG.error("Invalid browser name");
 			//System.err.println("Invalid browser name");
 		}
@@ -182,9 +183,7 @@ public class Keyword {
 	}
 
 	public void clickOnYourCategory(String categoryNameInLowerCaseOnly) throws InterruptedException {
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-");
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(", ", "-");
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" ", "-");
+		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
 		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(
 				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul/li/a[@href=\"/cl/"
 						+ categoryNameInLowerCaseOnly + "/?nc=nb\"]"));
