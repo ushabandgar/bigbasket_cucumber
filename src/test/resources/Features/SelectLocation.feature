@@ -46,7 +46,7 @@ Feature: This feature file test Select Location functionality
     And User enter "Mumbai" into textBox
     And User click on clear button
     Then "Mumbai" text should be remove from textbox
-
+    
   Scenario: Verify when user enter speacial character "!@#$%^&*" only into text box
     Given After enter url, User on HomePage
     When User click on select location bar
