@@ -227,7 +227,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     Then I should see Hide Filter text replaces with "Show Filter".
 
- 
   Scenario: Verify on click of "Show Filter", all filters should be shown
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -243,3 +242,44 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     And I click on "Show Filter"
     Then I should see Show Filter text replaces with "Hide Filter".
+
+  Scenario: Verify products list should be displayed as per price filter
+    Given User is on Category Page
+    When User click on "Rs 101 to Rs 200" filter
+    Then User should see products list of price between 101 and 200
+
+  Scenario: Verify products list should be displayed properly if applied More Than Rs 500 filter
+    Given User is on Category Page
+    When User click on "More than Rs 500" filter
+    Then User should see products list of price should be greater than 500
+
+  Scenario: Verify offers products list should be displayed as per discount selected
+    Given User is on Category Page
+    When User click on "More than 25%" filter
+    Then User should see products list of having discount More than 25%
+
+  #bug
+  Scenario: Verify offers products list should be displayed as per discount selected
+    Given User is on Category Page
+    When User click on "5% - 10%" filter
+    Then User should see products list of having discount between 5% - 10%
+
+  
+  Scenario: Verify products list should be displayed as per filter if applied Size Filter
+    Given User is on Category Page
+    When User click on "Large" filter
+    Then User should see products list of size "Large"
+
+  
+  Scenario: Verify products list should be displayed as per filter if applied Pack Size Filter
+    Given User is on Category Page
+    When User click on "24 pcs" filter
+    Then User should see products list of "24 pcs"
+
+  #TC: 42
+  Scenario: Verify if selected any product rating then that rated product should be shown
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "Fruits & Vegetables" category
+    And User click on 5 star rating filter
+    Then User should see products list of "5" star ratings only
