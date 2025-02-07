@@ -191,7 +191,7 @@ public class ProductDetailPage {
 	}
 
 	public void verifyProductAddedToTheBasket() throws InterruptedException {
-		Thread.sleep(1000);
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
 		WaitFor.visibilityOfElement(ConfirmationMsg);
@@ -216,7 +216,8 @@ public class ProductDetailPage {
 	}
 
 	public void verifyconfirmationMsgShouldBeAppere() throws InterruptedException {
-		Thread.sleep(1000);
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
+		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
 		WaitFor.visibilityOfElement(ConfirmationMsg);
 		String confirmationMsg = ConfirmationMsg.getText();

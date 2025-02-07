@@ -75,7 +75,7 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The product quantity Increase When user click on plus btn to add more items
-
+    
   Scenario: verify the visual confirmation msg should be appere after "Adding product" to the add to Basket
     When The user searches for "Product"
     When The user clicks on the "Product"
@@ -85,7 +85,8 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then confirmation Removing msg should be appere
-
+    
+  #Bug
   Scenario: verify user should add multiple product as they want by clicking on plus btn to add more items
     When The user searches for "Product"
     When The user clicks on the "Product"
