@@ -419,7 +419,7 @@ public class HomePage {
 		searchText.sendKeys(Keys.ENTER);
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
 		//WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 	}
 

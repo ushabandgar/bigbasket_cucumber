@@ -75,7 +75,7 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The product quantity Increase When user click on plus btn to add more items
-    
+
   Scenario: verify the visual confirmation msg should be appere after "Adding product" to the add to Basket
     When The user searches for "Product"
     When The user clicks on the "Product"
@@ -85,7 +85,7 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then confirmation Removing msg should be appere
-    
+
   #Bug
   Scenario: verify user should add multiple product as they want by clicking on plus btn to add more items
     When The user searches for "Product"
@@ -122,7 +122,7 @@ Feature: Product Detail Page functionality
     When The user clicks on the "Product"
     Then The Twitter page should open
 
-  Scenario: verify user click on Email icon, then user should redirect to facebook url
+  Scenario: verify user click on Email icon, then user should redirect to Email url
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The Email page should open
@@ -156,3 +156,29 @@ Feature: Product Detail Page functionality
     When The user searches for "Product"
     When The user clicks on the "Product"
     Then The user should able to to click on "-" and "+" option to see Other Product Info
+
+  Scenario: Verify that the "Smart basket Icon" should be clickable
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Smart basket Icon should be clickable
+
+  Scenario: Verify that the "Offer" icon should be clickable
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The Offer Icon should be clickable
+
+  Scenario: Verify that the on PIP page "Amul" word should be clickable
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to click on amul word
+
+  Scenario: Verify that the after clicking on "amul", only Amul brand product should be appere
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The user should able to see only Amul brand product
+    
+ #working on it
+  Scenario: Verify that the after clicking on Offer Icon product should be display with "OFFER" tag only
+    When The user searches for "Product"
+    When The user clicks on the "Product"
+    Then The product list display with OFFER tag  
