@@ -1,18 +1,18 @@
 package com.bigbasket.pages;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
-
-import java.util.Iterator;
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.WaitFor;
 
@@ -66,7 +66,22 @@ public class ProductDetailPage {
 
 	@FindBy(css = "div.iUVPaR section div.justify-end button")
 	List<WebElement> SocialMediaIcons;
-
+	
+	@FindBy(css = "div.p-6 div.qqnNj")
+	WebElement similarProducts;
+	
+	@FindBy(css = "div.p-6 li.pb-1")
+	WebElement similarProductsLists;
+	
+	@FindBy(css = "section.bnsJyy div.dNIxde div.overflow-hidden")
+	WebElement aboutTheProductDesceiption;
+	
+	@FindBy(css = "section.bnsJyy div.kIqWEi div.overflow-hidden")
+	WebElement otherProductInfo;
+	
+	@FindBy(css = "button.fNKyNB")
+	WebElement otherProductInfoIcons;
+	
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -143,11 +158,11 @@ public class ProductDetailPage {
 			String imageSelector = "#thumb-" + i;
 			List<WebElement> productImages = WaitFor
 					.visibilityOfElements(Keyword.driver.findElements(By.cssSelector(imageSelector)));
-			for (WebElement images : productImages) {
-				Thread.sleep(3000);
-				WaitFor.visibilityOfElement(images);
-				images.click();
-				assertTrue(images.isDisplayed(), "Image is not visible");
+			for (WebElement image : productImages) {
+				WebDriverWait wait = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
+	            wait.until(ExpectedConditions.visibilityOf(image));
+				image.click();
+				assertTrue(image.isDisplayed(), "Image is not visible");
 			}
 		}
 	}
@@ -305,4 +320,48 @@ public class ProductDetailPage {
 		}
 
 	}
+
+	public void similarProductList() {
+		WaitFor.visibilityOfElement(similarProducts);
+		System.out.println(similarProducts.getText());
+		assertTrue(similarProducts.isDisplayed(), "similar product list are not on PIP page.");
+		
+	}
+
+	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
+		WaitFor.visibilityOfElement(similarProducts);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+	    jse.executeScript("window.scrollBy(0,1500)");
+	    assertTrue(similarProductsLists.isDisplayed(), "Similar products list should be visible after scrolling");
+	}
+
+	public void aboutTheProdutDescription() {
+		WaitFor.visibilityOfElement(aboutTheProductDesceiption);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+		jse.executeScript("window.scrollBy(0,800)");
+		String description ="Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
+	    
+		assertEquals(aboutTheProductDesceiption.getText(), description, "About the product description Not match");
+	}
+
+	public void otherProductInfo() {
+		WaitFor.visibilityOfElement(otherProductInfo);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+		jse.executeScript("window.scrollBy(0,800)");
+		assertTrue(otherProductInfo.getText().contains("EAN Code: 8901262260091"));
+		
+	}
+
+	public void clickOnOtherProductInfoIcons() throws InterruptedException {
+		WaitFor.visibilityOfElement(otherProductInfoIcons);
+		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
+		jse.executeScript("window.scrollBy(0,600)");
+		Thread.sleep(1000);
+		WaitFor.visibilityOfElement(otherProductInfoIcons);
+		otherProductInfoIcons.click();
+		otherProductInfoIcons.click();
+		assertTrue(otherProductInfoIcons.isEnabled(), "Icon are not clickable.");
+		
+	}
+
 }

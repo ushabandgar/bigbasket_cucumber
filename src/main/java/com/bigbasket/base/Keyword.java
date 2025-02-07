@@ -14,14 +14,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.Optional;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.bigbasket.pages.HomePage;
 
 public class Keyword {
 
 	public static RemoteWebDriver driver;
 
-    //private static final Logger LOG = LogManager.getLogger(Keyword.class);
+    private static final Logger LOG = LogManager.getLogger(Keyword.class);
 	public void openBrowser(@Optional String browserName) {
 		if (browserName == null) {
 			System.out.println("Launching Chrome by default");
@@ -35,17 +36,18 @@ public class Keyword {
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
 		} else {
-			//LOG.error("Invalid browser name");
+
+			LOG.error("Invalid browser name");
 			//System.err.println("Invalid browser name");
 		}
 		//System.out.println("Launched " + browserName + " browser");
-	//	LOG.info("Launched " + browserName + " browser");
+		LOG.info("Launched " + browserName + " browser");
 
 	}
 
 	public void launchUrl(String url) {
 		driver.get(url);
-		//LOG.info("Lauched url");
+		LOG.info("Lauched url");
 	}
 
 	public void clickOn(WebElement element) {
