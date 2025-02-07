@@ -1,17 +1,10 @@
 package com.bigbasket.stepdefinations;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.Locator;
-import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
 
@@ -22,7 +15,7 @@ import io.cucumber.java.en.When;
 
 public class ShopByCategorySteps {
 	int countAfterFilter;
-	String classNameBeforeHideFilter,classNameAfterHideFilter;
+	String classNameBeforeHideFilter, classNameAfterHideFilter;
 
 	@Given("Browser is launched and maximized")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
@@ -53,7 +46,7 @@ public class ShopByCategorySteps {
 	}
 
 	@When("I click on SHOP BY CATEGORY menu")
-	public void clickOnShopByCatgeoryMenuAfterExpand() {
+	public void clickOnShopByCatgeoryMenuBeforeExpand() {
 		HomePage homepage = new HomePage();
 		homepage.clickOnShopByCategoryMenu();
 	}
@@ -214,9 +207,9 @@ public class ShopByCategorySteps {
 	}
 
 	@When("I select the brand {string} from the brand filter")
-	public void selectBrand(String brandNameFromList) throws InterruptedException {
+	public void selectBrand(String filterNameFromList) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-		categoryPage.clickOnYourBrand(brandNameFromList);
+		categoryPage.clickOnYourFilter(filterNameFromList);
 
 	}
 
@@ -363,7 +356,7 @@ public class ShopByCategorySteps {
 	@Then("I should see All Filters should get hided.")
 	public void verifyAllFiltersAreHidedAfterTapOnHideFilters() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-		String classNameAfterHideFilter=categoryPage.getClassNameAfterHideFilter();
+		String classNameAfterHideFilter = categoryPage.getClassNameAfterHideFilter();
 		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
 	}
 
@@ -372,16 +365,62 @@ public class ShopByCategorySteps {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
 	}
-	
-    @Then("I should see Show Filter text replaces with {string}.")
+
+	@Then("I should see Show Filter text replaces with {string}.")
 	public void verifyShowFiltersReplacesWithHideFiltersOnTapOfIt(String ExpectedText) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
 	}
-    @Then("I should see All Filters should be shown.")
+
+	@Then("I should see All Filters should be shown.")
 	public void verifyAllFiltersShownAfterTapOnShowFilters() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
-		String classNameAfterHideFilter=categoryPage.getClassNameAfterHideFilter();
+		String classNameAfterHideFilter = categoryPage.getClassNameAfterHideFilter();
 		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
 	}
+
+	@Given("User is on Category Page")
+	public void userIsOnCategoryPage() {
+		clickOnShopByCatgeoryMenuBeforeExpand();
+		try {
+			clickOnCategory("fashion");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@When("User click on {string} filter")
+	public void userClickOnPriceFilter(String filterNameFromList) throws InterruptedException {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.clickOnYourFilter(filterNameFromList);
+	}
+
+	@Then("User should see products list of price between {int} and {int}")
+	public void user_should_see_products_list_of_price_filter_only(Integer minPrice, Integer maxPrice) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getProductPrice();
+		categoryPage.verifyProductPriceAfterPriceFilter(minPrice, maxPrice);
+	}
+
+	@Then("User should see products list of price should be greater than {int}")
+	public void userShouldSeeProductPriceGreaterThanFiveHundered(Integer MoreThanFiveHunderedFilter) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.verifyProductPriceMoreThanFiveHundered(MoreThanFiveHunderedFilter);
+	}
+
+	@Then("User should see products list of having discount More than {int}%")
+	public void verifyProductListHavingDiscountMoreThantwentyFive(Integer discountOnProduct) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getDiscountOnProduct();
+		categoryPage.verifyDiscountOnProductMoreThanTwentyFivePercentage(discountOnProduct);
+	}
+
+	@Then("User should see products list of having discount between {int}% - {int}%")
+	public void verifyProductListHavingDiscountBetweenSelectedRange(Integer MinDiscountOnProduct,
+			Integer MaxDiscountOnProduct) {
+		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+		categoryPage.getDiscountOnProduct();
+		categoryPage.verifyDiscountOnProductBetweenSelectedRange(MinDiscountOnProduct, MaxDiscountOnProduct);
+	}
+
 }
