@@ -227,7 +227,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     Then I should see Hide Filter text replaces with "Show Filter".
 
-  @today
+ 
   Scenario: Verify on click of "Show Filter", all filters should be shown
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu

@@ -142,7 +142,7 @@ public class ProductDetailPage {
 	}
 
 	public void hoverOnImage() throws InterruptedException {
-		Thread.sleep(1000);
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		WaitFor.elementToBeClickable(productImage);
 		keyword.mouseHoverOn(productImage);
 
