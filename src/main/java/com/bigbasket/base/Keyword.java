@@ -3,7 +3,6 @@ package com.bigbasket.base;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -22,6 +21,7 @@ public class Keyword {
 
 	public static RemoteWebDriver driver;
 
+    //private static final Logger LOG = LogManager.getLogger(Keyword.class);
 	public void openBrowser(@Optional String browserName) {
 		if (browserName == null) {
 			System.out.println("Launching Chrome by default");
@@ -35,15 +35,17 @@ public class Keyword {
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
 		} else {
-			System.out.println("Invalid browser name");
+			//LOG.error("Invalid browser name");
+			//System.err.println("Invalid browser name");
 		}
-
-		System.out.println("Launched " + browserName + " browser");
+		//System.out.println("Launched " + browserName + " browser");
+	//	LOG.info("Launched " + browserName + " browser");
 
 	}
 
 	public void launchUrl(String url) {
 		driver.get(url);
+		//LOG.info("Lauched url");
 	}
 
 	public void clickOn(WebElement element) {
@@ -179,9 +181,7 @@ public class Keyword {
 	}
 
 	public void clickOnYourCategory(String categoryNameInLowerCaseOnly) throws InterruptedException {
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-");
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(", ", "-");
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" ", "-");
+		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
 		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(
 				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul/li/a[@href=\"/cl/"
 						+ categoryNameInLowerCaseOnly + "/?nc=nb\"]"));

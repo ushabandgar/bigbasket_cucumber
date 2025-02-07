@@ -123,7 +123,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "fruits & vegetables" category
     Then I check if the filter section is scrollable
 
-
   Scenario: Verify product brands are deselectable
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -139,7 +138,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When I select the multiple brands from the brand filter
     Then I should see multiple brands are selected
 
-    
   Scenario: Verify products are filtered by the selected brand
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
@@ -265,3 +263,23 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     Given User is on Category Page
     When User click on "5% - 10%" filter
     Then User should see products list of having discount between 5% - 10%
+
+  #TC: 40
+  Scenario: Verify products list should be displayed as per filter if applied Size Filter
+    Given User is on Category Page
+    When User click on "Large" filter
+    Then User should see products list of size "Large"
+
+  #TC: 41
+  Scenario: Verify products list should be displayed as per filter if applied Pack Size Filter
+    Given User is on Category Page
+    When User click on "24 pcs" filter
+    Then User should see products list of "24 pcs"
+
+  @today
+  Scenario: Verify if selected any product rating then that rated product should be shown
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "Fruits & Vegetables" category
+    And User click on 5 star rating filter
+    Then User should see products list of "5" star ratings only
