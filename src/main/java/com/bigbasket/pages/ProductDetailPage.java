@@ -66,22 +66,43 @@ public class ProductDetailPage {
 
 	@FindBy(css = "div.iUVPaR section div.justify-end button")
 	List<WebElement> SocialMediaIcons;
-	
+
 	@FindBy(css = "div.p-6 div.qqnNj")
 	WebElement similarProducts;
-	
+
 	@FindBy(css = "div.p-6 li.pb-1")
 	WebElement similarProductsLists;
-	
+
 	@FindBy(css = "section.bnsJyy div.dNIxde div.overflow-hidden")
 	WebElement aboutTheProductDesceiption;
-	
+
 	@FindBy(css = "section.bnsJyy div.kIqWEi div.overflow-hidden")
 	WebElement otherProductInfo;
-	
+
 	@FindBy(css = "button.fNKyNB")
 	WebElement otherProductInfoIcons;
-	
+
+	@FindBy(css = "div.place-content-center a:nth-child(1)")
+	WebElement smartBasketIcon;
+
+	@FindBy(css = "div.place-content-center a:nth-child(2)")
+	WebElement offerIcon;
+
+	@FindBy(css = "div.owl-stage div.owl-item div.item div.owl-pd  div.save-price")
+	List<WebElement> offerList;
+
+	@FindBy(css = "div.owl-next")
+	WebElement next;
+
+	@FindBy(css = "a.gePjxR")
+	WebElement amul;
+
+	@FindBy(css = "li.dDBqny h3.flex-col a")
+	List<WebElement> amulBrandList;
+
+	@FindBy(css = "footer.footer")
+	WebElement footerSection;
+
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -142,7 +163,7 @@ public class ProductDetailPage {
 	}
 
 	public void hoverOnImage() throws InterruptedException {
-		Thread.sleep(1000);
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		WaitFor.elementToBeClickable(productImage);
 		keyword.mouseHoverOn(productImage);
 
@@ -160,7 +181,7 @@ public class ProductDetailPage {
 					.visibilityOfElements(Keyword.driver.findElements(By.cssSelector(imageSelector)));
 			for (WebElement image : productImages) {
 				WebDriverWait wait = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
-	            wait.until(ExpectedConditions.visibilityOf(image));
+				wait.until(ExpectedConditions.visibilityOf(image));
 				image.click();
 				assertTrue(image.isDisplayed(), "Image is not visible");
 			}
@@ -191,7 +212,7 @@ public class ProductDetailPage {
 	}
 
 	public void verifyProductAddedToTheBasket() throws InterruptedException {
-		Thread.sleep(1000);
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
 		WaitFor.visibilityOfElement(ConfirmationMsg);
@@ -216,7 +237,8 @@ public class ProductDetailPage {
 	}
 
 	public void verifyconfirmationMsgShouldBeAppere() throws InterruptedException {
-		Thread.sleep(1000);
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
+		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
 		WaitFor.visibilityOfElement(ConfirmationMsg);
 		String confirmationMsg = ConfirmationMsg.getText();
@@ -259,7 +281,8 @@ public class ProductDetailPage {
 
 	public void saveForLaterBtnShouldBeOnProductDetailPage() throws InterruptedException {
 		Thread.sleep(1000);
-		//assertTrue(Keyword.driver.getCurrentUrl().contains("pd/"), " saveForLater btn Not on product detail page");
+		// assertTrue(Keyword.driver.getCurrentUrl().contains("pd/"), " saveForLater btn
+		// Not on product detail page");
 		assertTrue(SaveForLaterBtn.isDisplayed(), "Not display!");
 	}
 
@@ -325,22 +348,22 @@ public class ProductDetailPage {
 		WaitFor.visibilityOfElement(similarProducts);
 		System.out.println(similarProducts.getText());
 		assertTrue(similarProducts.isDisplayed(), "similar product list are not on PIP page.");
-		
+
 	}
 
 	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
 		WaitFor.visibilityOfElement(similarProducts);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
-	    jse.executeScript("window.scrollBy(0,1500)");
-	    assertTrue(similarProductsLists.isDisplayed(), "Similar products list should be visible after scrolling");
+		jse.executeScript("window.scrollBy(0,1500)");
+		assertTrue(similarProductsLists.isDisplayed(), "Similar products list should be visible after scrolling");
 	}
 
 	public void aboutTheProdutDescription() {
 		WaitFor.visibilityOfElement(aboutTheProductDesceiption);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,800)");
-		String description ="Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
-	    
+		String description = "Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
+
 		assertEquals(aboutTheProductDesceiption.getText(), description, "About the product description Not match");
 	}
 
@@ -349,7 +372,7 @@ public class ProductDetailPage {
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,800)");
 		assertTrue(otherProductInfo.getText().contains("EAN Code: 8901262260091"));
-		
+
 	}
 
 	public void clickOnOtherProductInfoIcons() throws InterruptedException {
@@ -361,7 +384,56 @@ public class ProductDetailPage {
 		otherProductInfoIcons.click();
 		otherProductInfoIcons.click();
 		assertTrue(otherProductInfoIcons.isEnabled(), "Icon are not clickable.");
-		
+
 	}
 
+	public void clickOnSmartBasketIcon() {
+		WaitFor.visibilityOfElement(smartBasketIcon);
+		smartBasketIcon.click();
+		String url = Keyword.driver.getCurrentUrl();
+		assertTrue(url.contains("https://www.bigbasket.com/member/sb"));
+	}
+
+	public void clickOnOfferIcon() {
+		WaitFor.visibilityOfElement(offerIcon);
+		offerIcon.click();
+		String url = Keyword.driver.getCurrentUrl();
+		assertTrue(url.contains("https://www.bigbasket.com/offers/?nc"));
+	}
+
+	public void listDisplayWithOfferTag() {
+		clickOnOfferIcon();
+		WaitFor.visibilityOfElement(next);
+		for (int i = 1; i <= 7; i++) {
+			next.click();
+			for (WebElement offerItemList : offerList) {
+				String offerListsItems = offerItemList.getText();
+				System.out.println(offerListsItems);
+				//assertTrue(offerListsItems.contains("OFF"), "In item list, no offer available for Products.");
+			}
+			
+		}
+	}
+
+	public void clickOnAmul() {
+		WaitFor.visibilityOfElement(amul);
+		amul.click();
+		WaitFor.untilUrlLoad("amul");
+		String url = Keyword.driver.getCurrentUrl();
+		assertTrue(url.contains("amul"));
+	}
+
+	public void amulBrandProduct() {
+		clickOnAmul();
+		WaitFor.visibilityOfElement(footerSection);
+		keyword.scrollDownTillSpecificElement(footerSection);
+		WaitFor.visibilityOfElements(amulBrandList);
+		System.out.println("Total Amul brand products found: " + amulBrandList.size());
+		JavascriptExecutor js = (JavascriptExecutor) Keyword.driver;
+		for (WebElement list : amulBrandList) {
+			String amulBrandLists = list.getText();
+			System.out.println(amulBrandLists);
+			assertTrue(list.getText().contains("Amul"), "Not found Amul brand products!");
+		}
+	}
 }

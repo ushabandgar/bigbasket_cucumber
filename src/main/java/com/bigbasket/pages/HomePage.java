@@ -55,22 +55,25 @@ public class HomePage {
 	WebElement clearButtonOfSearchForAreaTextBox;
 	
 	@FindBy(xpath = "//img[@src=\"https://www.bbassets.com/bb2assets/images/svg/no-delivery.svg?tr=w-undefined,q-80\"]")
-	WebElement noResultMsgForDeliveryLocatrion;
+	WebElement noResultMsgForDeliveryLocation;
 
 	public void verifySelectLoactionBarVisibleOnTheHomepageOrNot() {
+		WaitFor.elementTobeVisible(selectLocation);
 		Assert.assertTrue(selectLocation.isDisplayed());
 
 	}
 
-	public void clickonSelectLocationbar() throws InterruptedException {
-		Thread.sleep(3000);
+	public void clickonSelectLocationbar()  {
+		WaitFor.elementToBeClickable(selectLocation);
+		//Thread.sleep(3000);
 		selectLocation.click();
 
 	}
 
-	public void enterTextIntoSearchForAreaTextBox() throws InterruptedException {
+	public void enterTextIntoSearchForAreaTextBox() {
 		Keyword.sendkeys(searchForArea, "Pune");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchForArea);
+		//Thread.sleep(3000);
 	}
 
 	public void verifyThatUserCanAbleToTypeTextIntosearchForAreaTextBox() {
@@ -140,9 +143,10 @@ public class HomePage {
 
 	}
 
-	public void EnterPartialTextIntoSearchForAreaTextBox() throws InterruptedException {
+	public void EnterPartialTextIntoSearchForAreaTextBox()  {
 		Keyword.sendkeys(searchForArea, "Mum");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchForArea);
+		//Thread.sleep(3000);
 
 	}
 
@@ -186,25 +190,55 @@ public class HomePage {
 
 	}
 	
-	public void enterSpecialCharacterOnlyIntoSearchForAreaTextBox() throws InterruptedException {
-		keyword.sendkeys(searchForArea, "!@#");
-		Thread.sleep(3000);
+	public void enterSpecialCharacterOnlyIntoSearchForAreaTextBox(){
+		keyword.sendkeys(searchForArea, "!@#$%^&*");
+		WaitFor.elementToBeDisplayed(searchForArea);
+		//Thread.sleep(3000);
 
 	}
 
-	public void verifyWhenEnterSpeacialCharacterOnlyIntoSearchForAreaTextBox() {
-		Assert.assertTrue (noResultMsgForDeliveryLocatrion.isDisplayed());
+	public void verifyWhenEnterSpeacialCharacterOnlyIntoSearchForAreaTextBox() { 
+		WaitFor.elementToBeDisplayed(noResultMsgForDeliveryLocation);
+		Assert.assertTrue (noResultMsgForDeliveryLocation.isDisplayed());
 
 	}
 	
-	public void enterLargeNumberOnlyIntoSearchForAreaTextBox() throws InterruptedException {
+	public void enterLargeNumberOnlyIntoSearchForAreaTextBox(){
 		keyword.sendkeys(searchForArea, "07676476337565");
-		Thread.sleep(3000);
-
-	}
+		WaitFor.elementToBeDisplayed(searchForArea);
+		//Thread.sleep(3000);
+		}
 	
 	public void verifyWhenEnterOnlyLargeNumberIntoSearchForAreaTextBox() {
-		Assert.assertTrue (noResultMsgForDeliveryLocatrion.isDisplayed());
+		WaitFor.elementToBeDisplayed(noResultMsgForDeliveryLocation);
+		Assert.assertTrue (noResultMsgForDeliveryLocation.isDisplayed());
+		
+
+	}
+	public void enterInvalidSpecialCharacterOnlyIntoSearchForAreaTextBox() {
+		keyword.sendkeys(searchForArea, "<:>/{};");
+		WaitFor.elementToBeDisplayed(searchForArea);
+		//Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterInvalidSpecialCharacterOnlyIntoSearchForAreatTextBox() {
+		WaitFor.elementTobeVisible(noResultMsgForDeliveryLocation);
+		WaitFor.elementToBeDisplayed(noResultMsgForDeliveryLocation);
+		Assert.assertTrue(noResultMsgForDeliveryLocation.isDisplayed());
+
+	}
+	
+	public void enterExtremelyLargeInvalidTextIntoearchForAreaTextBox() {
+		keyword.sendkeys(searchForArea, "hjfhfjwehjdwjdsooudiqwufiyf");
+		WaitFor.elementToBeDisplayed(searchForArea);
+		//Thread.sleep(3000);
+
+	}
+
+	public void verifyWhenEnterExtremelyLargeInvalidTextIntoearchForAreaTextBox() {
+		WaitFor.elementToBeDisplayed(noResultMsgForDeliveryLocation);
+		Assert.assertTrue(noResultMsgForDeliveryLocation.isDisplayed());
 
 	}
 
@@ -217,9 +251,10 @@ public class HomePage {
 
 	}
 
-	public void enterTextIntoSearchTextBox() throws InterruptedException {
+	public void enterTextIntoSearchTextBox() {
 		Keyword.sendkeys(searchTextBox, "Apple");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchTextBox);
+		//Thread.sleep(3000);
 	}
 
 	public void verifyThatUserCanAbleToTypeTextIntoTheSearchBar() {
@@ -289,9 +324,10 @@ public class HomePage {
 
 	}
 
-	public void EnterPartialTextIntoTextBox() throws InterruptedException {
+	public void EnterPartialTextIntoTextBox() {
 		Keyword.sendkeys(searchTextBox, "Toma");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchTextBox);
+		//Thread.sleep(3000);
 
 	}
 
@@ -318,6 +354,7 @@ public class HomePage {
 
 	public String enterTextIntoTextBox() {
 		keyword.sendkeys(searchTextBox, "Tomato");
+		WaitFor.elementToBeDisplayed(searchTextBox);
 		String valueAfterEnterText = searchTextBox.getAttribute("value");
 		return valueAfterEnterText;
 
@@ -336,46 +373,54 @@ public class HomePage {
 
 	}
 
-	public void enterSpecialCharacterOnlyIntoSearchTextBox() throws InterruptedException {
+	public void enterSpecialCharacterOnlyIntoSearchTextBox(){
 		keyword.sendkeys(searchTextBox, "!@#");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchTextBox);
+		//Thread.sleep(3000);
 
 	}
 
 	public void verifyWhenEnterSpeacialCharacterOnlyIntoSearchBar() {
+		WaitFor.elementToBeDisplayed(noResultMsg);
 		Assert.assertTrue(noResultMsg.isDisplayed());
 
 	}
 
-	public void enterNumberOnlyIntoSearchTextBox() throws InterruptedException {
+	public void enterNumberOnlyIntoSearchTextBox() {
 		keyword.sendkeys(searchTextBox, "01234569746");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchTextBox);
+		//Thread.sleep(3000);
 
 	}
 
 	public void verifyWhenEnterNumberOnlyIntoSearchBar() {
+		WaitFor.elementToBeDisplayed(noResultMsg);
 		Assert.assertTrue(noResultMsg.isDisplayed());
 
 	}
 
-	public void enterInvalidSpecialCharacterOnlyIntoSearchTextBox() throws InterruptedException {
+	public void enterInvalidSpecialCharacterOnlyIntoSearchTextBox(){
 		keyword.sendkeys(searchTextBox, "<:>/{};");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchTextBox);
+		//Thread.sleep(3000);
 
 	}
 
 	public void verifyWhenEnterInvalidSpecialCharacterOnlyIntoSearchBar() {
+		WaitFor.elementToBeDisplayed(noResultMsg);
 		Assert.assertTrue(noResultMsg.isDisplayed());
 
 	}
 
-	public void enterExtremelyLargeInvalidTextIntoSearchTextBox() throws InterruptedException {
+	public void enterExtremelyLargeInvalidTextIntoSearchTextBox()  {
 		keyword.sendkeys(searchTextBox, "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-		Thread.sleep(3000);
+		WaitFor.elementToBeDisplayed(searchTextBox);
+		//Thread.sleep(3000);
 
 	}
 
 	public void verifyWhenEnterExtremelyLargeInvalidTextIntoSearchBar() {
+		WaitFor.elementToBeDisplayed(noResultMsg);
 		Assert.assertTrue(noResultMsg.isDisplayed());
 
 	}
@@ -419,7 +464,7 @@ public class HomePage {
 		searchText.sendKeys(Keys.ENTER);
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
 		//WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 	}
 
