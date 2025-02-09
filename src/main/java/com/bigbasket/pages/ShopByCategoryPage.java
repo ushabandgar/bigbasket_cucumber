@@ -92,6 +92,7 @@ public class ShopByCategoryPage {
 
 	@FindBy(xpath = "//h3[@class=\"block m-0 line-clamp-2 font-regular text-base leading-sm text-darkOnyx-800 pt-0.5 h-full\"]")
 	List<WebElement> productDescriptionFromProductList;
+
 	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 FilterByRating___StyledLabel-sc-17wxy9s-0 gJxZPQ jKZfbM\"]")
 	WebElement productRating;
 
@@ -101,11 +102,14 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//span[@class=\"Label-sc-15v1nk5-0 Badges___StyledLabel-sc-1k3p1ug-0 gJxZPQ kAyiFy leading-xxs\"]/span")
 	List<WebElement> productRatingsFromProdDescription;
 
+	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 ListSorter___StyledLabel-sc-1btacag-1 gJxZPQ hneWsn\"]")
+	WebElement relevanceFilters;
+
 	String textbeforeclick;
 	String brandName;
 	String TextBeforeClickOnHideFilter;
 	String TextAfterClickOnHideFilter;
-	int ProductPrice;
+	int ProductPrice, NextProductPrice;
 	String filterNameFromList;
 
 	public ShopByCategoryPage() {
@@ -138,7 +142,7 @@ public class ShopByCategoryPage {
 		return actualNoProductMessage;
 	}
 
-	public int getProductListAfterClickOnCategory() {
+	public int getProductListCountAfterClickOnCategory() {
 		List<WebElement> productList = Keyword.driver
 				.findElements(By.cssSelector("div[class=\"SKUDeck___StyledDiv-sc-1e5d9gk-0 eA-dmzP\"]"));
 		int productCount = productList.size();
@@ -146,7 +150,7 @@ public class ShopByCategoryPage {
 	}
 
 	public void verifyNoProductMessgae() {
-		int productCount = getProductListAfterClickOnCategory();
+		int productCount = getProductListCountAfterClickOnCategory();
 		if (productCount == 0) {
 			String actualNoProductMessage = getNoProductMessage();
 			String expectedMessage = "We couldn't find anything matching your query. Try something else.";
@@ -471,7 +475,7 @@ public class ShopByCategoryPage {
 		keyword.scrollDownTillSpecificElement(filterName);
 		WaitFor.elementToBeClickable(filterName);
 		filterName.click();
-		// Thread.sleep(3000);
+		Thread.sleep(3000);
 		WaitFor.elementToBeVisible(HideFilterButton);
 
 	}
@@ -622,12 +626,97 @@ public class ShopByCategoryPage {
 
 		for (int i = 0; i < ratingsOnProductLists.size(); i++) {
 			String ratingOnProduct = ratingsOnProductLists.get(i);
-			System.out.println("ratingOnProduct: "+ratingOnProduct);
-			System.out.println("ratingSelected: "+ratingSelected);
+			System.out.println("ratingOnProduct: " + ratingOnProduct);
+			System.out.println("ratingSelected: " + ratingSelected);
 			softlyassert.assertTrue(ratingOnProduct.equals(ratingSelected));
 
 		}
 		softlyassert.assertAll();
-		
+
+	}
+
+	List<String> productListDesc = new ArrayList<String>();
+
+	public List<String> getProductListAfterClickOnCategory() {
+		for (WebElement prodDesc : productDescriptionFromProductList) {
+			productListDesc.add(prodDesc.getText());
+		}
+		return productListDesc;
+	}
+
+	public void verifyProductDescriptionHavingCatgeoryProducts(String childCategorySelected) {
+
+		SoftAssert softlyassert = new SoftAssert();
+		productListDesc = getProductListAfterClickOnCategory();
+		for (int i = 0; i < productListDesc.size(); i++) {
+			String productDescritpion = productListDesc.get(i);
+			System.out.println("productDescritpion: " + productDescritpion);
+			softlyassert.assertTrue(productDescritpion.contains(childCategorySelected));
+		}
+		softlyassert.assertAll();
+
+	}
+
+	public void verifyRelevanceFiltersDisplayed(String relevanceFilter) {
+
+		if (relevanceFilters.isDisplayed()) {
+			Assert.assertTrue(relevanceFilter.equals(relevanceFilters.getText()));
+		}
+
+	}
+
+	public void verifyRelevanceFilAdnSortingOptionsAvaialble() {
+		WebElement sortingOption = Keyword.driver.findElement(By.id("headlessui-listbox-button-:r12:"));
+		String expandedValue = sortingOption.getAttribute("aria-expanded");
+		if (sortingOption.isDisplayed()) {
+			Assert.assertTrue(expandedValue.equals("true"));
+		}
+	}
+
+	public void clickOnRelevanceButton() throws InterruptedException {
+
+		relevanceFilters.click();
+		Thread.sleep(4000);
+
+	}
+
+	public void clickOnAnyRelevanceOption(String relevanceOptionSelected) throws InterruptedException {
+		WebElement option = Keyword.driver.findElement(By.xpath(
+				"//span[contains(@class, 'Label-sc-15v1nk5-0') and contains(@class, 'ListSorter___StyledLabel2-sc-1btacag-2') and text()='"+relevanceOptionSelected+"']"));
+
+		option.click();
+		Thread.sleep(2000);
+
+	}
+
+	public void verifyProductListPriceIsSortingFromLowToHigh() {
+		List<String> prices = getProductPrice();
+		for (int i = 0; i < prices.size(); i++) {
+			String price = prices.get(i);
+			String priceOfNextProduct = prices.get(i + 1);
+			price = price.replace("₹", "");
+			priceOfNextProduct = priceOfNextProduct.replace("₹", "");
+			ProductPrice = Integer.parseInt(price);
+			NextProductPrice = Integer.parseInt(priceOfNextProduct);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(NextProductPrice >= ProductPrice);
+			softlyassert.assertAll();
+		}
+
+	}
+
+	public void verifyProductListPriceIsSortingFromHighToLow() {
+		List<String> prices = getProductPrice();
+		for (int i = 0; i < prices.size(); i++) {
+			String price = prices.get(i);
+			String priceOfNextProduct = prices.get(i + 1);
+			price = price.replace("₹", "");
+			priceOfNextProduct = priceOfNextProduct.replace("₹", "");
+			ProductPrice = Integer.parseInt(price);
+			NextProductPrice = Integer.parseInt(priceOfNextProduct);
+			SoftAssert softlyassert = new SoftAssert();
+			softlyassert.assertTrue(NextProductPrice <= ProductPrice);
+			softlyassert.assertAll();
+		}
 	}
 }

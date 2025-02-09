@@ -264,22 +264,50 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When User click on "5% - 10%" filter
     Then User should see products list of having discount between 5% - 10%
 
-  #TC: 40
   Scenario: Verify products list should be displayed as per filter if applied Size Filter
     Given User is on Category Page
     When User click on "Large" filter
     Then User should see products list of size "Large"
 
-  #TC: 41
   Scenario: Verify products list should be displayed as per filter if applied Pack Size Filter
     Given User is on Category Page
     When User click on "24 pcs" filter
     Then User should see products list of "24 pcs"
 
-  @today
   Scenario: Verify if selected any product rating then that rated product should be shown
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "Fruits & Vegetables" category
     And User click on 5 star rating filter
     Then User should see products list of "5" star ratings only
+
+  #TC: 43
+  Scenario: Verify product List if selected any child category
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And User mouse hover on "Fruits & Vegetables" category
+    And User mouse hover on "Fresh Fruits" subcategory
+    And then hover on "Mangoes" and click on it
+    Then User should see product list of having "Mango" only
+
+  Scenario: Verify that Relevance button is displayed on category page
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    Then "Relevance" filter button should be displayed
+
+  Scenario: Verify that Relevance button is displayed on category page
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Relevance" button
+    Then User should see the sorting options available
+       
+    @today
+    Scenario: Verify that Relevance button is displayed on category page
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Relevance" button
+    And I click on "Price - Low to High" relevance option
+    Then User should see product list sorting from low to high price
