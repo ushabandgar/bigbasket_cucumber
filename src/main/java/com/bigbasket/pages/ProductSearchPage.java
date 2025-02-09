@@ -30,7 +30,7 @@ public class ProductSearchPage {
 		Thread.sleep(1000);
 		try {
 			//WaitFor.elementToBeClickable(ClickonProduct);
-			Thread.sleep(3000);			
+			Thread.sleep(1000);			
 			ClickonProduct.click();
 			System.out.println("Clicked on product.");
 		} catch (StaleElementReferenceException e) {
