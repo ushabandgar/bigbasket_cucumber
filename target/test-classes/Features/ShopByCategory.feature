@@ -234,6 +234,80 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Hide Filter"
     And I click on "Show Filter"
     Then I should see All Filters should be shown.
+    
+ Scenario: Verify on click of "Show Filter", it replaces with "Hide Filter"
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+Then I should see Shop By Category Section on Catgeory page
+
+Scenario: verify "Show more +" link is present for categories with more than 5 subcategories
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+Then categoris with more than 5 subcatgories should have "Show more +" link
+
+Scenario: verify "Show more +" link is should not displays for categories with less than or equal to 5 subcategories
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fashion" category
+Then categoris with less than or equal to 5 subcatgories should not have "Show more +" link
+
+Scenario: Verify when user clicks on the "Show more +" button displays additional categories
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+And I click on "Show more +" link
+Then additional categories should be displayed
+
+
+Scenario: Verify when user clicks on the "Show more +" button changes button text to "Show less -"
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+And I get the text before click on Show more +
+And I click on "Show more +" link
+Then "Show more +" text replaces to "Show less -"
+
+
+Scenario: Verify when user clicks on the "Show less -" button collapses additional categories
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+And I scroll down
+And I click on "Show more +" link 
+Then I click on Show less - link additional categories should be collpased
+
+
+Scenario: Verify when user clicks on the "Show less -" button changes button text to "Show more +"
+
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+And I scroll down
+And I click on "Show more +" link 
+And I click on "Show less -" link 
+Then "Show less -" text replaces to "Show more +" 
+
+@today
+Scenario: Verify on Category Page bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+Then Bydefault Filters should be visible as per Category types like Brands,Product Rating, Price etc
+
+
+Scenario: Verify that the filter section is scrollable on Category page
+Given After entering url, User is on HomePage
+When I click on SHOP BY CATEBORY menu
+And I click on "fruits & vegetables" category
+When I check if the filter section is scrollable
+Then I should be able to scroll the filter section
 
   Scenario: Verify on click of "Show Filter", it replaces with "Hide Filter"
     Given After entering url, User is on HomePage
