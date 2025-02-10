@@ -219,3 +219,8 @@ Feature: Product Detail Page functionality
   Scenario: Verify user should able navigate from "SHOP BY CATEGORY" to "PIP" Page
     Given User click on ShopBycatory menu item
     Then The user should able to navigate on PIP Page
+    
+  Scenario: Verify user should able navigate from "SHOP BY CATEGORY" to "PIP" Page
+    Given User click on ShopBycatory menu item
+    Then The user should able to navigate on PIP Page
+    

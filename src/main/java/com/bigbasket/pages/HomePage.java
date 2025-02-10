@@ -427,7 +427,6 @@ public class HomePage {
 		Thread.sleep(1000);
 
 	}
-
 	public void verifyShopByCategoryCollapsesOnClickAfterExapands() {
 		String classNameAfterExapnd = shopByCategoryMenu.getAttribute("class");
 		clickOnShopByCategoryMenu();
@@ -495,5 +494,12 @@ public class HomePage {
 		assertTrue(url.contains(itemName.toLowerCase()));
 	    
 	}
-
+    
+	public void sendProductname(String productName) throws InterruptedException {
+	    searchText.clear(); // Clear the input field before entering new text
+	    searchText.sendKeys(productName);  // Now using dynamic product name
+	    searchText.sendKeys(Keys.ENTER);
+	    WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
+	    Thread.sleep(1000);
+	}
 }
