@@ -13,7 +13,7 @@ Feature: This feature file test Search For Produtcs functionality
   Scenario: verify placeholder text "Search for Products" is displayed when Search Text box is empty
     Given After enter url, User on HomePage
     When "Search for Products" is appear in Text BOX when text box is empty
-    And User enter "Apple" into empty text Box
+    And User enter "Fruite" into empty text Box
     And Observe "Search for Products" is not  appear in Text BOX
     Then verify placeholder text is displayed when Search Text box is empty
 
@@ -46,19 +46,17 @@ Feature: This feature file test Search For Produtcs functionality
     When User enter special character only into search text box
     Then "No Result found" message should be displayed on page
 
- 
   Scenario: verify when user enter Number only "01234569746" into Search Bar
     Given After enter url, User on HomePage
     When User enter Number only into search text box
     Then "No Result found" message should be display on page
 
- 
   Scenario: verify when user enter invalid special character only "<:>/{};" into Search Bar
     Given After enter url, User on HomePage
     When User enter invalid special character only into search text box
     Then "No Result found" message should be display on Homepage
-
-  Scenario: verify when user enter invalid large text "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" into Search Bar
+    
+  	Scenario: verify when user enter invalid large text "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" into Search Bar
     Given After enter url, User on HomePage
     When User enter invalid extremely lagre text into search text box
     Then "No Result found" message should be displayed on Homepage
