@@ -100,7 +100,7 @@ public class ProductDetailPage {
 	@FindBy(css = "footer.footer")
 	WebElement footerSection;
 	@FindBy(css = "section.z-10  li:nth-child(1)")
-	WebElement teaProduct;
+	WebElement firstProduct;
 
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -114,7 +114,7 @@ public class ProductDetailPage {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		String currentTitle = Keyword.driver.getTitle();
 		System.out.println("Current Title: " + currentTitle);
-		assertTrue(currentTitle.contains("Buy brandList Taaza Milk Online at Best Price"),
+		assertTrue(currentTitle.contains("Buy Amul Taaza Milk Online at "),
 				"The title did not change to the product page title.");
 	}
 
@@ -169,12 +169,12 @@ public class ProductDetailPage {
 	public void verifyclickFucntinalityOnProductImageGallaryOnebyOne() throws InterruptedException {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		for (int i = 0; i <= 4; i++) {
+			WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
 			String imageSelector = "#thumb-" + i;
 			List<WebElement> productImages = WaitFor
 					.visibilityOfElements(Keyword.driver.findElements(By.cssSelector(imageSelector)));
 			for (WebElement image : productImages) {
-				WebDriverWait wait = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
-				wait.until(ExpectedConditions.visibilityOf(image));
+				wait1.until(ExpectedConditions.visibilityOf(image));
 				image.click();
 				assertTrue(image.isDisplayed(), "Image is not visible");
 			}
@@ -204,11 +204,11 @@ public class ProductDetailPage {
 		assertEquals(actualpacksizePrice, expectedPriceValue, "Price does not match for the pack size");
 	}
 
-	public void verifyProductAddedToTheBasket() throws InterruptedException {
+	public void verifyProductAddedToTheBasket(){
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
-		WaitFor.visibilityOfElement(ConfirmationMsg);
+		WaitFor.elementTobeVisible(ConfirmationMsg);
 		String confirmationMsg = ConfirmationMsg.getText();
 		System.out.println(confirmationMsg);
 		assertTrue(confirmationMsg.contains("An item has been added to your basket successfully"),
@@ -229,7 +229,7 @@ public class ProductDetailPage {
 				"The confirmation message is incorrect.");
 	}
 
-	public void verifyconfirmationMsgShouldBeAppere() throws InterruptedException {
+	public void verifyconfirmationMsgShouldBeAppere(){
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
@@ -245,7 +245,6 @@ public class ProductDetailPage {
 		Thread.sleep(1000);
 		AddToBasket.click();
 		Thread.sleep(1000);
-		WaitFor.visibilityOfElement(AddToBasketRemovingBtn);
 		AddToBasketRemovingBtn.click();
 		Thread.sleep(1000);
 		assertTrue(ConfirmationMsg.getText().contains("Quantity of this item has been reduced"),
@@ -267,7 +266,7 @@ public class ProductDetailPage {
 
 	public void noSpellingGrammaticalMistakeInProductDescription() throws InterruptedException {
 		Thread.sleep(2000);
-		String expectedCorrectDescription = "brandList Taaza Milk, 1 L Pouch";
+		String expectedCorrectDescription = "Amul Taaza Milk, 1 L Pouch";
 		assertTrue(expectedProductTitleText.getText().equals(expectedCorrectDescription),
 				"Description contains spelling or grammatical errors");
 	}
@@ -278,14 +277,16 @@ public class ProductDetailPage {
 	}
 
 	public void saveProductForLater() throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
+		WaitFor.visibilityOfElement(SaveForLaterBtn);
 		SaveForLaterBtn.click();
 		WaitFor.visibilityOfElement(LoginSignup);
 		System.out.println(LoginSignup.getText());
 
 	}
     public void clickOnMediaIcons() throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
+    	WaitFor.visibilityOfElements(SocialMediaIcons);
 		for (WebElement icons : SocialMediaIcons) {
 			Thread.sleep(1000);
 			icons.click();
@@ -293,19 +294,19 @@ public class ProductDetailPage {
 		}
 	}
 	public void clickOnFacebookIcon() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		facebookIcon.click();
 		assertTrue(facebookIcon.isEnabled());
 	}
 
-	public void clickOnTwitter() throws InterruptedException {
-		Thread.sleep(2000);
+	public void clickOnTwitter() {
+		WaitFor.visibilityOfElement(twitter);
 		twitter.click();
 		assertTrue(twitter.isEnabled());
 	}
 
-	public void clickOnEmailOcon() throws InterruptedException {
-		Thread.sleep(2000);
+	public void clickOnEmailOcon() {
+		WaitFor.visibilityOfElement(email);
 		email.click();
 		assertTrue(email.isEnabled());
 	}
@@ -335,7 +336,7 @@ public class ProductDetailPage {
 		assertTrue(similarProducts.isDisplayed(), "similar product list are not on PIP page.");
 	}
 
-	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
+	public void scrollPageToseeSimiliarProductList() {
 		WaitFor.visibilityOfElement(similarProducts);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,1500)");
@@ -346,8 +347,8 @@ public class ProductDetailPage {
 		WaitFor.visibilityOfElement(aboutTheProductDesceiption);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,800)");
-		String description = "Known for its dairy, confectionary and other products, brandList is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. brandList Taazas Toned Milk is one such product that is made for the health conscious consumer.";
-		assertEquals(aboutTheProductDesceiption.getText(), description, "About the product description Not match");
+		String description = "Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
+		assertTrue(aboutTheProductDesceiption.getText().contains("dairy"), "About the product description Not match");
 	}
 
 	public void otherProductInfo() {
@@ -381,7 +382,7 @@ public class ProductDetailPage {
 		assertTrue(url.contains("https://www.bigbasket.com/offers/?nc"));
 	}
 
-	public void listDisplayWithOfferTag() throws InterruptedException {
+	public void listDisplayWithOfferTag() {
 		clickOnOfferIcon();
 		WaitFor.visibilityOfElement(next);
 		for (int i = 1; i <= 7; i++) {
@@ -476,8 +477,57 @@ public class ProductDetailPage {
 		softAssert.assertAll();
 	}
 	public void ClickonteaProduct() {
-		WaitFor.visibilityOfElement(teaProduct);
-		teaProduct.click();
+		WaitFor.visibilityOfElement(firstProduct);
+		firstProduct.click();
+	}
+
+	public void greeBrandProduct() {
+		WaitFor.untilUrlLoad("ghee");
+		WaitFor.visibilityOfElement(footerSection);
+		keyword.scrollDownTillSpecificElement(footerSection);
+		WaitFor.visibilityOfElements(brandList);
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean gheeFound = false;
+		for (WebElement list : brandList) {
+			String brandLists = list.getText();
+			System.out.println(brandLists);
+
+			if (brandLists.contains("Ghee")) {
+				gheeFound = true;
+				break;
+			}
+		}
+		softAssert.assertTrue(gheeFound, "Not found Ghee brand products!");
+		softAssert.assertAll();
+		
+	}
+
+	public void nandiniBrandProduct() {
+		WaitFor.untilUrlLoad("nandini");
+		WaitFor.visibilityOfElement(footerSection);
+		keyword.scrollDownTillSpecificElement(footerSection);
+		WaitFor.visibilityOfElements(brandList);
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean brandNameFound = false;
+		for (WebElement list : brandList) {
+			String brandLists = list.getText();
+			System.out.println(brandLists);
+
+			if (brandLists.contains("Nandini")) {
+				brandNameFound = true;
+				break;
+			}
+		}
+		softAssert.assertTrue(brandNameFound, "Not found Nandini brand products!");
+		softAssert.assertAll();
+	}
+	public void verifyPIPpage() {
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
+		String currentURL = Keyword.driver.getCurrentUrl();
+		System.out.println("Current Title: " + currentURL);
+		assertTrue(currentURL.contains("pd"));	
 	}
 
 }

@@ -316,6 +316,18 @@ public class ProductDetailSteps {
 		productDetailPage.ExoticFruitsVeggiesBrandProduct();
 		
 	}
+	@Then("The product should be display with Ghee tag")
+	public void clickOnGhee() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.greeBrandProduct();
+		
+	}
+	@Then("The product should be display with Nandini tag")
+	public void clickOnNandini() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.nandiniBrandProduct();
+		
+	}
 	
 	@When("The user Click on tea product")
 	public void clickOnTeaProduct() {
@@ -324,6 +336,17 @@ public class ProductDetailSteps {
 		
 	}
 	
-	
-
+	@Given("User click on ShopBycatory menu item")
+	public void clickOnShopByCategory() throws InterruptedException {
+		ShopByCategorySteps shopByCategorySteps = new ShopByCategorySteps();
+		shopByCategorySteps.clickOnShopByCatgeoryMenuBeforeExpand();
+		shopByCategorySteps.clickOnCategory("fashion");
+		clickOnTeaProduct();	
+	}
+	@Then("The user should able to navigate on PIP Page")
+	public void verifyPIPpage() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyPIPpage();
+	}
 }

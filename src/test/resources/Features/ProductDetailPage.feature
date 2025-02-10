@@ -200,10 +200,22 @@ Feature: Product Detail Page functionality
   Scenario: Verify that the after clicking on "Ghee" BTN product url should be display with exotic-fruits-veggies
     Given The User click on "Ghee" btn
 
+  Scenario: Verify that the after clicking on "Ghee" BTN, The perticular products lists should be display
+    Given The User click on "Ghee" btn
+    Then The product should be display with Ghee tag
+
   Scenario: Verify that the after clicking on "Nandini" BTN product url should be display with exotic-fruits-veggies
     Given The User click on "Nandini" btn
+
+  Scenario: Verify that the after clicking on "Nandini" BTN, The perticular products lists should be display
+    Given The User click on "Nandini" btn
+    Then The product should be display with Nandini tag
 
   Scenario: Verify that the after clicking on "Tata Tea Gold", only Tata Tea Gold brand product should be appere
     Given The User click on "Tea" btn
     When The user Click on tea product
     Then The user should able to click om "Tata Tea Gold" BrandName
+
+  Scenario: Verify user should able navigate from "SHOP BY CATEGORY" to "PIP" Page
+    Given User click on ShopBycatory menu item
+    Then The user should able to navigate on PIP Page
