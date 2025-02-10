@@ -475,8 +475,12 @@ public class ShopByCategoryPage {
 		keyword.scrollDownTillSpecificElement(filterName);
 		WaitFor.elementToBeClickable(filterName);
 		filterName.click();
+
+		// Thread.sleep(3000);
+		WaitFor.elementTobeVisible(HideFilterButton);
 		Thread.sleep(3000);
-		WaitFor.elementToBeVisible(HideFilterButton);
+		WaitFor.elementToBeClickable(HideFilterButton);
+
 
 	}
 
