@@ -3,6 +3,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -59,10 +60,6 @@ public class WaitFor {
 	public static void elementToBeDisplayed(WebElement element) {
 		wait1.until(ExpectedConditions.visibilityOf(element));
 	}
-	
-	public static void elementToBeVisible(WebElement element) {
-	    wait1.until(ExpectedConditions.visibilityOf(element));
-	}
-	
+
 }
 

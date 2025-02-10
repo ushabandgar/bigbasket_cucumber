@@ -167,18 +167,43 @@ Feature: Product Detail Page functionality
     When The user clicks on the "Product"
     Then The Offer Icon should be clickable
 
-  Scenario: Verify that the on PIP page "Amul" word should be clickable
+  Scenario: Verify that the on PIP page "Amul" BrandName should be clickable
     When The user searches for "Product"
     When The user clicks on the "Product"
-    Then The user should able to click on amul word
+    Then The user should able to click om "Amul" BrandName
 
   Scenario: Verify that the after clicking on "amul", only Amul brand product should be appere
     When The user searches for "Product"
     When The user clicks on the "Product"
+    Then The user should able to click om "Amul" BrandName
     Then The user should able to see only Amul brand product
-    
- #working on it
+
   Scenario: Verify that the after clicking on Offer Icon product should be display with "OFFER" tag only
     When The user searches for "Product"
     When The user clicks on the "Product"
-    Then The product list display with OFFER tag  
+    Then The product list display with OFFER tag
+
+  Scenario: Verify that the after clicking on "Tea" BTN product url should be display with exotic-fruits-veggies
+    Given The User click on "Tea" btn
+
+  Scenario: Verify that the after clicking on Tea BTN product should be display with "Tea" tags
+    Given The User click on "Tea" btn
+    Then The product should be display with Tea tag
+
+  Scenario: Verify that the after clicking on "Exotic Fruits & Veggies" BTN product url should be display with exotic-fruits-veggies
+    Given The User click on "Exotic Fruits & Veggies" btn
+
+  Scenario: Verify that the after clicking on "Exotic Fruits & Veggies" BTN, The perticular products lists should be display
+    Given The User click on "Exotic Fruits & Veggies" btn
+    Then The product should be display with Exotic Fruits & Veggies tag
+
+  Scenario: Verify that the after clicking on "Ghee" BTN product url should be display with exotic-fruits-veggies
+    Given The User click on "Ghee" btn
+
+  Scenario: Verify that the after clicking on "Nandini" BTN product url should be display with exotic-fruits-veggies
+    Given The User click on "Nandini" btn
+
+  Scenario: Verify that the after clicking on "Tata Tea Gold", only Tata Tea Gold brand product should be appere
+    Given The User click on "Tea" btn
+    When The user Click on tea product
+    Then The user should able to click om "Tata Tea Gold" BrandName

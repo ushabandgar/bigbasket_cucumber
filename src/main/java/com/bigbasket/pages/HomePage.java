@@ -2,13 +2,18 @@ package com.bigbasket.pages;
 
 import static org.testng.Assert.assertTrue;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import com.bigbasket.base.WaitFor;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -476,4 +481,19 @@ public class HomePage {
 		String urlAfterNavigationToHome = Keyword.driver.getCurrentUrl();
 		assertTrue(urlAfterNavigationToHome.equals("https://www.bigbasket.com/"));
 	}
+
+	public void clickOnHeaderFoodItem(String itemName) {
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
+		WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
+	    WebElement itemname = wait1.until(ExpectedConditions.visibilityOfElementLocated(
+	    		By.xpath("//span[@class='TopNav___StyledMotionSpan-sc-1vxbycn-2 gcPbqq' and text()='" + itemName + "']")));
+	    itemname.click();
+	    itemName = itemName.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
+	    System.out.println("I clicked on: "+ itemName);
+	    WaitFor.untilUrlLoad(itemName.toLowerCase());
+	    String url = Keyword.driver.getCurrentUrl();
+		assertTrue(url.contains(itemName.toLowerCase()));
+	    
+	}
+
 }

@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.testng.asserts.SoftAssert;
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.WaitFor;
 
@@ -93,29 +93,28 @@ public class ProductDetailPage {
 
 	@FindBy(css = "div.owl-next")
 	WebElement next;
-
-	@FindBy(css = "a.gePjxR")
-	WebElement amul;
-
+	
 	@FindBy(css = "li.dDBqny h3.flex-col a")
-	List<WebElement> amulBrandList;
+	List<WebElement> brandList;
 
 	@FindBy(css = "footer.footer")
 	WebElement footerSection;
+	@FindBy(css = "section.z-10  li:nth-child(1)")
+	WebElement teaProduct;
 
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
 	public void switchWindowOnproductDetailPage() {
-		keyword.switchToWindowByTitle("Buy Amul Taaza Milk Online at Best Price of Rs 56 - bigbasket");
+		keyword.switchToWindowByTitle("Buy brandList Taaza Milk Online at Best Price of Rs 56 - bigbasket");
 	}
 
 	public void verifyAfterClickOnProductThenProductUrlTitleChanged() {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		String currentTitle = Keyword.driver.getTitle();
 		System.out.println("Current Title: " + currentTitle);
-		assertTrue(currentTitle.contains("Buy Amul Taaza Milk Online at Best Price"),
+		assertTrue(currentTitle.contains("Buy brandList Taaza Milk Online at Best Price"),
 				"The title did not change to the product page title.");
 	}
 
@@ -161,18 +160,12 @@ public class ProductDetailPage {
 		System.out.println(currentUrl);
 		assertTrue(currentUrl.contains("https://www.bigbasket.com/pd/"));
 	}
-
-	public void hoverOnImage() throws InterruptedException {
+	public void verifyHoverFeatureWorks() {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		WaitFor.elementToBeClickable(productImage);
 		keyword.mouseHoverOn(productImage);
-
-	}
-
-	public void verifyHoverFeatureWorks() {
 		assertTrue(productImage.isDisplayed(), "Hover effect did not make the zoomed image visible.");
 	}
-
 	public void verifyclickFucntinalityOnProductImageGallaryOnebyOne() throws InterruptedException {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		for (int i = 0; i <= 4; i++) {
@@ -274,42 +267,35 @@ public class ProductDetailPage {
 
 	public void noSpellingGrammaticalMistakeInProductDescription() throws InterruptedException {
 		Thread.sleep(2000);
-		String expectedCorrectDescription = "Amul Taaza Milk, 1 L Pouch";
+		String expectedCorrectDescription = "brandList Taaza Milk, 1 L Pouch";
 		assertTrue(expectedProductTitleText.getText().equals(expectedCorrectDescription),
 				"Description contains spelling or grammatical errors");
 	}
 
 	public void saveForLaterBtnShouldBeOnProductDetailPage() throws InterruptedException {
 		Thread.sleep(1000);
-		// assertTrue(Keyword.driver.getCurrentUrl().contains("pd/"), " saveForLater btn
-		// Not on product detail page");
 		assertTrue(SaveForLaterBtn.isDisplayed(), "Not display!");
 	}
 
 	public void saveProductForLater() throws InterruptedException {
 		Thread.sleep(1000);
 		SaveForLaterBtn.click();
-		// afer Login/Signup page open
 		WaitFor.visibilityOfElement(LoginSignup);
 		System.out.println(LoginSignup.getText());
 
 	}
-
-	public void clickOnMediaIcons() throws InterruptedException {
+    public void clickOnMediaIcons() throws InterruptedException {
 		Thread.sleep(1000);
 		for (WebElement icons : SocialMediaIcons) {
 			Thread.sleep(1000);
 			icons.click();
 			assertTrue(icons.isEnabled(), "Icons not clickable");
 		}
-
 	}
-
 	public void clickOnFacebookIcon() throws InterruptedException {
 		Thread.sleep(2000);
 		facebookIcon.click();
 		assertTrue(facebookIcon.isEnabled());
-
 	}
 
 	public void clickOnTwitter() throws InterruptedException {
@@ -341,14 +327,12 @@ public class ProductDetailPage {
 				continue;
 			}
 		}
-
 	}
 
 	public void similarProductList() {
 		WaitFor.visibilityOfElement(similarProducts);
 		System.out.println(similarProducts.getText());
 		assertTrue(similarProducts.isDisplayed(), "similar product list are not on PIP page.");
-
 	}
 
 	public void scrollPageToseeSimiliarProductList() throws InterruptedException {
@@ -362,8 +346,7 @@ public class ProductDetailPage {
 		WaitFor.visibilityOfElement(aboutTheProductDesceiption);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,800)");
-		String description = "Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
-
+		String description = "Known for its dairy, confectionary and other products, brandList is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. brandList Taazas Toned Milk is one such product that is made for the health conscious consumer.";
 		assertEquals(aboutTheProductDesceiption.getText(), description, "About the product description Not match");
 	}
 
@@ -372,9 +355,7 @@ public class ProductDetailPage {
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,800)");
 		assertTrue(otherProductInfo.getText().contains("EAN Code: 8901262260091"));
-
 	}
-
 	public void clickOnOtherProductInfoIcons() throws InterruptedException {
 		WaitFor.visibilityOfElement(otherProductInfoIcons);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
@@ -384,7 +365,6 @@ public class ProductDetailPage {
 		otherProductInfoIcons.click();
 		otherProductInfoIcons.click();
 		assertTrue(otherProductInfoIcons.isEnabled(), "Icon are not clickable.");
-
 	}
 
 	public void clickOnSmartBasketIcon() {
@@ -401,7 +381,7 @@ public class ProductDetailPage {
 		assertTrue(url.contains("https://www.bigbasket.com/offers/?nc"));
 	}
 
-	public void listDisplayWithOfferTag() {
+	public void listDisplayWithOfferTag() throws InterruptedException {
 		clickOnOfferIcon();
 		WaitFor.visibilityOfElement(next);
 		for (int i = 1; i <= 7; i++) {
@@ -409,31 +389,95 @@ public class ProductDetailPage {
 			for (WebElement offerItemList : offerList) {
 				String offerListsItems = offerItemList.getText();
 				System.out.println(offerListsItems);
-				//assertTrue(offerListsItems.contains("OFF"), "In item list, no offer available for Products.");
+				// assertTrue(offerListsItems.contains("OFF"), "In item list, no offer available
+				// for Products.");
 			}
-			
 		}
 	}
 
-	public void clickOnAmul() {
-		WaitFor.visibilityOfElement(amul);
-		amul.click();
-		WaitFor.untilUrlLoad("amul");
-		String url = Keyword.driver.getCurrentUrl();
-		assertTrue(url.contains("amul"));
-	}
-
-	public void amulBrandProduct() {
-		clickOnAmul();
+	public void amulbrandListBrandProduct() {
 		WaitFor.visibilityOfElement(footerSection);
 		keyword.scrollDownTillSpecificElement(footerSection);
-		WaitFor.visibilityOfElements(amulBrandList);
-		System.out.println("Total Amul brand products found: " + amulBrandList.size());
+		WaitFor.visibilityOfElements(brandList);
+		System.out.println("Total brandList brand products found: " + brandList.size());
 		JavascriptExecutor js = (JavascriptExecutor) Keyword.driver;
-		for (WebElement list : amulBrandList) {
-			String amulBrandLists = list.getText();
-			System.out.println(amulBrandLists);
-			assertTrue(list.getText().contains("Amul"), "Not found Amul brand products!");
+		SoftAssert softAssert = new SoftAssert();
+		boolean freshoFound = false;
+		for (WebElement list : brandList) {
+			String brandLists = list.getText();
+			System.out.println(brandLists);
+			if (brandLists.contains("Amul")) {
+				freshoFound = true;
+				break;
+			}
 		}
+		softAssert.assertTrue(freshoFound, "Not found Amul brand products!");
+		softAssert.assertAll();
 	}
+
+	public void clickonBrandName(String brandName) throws InterruptedException {
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
+		WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
+		WebElement brandname = wait1.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//a[contains(@class, 'Description___StyledLink') and contains(text(), '" + brandName + "')]")));
+		brandname.click();
+		brandName = brandName.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
+		System.out.println("I click on: " + brandName);
+		Thread.sleep(2000);
+		WaitFor.untilUrlLoad(brandName.toLowerCase());
+		String url = Keyword.driver.getCurrentUrl();
+		System.out.println(url);
+		assertTrue(url.contains(brandName.toLowerCase()));
+	}
+
+	public void teaBrandProduct() {
+		WaitFor.untilUrlLoad("tea");
+		WaitFor.visibilityOfElement(footerSection);
+		keyword.scrollDownTillSpecificElement(footerSection);
+		WaitFor.visibilityOfElements(brandList);
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean itemFound = false;
+		for (WebElement list : brandList) {
+			String productName = list.getText().trim();
+			System.out.println(productName);
+			if (productName.toLowerCase().contains("tea")) {
+				itemFound = true;
+			} else if (productName.contains("Chai")) {
+				itemFound = true;
+			} else if (productName.contains("Tea")) {
+				itemFound = true;
+			} else {
+				softAssert.fail("Product '" + productName + "' does not contain 'Tea'!");
+			}
+		}
+		softAssert.assertTrue(itemFound, "No Tea brand products found!");
+		softAssert.assertAll();
+
+	}
+	public void ExoticFruitsVeggiesBrandProduct() {
+		WaitFor.untilUrlLoad("exotic-fruits-veggies");
+		WaitFor.visibilityOfElement(footerSection);
+		keyword.scrollDownTillSpecificElement(footerSection);
+		WaitFor.visibilityOfElements(brandList);
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean freshoFound = false;
+		for (WebElement list : brandList) {
+			String brandLists = list.getText();
+			System.out.println(brandLists);
+
+			if (brandLists.contains("fresho!")) {
+				freshoFound = true;
+				break;
+			}
+		}
+		softAssert.assertTrue(freshoFound, "Not found fresho! brand products!");
+		softAssert.assertAll();
+	}
+	public void ClickonteaProduct() {
+		WaitFor.visibilityOfElement(teaProduct);
+		teaProduct.click();
+	}
+
 }

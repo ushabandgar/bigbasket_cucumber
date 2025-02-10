@@ -472,7 +472,7 @@ public class ShopByCategoryPage {
 		WaitFor.elementToBeClickable(filterName);
 		filterName.click();
 		// Thread.sleep(3000);
-		WaitFor.elementToBeVisible(HideFilterButton);
+		WaitFor.elementTobeVisible(HideFilterButton);
 
 	}
 
