@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(features = "src/test/resources/Features",
-glue = "com.bigbasket.stepdefinations", tags="@today")
+glue = "com.bigbasket.stepdefinations",tags="@todays")
 public class TestRunner extends AbstractTestNGCucumberTests {
 
 }
