@@ -337,10 +337,48 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When User click on "24 pcs" filter
     Then User should see products list of "24 pcs"
 
-  #TC: 42
   Scenario: Verify if selected any product rating then that rated product should be shown
     Given After entering url, User is on HomePage
     When I click on SHOP BY CATEGORY menu
     And I click on "Fruits & Vegetables" category
     And User click on 5 star rating filter
     Then User should see products list of "5" star ratings only
+
+  Scenario: Verify product List if selected any child category
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And User mouse hover on "Fruits & Vegetables" category
+    And User mouse hover on "Fresh Fruits" subcategory
+    And then hover on "Mangoes" and click on it
+    Then User should see product list of having "Mango" only
+
+  Scenario: Verify that Relevance button is displayed on category page
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    Then "Relevance" filter button should be displayed
+
+  Scenario: Verify that Relevance button is displayed on category page
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Relevance" button
+    Then User should see the sorting options available
+
+  #bug
+  Scenario: Verify that Relevance option sorts products by Price - Low to High
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Relevance" button
+    And I click on "Price - Low to High" relevance option
+    Then User should see product list sorting from low to high price
+
+  #TC: 47
+  Scenario: Verify that Relevance option sorts products by Price - Low to High
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Relevance" button
+    And I click on "Price - High to Low" relevance option
+    Then User should see product list sorting from high to low price

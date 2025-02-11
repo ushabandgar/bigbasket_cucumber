@@ -212,4 +212,25 @@ public class Keyword {
 		actions.moveToElement(filterSection).perform();
 	}
 
+	public void mouseHoverOnYourSubCategory(String categoryNameToHoverOn) throws InterruptedException {
+		categoryNameToHoverOn = categoryNameToHoverOn.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
+		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(
+				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul[2]/li/a[@href=\"/pc/fruits-vegetables/"+categoryNameToHoverOn+"/?nc=nb\"]"));
+		WaitFor.elementToBeClickable(categoryName);
+		mouseHoverOn(categoryName);
+		Thread.sleep(3000);
+	}
+
+	public void mouseHoverOnYourCategory(String categoryNameToHoverOn) throws InterruptedException {
+		categoryNameToHoverOn = categoryNameToHoverOn.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
+		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(
+				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul/li/a[@href=\"/cl/"
+						+ categoryNameToHoverOn + "/?nc=nb\"]"));
+		WaitFor.elementToBeClickable(categoryName);
+		mouseHoverOn(categoryName);
+		Thread.sleep(3000);
+
+	}
+
+
 }
