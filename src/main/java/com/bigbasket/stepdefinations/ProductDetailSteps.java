@@ -1,7 +1,9 @@
 package com.bigbasket.stepdefinations;
 
-import com.bigbasket.base.Keyword;
+import static org.testng.Assert.assertTrue;
 
+import com.bigbasket.base.Keyword;
+import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ProductDetailPage;
 import com.bigbasket.pages.ProductSearchPage;
@@ -99,7 +101,7 @@ public class ProductDetailSteps {
 	public void verifyHoverFunctionalityWorks() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
-		productDetailPage.hoverOnImage();
+		// productDetailPage.hoverOnImage();
 		productDetailPage.verifyHoverFeatureWorks();
 	}
 
@@ -274,25 +276,77 @@ public class ProductDetailSteps {
 		productDetailPage.clickOnOfferIcon();
 	}
 
-	@Then("The user should able to click on amul word")
-	public void clickOnAmul() throws InterruptedException {
+	@Then("The user should able to click om {string} BrandName")
+	public void clickOnBrandName(String brandName) throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
-		productDetailPage.clickOnAmul();
+		productDetailPage.clickonBrandName(brandName);
 	}
 
 	@Then("The user should able to see only Amul brand product")
 	public void amulBrandProduct() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
-		productDetailPage.amulBrandProduct();
+		productDetailPage.amulbrandListBrandProduct();
 
 	}
+
 	@Then("The product list display with OFFER tag")
 	public void listDisplayWithOfferTag() throws InterruptedException {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.listDisplayWithOfferTag();
 	}
-
+	@Given("The User click on {string} btn")
+	public void clickOnTea(String itemName) {
+		HomePage page = new HomePage();
+		page.clickOnHeaderFoodItem(itemName);
+		
+	}
+	
+	@Then("The product should be display with Tea tag")
+	public void teaTag(){
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.teaBrandProduct();
+		
+	}
+	@Then("The product should be display with Exotic Fruits & Veggies tag")
+	public void clickOnExoticFruitsVeggies() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.ExoticFruitsVeggiesBrandProduct();
+		
+	}
+	@Then("The product should be display with Ghee tag")
+	public void clickOnGhee() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.greeBrandProduct();
+		
+	}
+	@Then("The product should be display with Nandini tag")
+	public void clickOnNandini() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.nandiniBrandProduct();
+		
+	}
+	
+	@When("The user Click on tea product")
+	public void clickOnTeaProduct() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.ClickonteaProduct();
+		
+	}
+	
+	@Given("User click on ShopBycatory menu item")
+	public void clickOnShopByCategory() throws InterruptedException {
+		ShopByCategorySteps shopByCategorySteps = new ShopByCategorySteps();
+		shopByCategorySteps.clickOnShopByCatgeoryMenuBeforeExpand();
+		shopByCategorySteps.clickOnCategory("fashion");
+		clickOnTeaProduct();	
+	}
+	@Then("The user should able to navigate on PIP Page")
+	public void verifyPIPpage() {
+		ProductDetailPage productDetailPage = new ProductDetailPage();
+		productDetailPage.switchWindowOnproductDetailPage();
+		productDetailPage.verifyPIPpage();
+	}
 }

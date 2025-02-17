@@ -1,10 +1,12 @@
 package com.bigbasket.stepdefinations;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.Locator;
+import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ShopByCategoryPage;
 
@@ -449,6 +451,75 @@ public class ShopByCategorySteps {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.getRatingOnProductList();
     	categoryPage.verifyProductRatingsOnProductDescritpion(ratingSelected);
+    }
+
+    @And("User mouse hover on {string} category")
+    public void mouseHoverOnSpecificElement(String categoryNameToHoverOn) throws InterruptedException {
+
+    	Keyword keyword=new Keyword();
+    	categoryNameToHoverOn=categoryNameToHoverOn.toLowerCase();
+    	keyword.mouseHoverOnYourCategory(categoryNameToHoverOn);
+
+    }
+    
+    @And("User mouse hover on {string} subcategory")
+    public void mouseHoverOnSubCategory(String subcategoryNameToMouseHoverOn) throws InterruptedException {
+    	Keyword keyword=new Keyword();
+
+    	subcategoryNameToMouseHoverOn=subcategoryNameToMouseHoverOn.toLowerCase();
+    	keyword.mouseHoverOnYourSubCategory(subcategoryNameToMouseHoverOn);
+
+    }
+
+    @And("then hover on {string} and click on it")
+    public void clickOnChildOfSubCatgeory(String childCategoryName) {
+    	childCategoryName=childCategoryName.toLowerCase();
+    	WebElement childCategory= Keyword.driver.findElement(By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul[3]/li/a[@href=\"/pc/fruits-vegetables/fresh-fruits/"+childCategoryName+"/?nc=nb\"]"));
+    	WaitFor.elementToBeClickable(childCategory);
+    	childCategory.click();
+    }
+
+    @Then("User should see product list of having {string} only")
+    public void verifyPorductListHavingChildCatgeoryProductsOnly(String childCategorySelected) throws InterruptedException {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	scrollDownUntillProductsLoaded();
+    	categoryPage.getProductListAfterClickOnCategory();
+    	categoryPage.verifyProductDescriptionHavingCatgeoryProducts(childCategorySelected);
+    }
+
+    @Then("{string} filter button should be displayed")
+    public void relevanceFilterIsDisplayed(String relevanceFilter) {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.verifyRelevanceFiltersDisplayed(relevanceFilter);
+    }
+    @And("I click on {string} button")
+    public void clickOnRelevanceButton(String relevanceButton) throws InterruptedException {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.clickOnRelevanceButton();
+    }
+
+    @Then("User should see the sorting options available")
+    public void relevanceFilterIsClickable() {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.verifyRelevanceFilAdnSortingOptionsAvaialble();
+    }
+
+    @And("I click on {string} relevance option")
+    public void clickOnYourRelevenaceOption(String relevanceOptionSelected) throws InterruptedException {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.clickOnAnyRelevanceOption(relevanceOptionSelected);
+    }
+
+    @Then("User should see product list sorting from low to high price")
+    public void verifyProductListPriceSortingLowToHigh() {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.verifyProductListPriceIsSortingFromLowToHigh();
+    }
+
+    @Then("User should see product list sorting from high to low price")
+    public void verifyProductListPriceSortingHighToLow() {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.verifyProductListPriceIsSortingFromHighToLow();
     }
 
 

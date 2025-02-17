@@ -2,13 +2,18 @@ package com.bigbasket.pages;
 
 import static org.testng.Assert.assertTrue;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import com.bigbasket.base.WaitFor;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -467,7 +472,6 @@ public class HomePage {
 		Thread.sleep(1000);
 
 	}
-
 	public void verifyShopByCategoryCollapsesOnClickAfterExapands() {
 		String classNameAfterExapnd = shopByCategoryMenu.getAttribute("class");
 		clickOnShopByCategoryMenu();
@@ -510,10 +514,12 @@ public class HomePage {
 
 	public void clickOnShopByCategoryMenu() {
 		keyword.clickOn(shopByCategoryMenu);
+		
 	}
 
 	public void clickOnCategory(String categoryNameInLowerCaseOnly) throws InterruptedException {
 		keyword.clickOnYourCategory(categoryNameInLowerCaseOnly);
+	
 
 	}
 
@@ -521,4 +527,46 @@ public class HomePage {
 		String urlAfterNavigationToHome = Keyword.driver.getCurrentUrl();
 		assertTrue(urlAfterNavigationToHome.equals("https://www.bigbasket.com/"));
 	}
+
+	public void clickOnHeaderFoodItem(String itemName) {
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
+		WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
+	    WebElement itemname = wait1.until(ExpectedConditions.visibilityOfElementLocated(
+	    		By.xpath("//span[@class='TopNav___StyledMotionSpan-sc-1vxbycn-2 gcPbqq' and text()='" + itemName + "']")));
+	    itemname.click();
+	    itemName = itemName.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
+	    System.out.println("I clicked on: "+ itemName);
+	    WaitFor.untilUrlLoad(itemName.toLowerCase());
+	    String url = Keyword.driver.getCurrentUrl();
+		assertTrue(url.contains(itemName.toLowerCase()));
+	    
+	}
+    
+	public void sendProductname(String productName) throws InterruptedException {
+	    searchText.clear(); // Clear the input field before entering new text
+	    searchText.sendKeys(productName);  // Now using dynamic product name
+	    searchText.sendKeys(Keys.ENTER);
+	    WaitFor.untilUrlLoad("https://www.bigbasket.com/ps");
+	    Thread.sleep(1000);
+	}
+
+	public void verifySearchSuggestionContainsInputLocationData(String selectLocationInputData) {
+
+		List<WebElement> selectLocationSuggestionsList=Keyword.driver.findElements(By.xpath("//span[@class=\"Label-sc-15v1nk5-0 AddressDropdown___StyledLabel5-sc-i4k67t-10 gJxZPQ gutzfG\"]"));
+	
+		SoftAssert softlyassert=new SoftAssert();
+		for(WebElement selectLocationSuggestion:selectLocationSuggestionsList)
+		{
+			String selectLocationSuggestionName=selectLocationSuggestion.getText();
+			softlyassert.assertTrue(selectLocationSuggestionName.contains(selectLocationInputData));
+		}
+		softlyassert.assertAll();
+	}
+
+	public void enterTextIntoSelectLocation(String location) throws InterruptedException {
+		WebElement selectLocation=Keyword.driver.findElement(By.xpath("(//input[@placeholder=\"Search for area or street name\"])[1]"));
+		Keyword.sendkeys(selectLocation, location);
+		Thread.sleep(3000);
+	}
+
 }
