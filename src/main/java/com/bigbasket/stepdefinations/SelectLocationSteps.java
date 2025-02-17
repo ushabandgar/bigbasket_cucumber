@@ -1,8 +1,15 @@
 package com.bigbasket.stepdefinations;
 
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.bigbasket.base.Keyword;
+import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -155,12 +162,11 @@ public class SelectLocationSteps {
 
 	}
 
-	
 	@And("User enter {string} into search for area  text box")
 	public void user_enter_into_search_for_area_textbox(String string) throws InterruptedException {
 		HomePage homepage = new HomePage();
 		homepage.enterLargeNumberOnlyIntoSearchForAreaTextBox();
-	    
+
 	}
 
 	@Then("{string} result message should be display")
@@ -169,30 +175,50 @@ public class SelectLocationSteps {
 		homepage.verifyWhenEnterOnlyLargeNumberIntoSearchForAreaTextBox();
 
 	}
+
 	@And("User enter {string} into text box")
 	public void user_enter_into_Textbox(String string) throws InterruptedException {
 		HomePage homepage = new HomePage();
 		homepage.enterInvalidSpecialCharacterOnlyIntoSearchForAreaTextBox();
-	    
+
 	}
-	
+
 	@Then("{string} result message should be display on page")
 	public void result_message_should_be_display_on_page(String string) {
 		HomePage homepage = new HomePage();
 		homepage.verifyWhenEnterInvalidSpecialCharacterOnlyIntoSearchForAreatTextBox();
-	   
+
 	}
+
 	@And("User enter {string} into select Location bar")
 	public void user_enter_into_select_Location_bar(String hjfhfjwehjdwjdsooudiqwufiyf) throws InterruptedException {
 		HomePage homepage = new HomePage();
-		homepage.enterExtremelyLargeInvalidTextIntoearchForAreaTextBox(); 
-	    
+		homepage.enterExtremelyLargeInvalidTextIntoearchForAreaTextBox();
+
 	}
+
 	@Then("{string} result message should be displayed on page")
 	public void result_message_should_be_displayed_on_page(String hjfhfjwehjdwjdsooudiqwufiyf) {
 		HomePage homepage = new HomePage();
 		homepage.verifyWhenEnterExtremelyLargeInvalidTextIntoearchForAreaTextBox();
-	    
+
+	}
+
+	@And("User enter the following locations using DataTable")
+	public void userEnterLocation(DataTable locationsTable) throws InterruptedException {
+		List<List<String>> locations = locationsTable.cells();
+		System.out.println(locations.get(0).get(0));
+        Keyword.driver.findElement(By.xpath
+        		("(//input[@placeholder=\"Search for area or street name\"])[1]"))
+        .sendKeys(locations.get(0).get(0));	
+		Thread.sleep(3000);
+		
+	}
+
+	@Then("Search Suggestions result should contains {string}")
+	public void verifySearchSuggestionContainsInputData(String SelectLocationInputData) {
+		HomePage homepage = new HomePage();
+		homepage.verifySearchSuggestionContainsInputLocationData(SelectLocationInputData);
 	}
 
 }

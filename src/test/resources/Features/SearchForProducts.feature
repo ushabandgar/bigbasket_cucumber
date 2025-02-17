@@ -40,7 +40,8 @@ Feature: This feature file test Search For Produtcs functionality
     When User enter text "Tomato" into search text box
     And Click on clear botton
     Then Verify search text box should be clear
-
+    
+	@todays
   Scenario: verify when user enter Speacial Character only "!@#" into Search Bar
     Given After enter url, User on HomePage
     When User enter special character only into search text box

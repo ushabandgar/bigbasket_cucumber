@@ -52,6 +52,8 @@ public class Keyword {
 
 	public void clickOn(WebElement element) {
 		element.click();
+		System.out.println("Clicked on: "+element.getText());
+
 	}
 
 	public void closeBrowser() {
