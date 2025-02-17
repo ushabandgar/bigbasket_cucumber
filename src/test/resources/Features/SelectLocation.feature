@@ -46,7 +46,7 @@ Feature: This feature file test Select Location functionality
     And User enter "Mumbai" into textBox
     And User click on clear button
     Then "Mumbai" text should be remove from textbox
-    
+
   Scenario: Verify when user enter speacial character "!@#$%^&*" only into text box
     Given After enter url, User on HomePage
     When User click on select location bar
@@ -70,3 +70,12 @@ Feature: This feature file test Select Location functionality
     When User click on select location bar
     And User enter "hjfhfjwehjdwjdsooudiqwufiyf" into select Location bar
     Then "Sorry,we dont deliver in this location" result message should be displayed on page
+
+ 
+  Scenario Outline: Verify Select location with different inputs
+    Given After enter url, User on HomePage
+    When User click on select location bar
+    And User enter the following locations using DataTable
+        |wakad|
+        |warje|
+

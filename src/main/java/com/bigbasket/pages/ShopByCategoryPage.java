@@ -93,7 +93,7 @@ public class ShopByCategoryPage {
 	@FindBy(xpath = "//h3[@class=\"block m-0 line-clamp-2 font-regular text-base leading-sm text-darkOnyx-800 pt-0.5 h-full\"]")
 	List<WebElement> productDescriptionFromProductList;
 
-	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 FilterByRating___StyledLabel-sc-17wxy9s-0 gJxZPQ jKZfbM\"]")
+	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 FilterByRating___StyledLabel2-sc-17wxy9s-1 gJxZPQ jNeRcZ group\"]")
 	WebElement productRating;
 
 	@FindBy(css = "footer[class=\"sm:hidden w-full pt-13 mt-6 text-md text-silverSurfer-300 bg-darkOnyx-900 footer\"]")
@@ -615,6 +615,7 @@ public class ShopByCategoryPage {
 	}
 
 	public List<String> getRatingOnProductList() throws InterruptedException {
+		Thread.sleep(3000);
 		keyword.scrollDownTillSpecificElement(productRating);
 		WaitFor.visibilityOfElements(productDescriptionFromProductList);
 		ArrayList<String> productRatings = new ArrayList<String>();

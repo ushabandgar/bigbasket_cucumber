@@ -1,4 +1,4 @@
-@today
+
 Feature: Search Functionality
 
   Scenario Outline: Verify search with different inputs
