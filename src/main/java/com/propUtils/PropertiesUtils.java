@@ -12,10 +12,9 @@ package com.propUtils;
 		
 		public static String getProperty(String filepath,String key) throws IOException {
 			FileInputStream fis;
-			String base=System.getProperty("user.dir");//THIS IS SYSTEM PROPERTIES
-			System.out.println(base);//C:\Users\LENOVO\eclipse-workspace\frameworkJarvishMavenProject
+			String base=System.getProperty("user.dir");
+			System.out.println(base);
 			fis =new FileInputStream(filepath);
-			
 			Properties prop=new Properties();
 			prop.load(fis);
 			String value=prop.getProperty(key);
