@@ -7,13 +7,15 @@ import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import com.bigbasket.base.Keyword;
+import com.propUtils.App;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 
-public class Hooks1 {
+public class HooksForCBT {
+	
 	static ThreadLocal<String> browser = new ThreadLocal<String>();
-	//private static final Logger LOG = LogManager.getLogger(Hooks.class);
 	Keyword keyword = new Keyword();
 
 	@Parameters("browser-name")
@@ -27,7 +29,7 @@ public class Hooks1 {
 	@Before
 	public void setUp() throws Exception {
 		keyword.openBrowser(browser.get());
-		keyword.launchUrl("https://www.bigbasket.com");
+		keyword.launchUrl(App.getUrl("qa"));
 		keyword.maximizeBrowser();
 	}
 
@@ -35,7 +37,7 @@ public class Hooks1 {
 	public void tearDown() {
 		keyword.quitBrowser();
 		System.out.println("close browser");
-		//LOG.info("close browser");
+		
 	}
 
 }
