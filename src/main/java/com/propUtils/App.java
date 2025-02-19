@@ -15,5 +15,10 @@ public class App {
 		String base=System.getProperty("user.dir");	
 		return PropertiesUtils.getProperty(base+filepath,env+".url");
 	}
+	 public static void main(String[] args) throws IOException {
+		 getBrowserName(); 
+		
+	}
+	
 
 }

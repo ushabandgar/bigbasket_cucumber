@@ -10,10 +10,8 @@ package com.propUtils;
 	public class PropertiesUtils {
 		
 		
-		public static String getProperty(String filepath,String key) throws IOException {
+		public static String  getProperty(String filepath,String key) throws IOException {
 			FileInputStream fis;
-			String base=System.getProperty("user.dir");
-			System.out.println(base);
 			fis =new FileInputStream(filepath);
 			Properties prop=new Properties();
 			prop.load(fis);

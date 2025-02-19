@@ -13,9 +13,9 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 
-public class Hooks1 {
+public class HooksForCBT {
+	
 	static ThreadLocal<String> browser = new ThreadLocal<String>();
-	private static final Logger LOG = LogManager.getLogger(Hooks.class);
 	Keyword keyword = new Keyword();
 
 	@Parameters("browser-name")
@@ -28,7 +28,7 @@ public class Hooks1 {
 
 	@Before
 	public void setUp() throws Exception {
-		keyword.openBrowser(App.getBrowserName());
+		keyword.openBrowser(browser.get());
 		keyword.launchUrl(App.getUrl("qa"));
 		keyword.maximizeBrowser();
 	}
@@ -36,7 +36,8 @@ public class Hooks1 {
 	@After
 	public void tearDown() {
 		keyword.quitBrowser();
-		LOG.info("close browser");
+		System.out.println("close browser");
+		
 	}
 
 }
