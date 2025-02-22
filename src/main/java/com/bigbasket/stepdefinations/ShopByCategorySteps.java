@@ -521,6 +521,17 @@ public class ShopByCategorySteps {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.verifyProductListPriceIsSortingFromHighToLow();
     }
+    
+    @And("I click on {string} icon")
+    public void clickOnSaveForLaterButton(String SaveForLater) throws InterruptedException {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.clickOnSaveForLater();
+    }
 
+    @Then("I should see opening login or signup popup")
+    public void verifyLoginOrSignupPopupOpens() {
+    	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
+    	categoryPage.verifyLoginTextAfterSaveForLaterClick();
+    }
 
 }

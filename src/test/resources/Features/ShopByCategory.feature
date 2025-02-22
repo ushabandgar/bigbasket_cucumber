@@ -382,3 +382,10 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Relevance" button
     And I click on "Price - High to Low" relevance option
     Then User should see product list sorting from high to low price
+    
+    Scenario: Verify that on click of Save For Later opening login popup
+    Given After entering url, User is on HomePage
+    When I click on SHOP BY CATEGORY menu
+    And I click on "fashion" category
+    And I click on "Save For Later" icon
+    Then I should see opening login or signup popup
