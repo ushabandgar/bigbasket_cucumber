@@ -2,6 +2,8 @@ package com.bigbasket.stepdefinations;
 
 import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
+
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
@@ -17,7 +19,12 @@ public class ProductDetailSteps {
 	@Given("The user is on the homepage")
 	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
 		Keyword keyword = new Keyword();
-		keyword.openBrowser("Firefox");
+		try {
+			keyword.openBrowser("Firefox");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		keyword.launchUrl("https://www.bigbasket.com/");
 		keyword.maximizeBrowser();
 	}
