@@ -1,5 +1,7 @@
 package com.bigbasket.stepdefinations;
 
+import java.io.IOException;
+
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 
@@ -10,7 +12,7 @@ import io.cucumber.java.en.When;
 
 public class SearchForProductsSteps {
 	@Given("Browser launched")
-	public void browserLaunchedAndUrlIsLoadedSuccessfully() {
+	public void browserLaunchedAndUrlIsLoadedSuccessfully() throws IOException {
 		Keyword keyword = new Keyword();
 		keyword.openBrowser("Firefox");
 

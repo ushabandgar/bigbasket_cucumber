@@ -1,5 +1,7 @@
 package com.bigbasket.stepdefinations;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -20,7 +22,7 @@ public class ShopByCategorySteps {
 	String classNameBeforeHideFilter, classNameAfterHideFilter;
 
 	@Given("Browser is launched and maximized")
-	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() {
+	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() throws IOException {
 		Keyword keyword = new Keyword();
 		keyword.openBrowser("firefox");
 		keyword.maximizeBrowser();

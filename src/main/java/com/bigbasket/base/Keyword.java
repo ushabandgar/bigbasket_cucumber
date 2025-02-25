@@ -1,5 +1,8 @@
 package com.bigbasket.base;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -17,33 +21,46 @@ import org.testng.annotations.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.bigbasket.pages.HomePage;
+import com.propUtils.App;
 
 public class Keyword {
 
 	public static RemoteWebDriver driver;
 
     private static final Logger LOG = LogManager.getLogger(Keyword.class);
-	public void openBrowser(@Optional String browserName) {
+	public void openBrowser(@Optional String browserName) throws IOException {
+		boolean isOnGrid=true;
+		if(isOnGrid) {
+			String hubUrl=" http://192.168.1.6:4444";
+			ChromeOptions option=new ChromeOptions();
+			option.addArguments("--start-maximized");
+			driver=new RemoteWebDriver(new URL(hubUrl),option);
+			
+		}else {
 		if (browserName == null) {
-			System.out.println("Launching Chrome by default");
-			driver = new ChromeDriver();
-		} else if (browserName.equalsIgnoreCase("Chrome")) {
-			driver = new ChromeDriver();
-		} else if (browserName.equalsIgnoreCase("Firefox")) {
-			driver = new FirefoxDriver();
-		} else if (browserName.equalsIgnoreCase("Safari")) {
-			driver = new SafariDriver();
-		} else if (browserName.equalsIgnoreCase("edge")) {
-			driver = new EdgeDriver();
-		} else {
+				System.out.println("Launching Chrome by default");
+				driver = new ChromeDriver();
+			} else if (browserName.equalsIgnoreCase("Chrome")) {
+				driver = new ChromeDriver();
+			} else if (browserName.equalsIgnoreCase("Firefox")) {
+				driver = new FirefoxDriver();
+			} else if (browserName.equalsIgnoreCase("Safari")) {
+				driver = new SafariDriver();
+			} else if (browserName.equalsIgnoreCase("edge")) {
+				driver = new EdgeDriver();
+			} else {
 
-			LOG.error("Invalid browser name");
-			//System.err.println("Invalid browser name");
+				LOG.error("Invalid browser name");
+				//System.err.println("Invalid browser name");
+			}
+			//System.out.println("Launched " + browserName + " browser");
+			LOG.info("Launched " + browserName + " browser");
 		}
-		//System.out.println("Launched " + browserName + " browser");
-		LOG.info("Launched " + browserName + " browser");
 
-	}
+			
+		}
+		
+	
 
 	public void launchUrl(String url) {
 		driver.get(url);

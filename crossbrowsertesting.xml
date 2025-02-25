@@ -5,7 +5,7 @@
 	<test name="Chrome Test">
 		<parameter name="browser-name" value="Chrome"></parameter>
 		<classes>
-			<class name="com.bigbasket.stepdefinations.Hooks1" />
+			<class name="com.bigbasket.stepdefinations.HooksForCBT" />
 			<class name="com.bigbasket.Runner.TestRunner"/>
 		</classes>
 	</test> <!-- Test -->
@@ -14,7 +14,7 @@
 	<test name="Firefox Test">
 		<parameter name="browser-name" value="Firefox"></parameter>
 		<classes>
-			<class name="com.bigbasket.stepdefinations.Hooks1" />
+			<class name="com.bigbasket.stepdefinations.HooksForCBT" />
 			<class name="com.bigbasket.Runner.TestRunner" />
 		</classes>
 	</test> <!-- Test -->
@@ -23,7 +23,7 @@
 	<test name="Edge Test">
 		<parameter name="browser-name" value="Edge"></parameter>
 		<classes>
-			<class name="com.bigbasket.stepdefinations.Hooks1" />
+			<class name="com.bigbasket.stepdefinations.HooksForCBT" />
 			<class name="com.bigbasket.Runner.TestRunner" />
 		</classes>
 	</test> <!-- Test -->
