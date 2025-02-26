@@ -23,7 +23,11 @@ public class Keyword {
 	public static RemoteWebDriver driver;
 
     private static final Logger LOG = LogManager.getLogger(Keyword.class);
-	public void openBrowser(@Optional String browserName) {
+	public void openBrowser(String browserName) {
+		 /*if (driver != null) {
+		        System.out.println("Browser already initialized.");
+		        return;
+		    }*/
 		if (browserName == null) {
 			System.out.println("Launching Chrome by default");
 			driver = new ChromeDriver();
@@ -38,9 +42,7 @@ public class Keyword {
 		} else {
 
 			LOG.error("Invalid browser name");
-			//System.err.println("Invalid browser name");
 		}
-		//System.out.println("Launched " + browserName + " browser");
 		LOG.info("Launched " + browserName + " browser");
 
 	}
