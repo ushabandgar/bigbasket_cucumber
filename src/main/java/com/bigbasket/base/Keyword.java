@@ -31,13 +31,13 @@ public class Keyword {
     
 	public void openBrowser(@Optional String browserName) throws IOException {
 		boolean isOnGrid=true;
-		if(isOnGrid) {
-			String hubUrl=" http://192.168.1.6:4444";
-			ChromeOptions option=new ChromeOptions();
-			option.addArguments("--start-maximized");
-			driver=new RemoteWebDriver(new URL(hubUrl),option);
-			
-		}else {
+//		if(isOnGrid) {
+//			String hubUrl=" http://192.168.1.6:4444";
+//			ChromeOptions option=new ChromeOptions();
+//			option.addArguments("--start-maximized");
+//			driver=new RemoteWebDriver(new URL(hubUrl),option);
+//			
+//		}else {
 		if (browserName == null) {
 				System.out.println("Launching Chrome by default");
 				driver = new ChromeDriver();
@@ -57,7 +57,7 @@ public class Keyword {
 			//System.out.println("Launched " + browserName + " browser");
 			LOG.info("Launched " + browserName + " browser");
 		}
-		}
+		//}
 		
 	
 
