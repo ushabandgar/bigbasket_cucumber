@@ -21,27 +21,6 @@ public class ShopByCategorySteps {
 	int countAfterFilter;
 	String classNameBeforeHideFilter, classNameAfterHideFilter;
 
-	@Given("Browser is launched and maximized")
-	public void browserIsLaunchedAndUrlIsLoadedSuccessfully() throws IOException {
-		Keyword keyword = new Keyword();
-		keyword.openBrowser("firefox");
-		keyword.maximizeBrowser();
-
-	}
-
-	@And("close the browser")
-	public void closeBrowser() {
-		Keyword.driver.close();
-	}
-
-	@When("After entering url, User is on HomePage")
-	public void userIsOnHomePage() {
-		Keyword keyword = new Keyword();
-		keyword.launchUrl("https://www.bigbasket.com/");
-		keyword.maximizeBrowser();
-
-	}
-
 	@Then("SHOP BY CATEGORY should be displayed on HomePage")
 	public void verifyShopByCategoryShouldBeDisplayedOnHomePage() {
 		HomePage homepage = new HomePage();

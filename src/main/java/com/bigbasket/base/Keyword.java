@@ -28,6 +28,7 @@ public class Keyword {
 	public static RemoteWebDriver driver;
 
     private static final Logger LOG = LogManager.getLogger(Keyword.class);
+    
 	public void openBrowser(@Optional String browserName) throws IOException {
 		boolean isOnGrid=true;
 		if(isOnGrid) {
@@ -56,8 +57,6 @@ public class Keyword {
 			//System.out.println("Launched " + browserName + " browser");
 			LOG.info("Launched " + browserName + " browser");
 		}
-
-			
 		}
 		
 	
