@@ -58,8 +58,6 @@ public class Keyword {
 			LOG.info("Launched " + browserName + " browser");
 		}
 		//}
-		
-	
 
 	public void launchUrl(String url) {
 		driver.get(url);
