@@ -16,12 +16,11 @@ public class Hooks {
 	@Before
 	public void setUp() throws Exception {
 		keyword.openBrowser(App.getBrowserName());
+		System.out.println("launching browser from proeprties file");
 		keyword.launchUrl(App.getUrl("qa"));
 		keyword.maximizeBrowser();
 	}
 	
-	
-
 	@After
 	public void tearDown() {
 		keyword.quitBrowser();
