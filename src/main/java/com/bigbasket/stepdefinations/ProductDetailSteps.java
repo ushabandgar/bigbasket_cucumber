@@ -304,52 +304,58 @@ public class ProductDetailSteps {
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.listDisplayWithOfferTag();
 	}
+
 	@Given("The User click on {string} btn")
 	public void clickOnTea(String itemName) {
 		HomePage page = new HomePage();
 		page.clickOnHeaderFoodItem(itemName);
-		
+
 	}
-	
+
 	@Then("The product should be display with Tea tag")
-	public void teaTag(){
+	public void teaTag() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.teaBrandProduct();
-		
+
 	}
+
 	@Then("The product should be display with Exotic Fruits & Veggies tag")
 	public void clickOnExoticFruitsVeggies() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.ExoticFruitsVeggiesBrandProduct();
-		
+
 	}
+
 	@Then("The product should be display with Ghee tag")
 	public void clickOnGhee() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.greeBrandProduct();
-		
+
 	}
+
 	@Then("The product should be display with Nandini tag")
 	public void clickOnNandini() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.nandiniBrandProduct();
-		
+
 	}
-	
+
 	@When("The user Click on tea product")
 	public void clickOnTeaProduct() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
 		productDetailPage.ClickonteaProduct();
-		
+
 	}
-	
+
 	@Given("User click on ShopBycatory menu item")
 	public void clickOnShopByCategory() throws InterruptedException {
 		ShopByCategorySteps shopByCategorySteps = new ShopByCategorySteps();
 		shopByCategorySteps.clickOnShopByCatgeoryMenuBeforeExpand();
 		shopByCategorySteps.clickOnCategory("fashion");
-		clickOnTeaProduct();	
+		Thread.sleep(1000);
+		clickOnTeaProduct();
 	}
+
 	@Then("The user should able to navigate on PIP Page")
 	public void verifyPIPpage() {
 		ProductDetailPage productDetailPage = new ProductDetailPage();
