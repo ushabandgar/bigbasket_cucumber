@@ -12,8 +12,9 @@ Features:
 8. Continuous Integration (CI/CD) Support – Compatible with Jenkins and GitHub Actions for automated test execution.
 
 Runner Class: The Runner Class is used to execute Cucumber test cases. It integrates with JUnit and specifies the location of feature files and step definitions.
-Explanation: @RunWith(Cucumber.class) – Executes tests with Cucumber.
-             features – Specifies the path of feature files.
-             glue – Defines the step definition package.
-             plugin – Generates test execution reports.
+Explanation:
+@RunWith(Cucumber.class) – Executes tests with Cucumber.
+features – Specifies the path of feature files.
+glue – Defines the step definition package.
+plugin – Generates test execution reports.
 
