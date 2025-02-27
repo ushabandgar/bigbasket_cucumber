@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -105,6 +103,12 @@ public class ShopByCategoryPage {
 	@FindBy(css = "span[class=\"Label-sc-15v1nk5-0 ListSorter___StyledLabel-sc-1btacag-1 gJxZPQ hneWsn\"]")
 	WebElement relevanceFilters;
 
+	@FindBy(xpath="//button[@class=\"Button-sc-1dr2sn8-0 CtaButtons___StyledButton-sc-1tlmn1r-0 hlIKGt jWnUIa\"]")
+	WebElement SaveForLaterButtonOnCategoryPage;
+	
+	@FindBy(xpath="//span[@class=\"Label-sc-15v1nk5-0 gJxZPQ text-lg leading-xxl font-bold text-silverSurfer-100\"]")
+	WebElement LoginOrSignUpTextFromPopup;
+	
 	String textbeforeclick;
 	String brandName;
 	String TextBeforeClickOnHideFilter;
@@ -724,4 +728,19 @@ public class ShopByCategoryPage {
 			softlyassert.assertAll();
 		}
 	}
+
+	public void clickOnSaveForLater() throws InterruptedException {
+        keyword.mouseScrollDown();
+		SaveForLaterButtonOnCategoryPage.click();
+		System.out.println("Clicked on Save For Later");
+	}
+
+	public void verifyLoginTextAfterSaveForLaterClick() {
+		
+		String LoginOrSignupText=LoginOrSignUpTextFromPopup.getText();
+		String expectedAfterSaveForLaterClick="Login/ Sign up";
+		Assert.assertTrue(LoginOrSignupText.equals(expectedAfterSaveForLaterClick));
+	    System.out.println("Opened Logon or signup popup");
+	}
+	
 }
