@@ -8,8 +8,7 @@ Features:
 4. Keyword-driven framework for easy test creation and management.
 5. Maven as the build tool for dependency management and project structure.
 6. Cross-Browser Testing – Supports Chrome, Firefox, Edge, etc.
-7. Test Reporting & Logging – Integrated with Extent Reports and Log4j for better debugging.
-8. Continuous Integration (CI/CD) Support – Compatible with Jenkins and GitHub Actions for automated test execution.
+7. Continuous Integration (CI/CD) Support – Compatible with Jenkins and GitHub Actions for automated test execution.
 
 Runner Class: The Runner Class is used to execute Cucumber test cases. It integrates with JUnit and specifies the location of feature files and step definitions.
 Explanation:
