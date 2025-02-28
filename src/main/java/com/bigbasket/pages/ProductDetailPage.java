@@ -171,6 +171,7 @@ public class ProductDetailPage {
 		for (int i = 0; i <= 4; i++) {
 			WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
 			String imageSelector = "#thumb-" + i;
+			Thread.sleep(1000);
 			List<WebElement> productImages = WaitFor
 					.visibilityOfElements(Keyword.driver.findElements(By.cssSelector(imageSelector)));
 			for (WebElement image : productImages) {
@@ -204,9 +205,10 @@ public class ProductDetailPage {
 		assertEquals(actualpacksizePrice, expectedPriceValue, "Price does not match for the pack size");
 	}
 
-	public void verifyProductAddedToTheBasket(){
+	public void verifyProductAddedToTheBasket() throws InterruptedException{
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
+		Thread.sleep(1000);
 		AddToBasket.click();
 		WaitFor.elementTobeVisible(ConfirmationMsg);
 		String confirmationMsg = ConfirmationMsg.getText();
@@ -277,7 +279,7 @@ public class ProductDetailPage {
 	}
 
 	public void saveProductForLater() throws InterruptedException {
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		WaitFor.visibilityOfElement(SaveForLaterBtn);
 		SaveForLaterBtn.click();
 		WaitFor.visibilityOfElement(LoginSignup);
@@ -418,10 +420,13 @@ public class ProductDetailPage {
 
 	public void clickonBrandName(String brandName) throws InterruptedException {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
+		Thread.sleep(1000);
 		WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
-		WebElement brandname = wait1.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath("//a[contains(@class, 'Description___StyledLink') and contains(text(), '" + brandName + "')]")));
-		brandname.click();
+		WebElement brandElement = wait1.until(ExpectedConditions.visibilityOfElementLocated(
+			        By.xpath("//a[contains(@class, 'Description___StyledLink') and contains(text(), '" + brandName + "')]")
+			    )
+			);
+		brandElement.click();
 		brandName = brandName.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
 		System.out.println("I click on: " + brandName);
 		Thread.sleep(2000);
