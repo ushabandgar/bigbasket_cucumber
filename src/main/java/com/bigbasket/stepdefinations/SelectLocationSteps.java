@@ -25,14 +25,14 @@ public class SelectLocationSteps {
 	}
 
 	@When("User click on select location bar")
-	public void user_click_on_select_location_bar() throws InterruptedException {
+	public void user_click_on_select_location_bar() {
 		HomePage homepage = new HomePage();
 		homepage.clickonSelectLocationbar();
 
 	}
 
 	@When("User enter {string} into Search For Area TextBox")
-	public void user_enter_into_search_for_area_text_box(String string) throws InterruptedException {
+	public void user_enter_into_search_for_area_text_box(String string) {
 		HomePage homepage = new HomePage();
 		homepage.enterTextIntoSearchForAreaTextBox();
 
@@ -106,7 +106,7 @@ public class SelectLocationSteps {
 	}
 
 	@And("User enter {string} into search for area text box")
-	public void user_enter_into_search_for_area_text_Box(String Mum) throws InterruptedException {
+	public void user_enter_into_search_for_area_text_Box(String Mum)  {
 		HomePage homepage = new HomePage();
 		homepage.EnterPartialTextIntoSearchForAreaTextBox();
 
@@ -163,7 +163,7 @@ public class SelectLocationSteps {
 	}
 
 	@And("User enter {string} into search for area  text box")
-	public void user_enter_into_search_for_area_textbox(String string) throws InterruptedException {
+	public void user_enter_into_search_for_area_textbox(String string) {
 		HomePage homepage = new HomePage();
 		homepage.enterLargeNumberOnlyIntoSearchForAreaTextBox();
 
@@ -177,7 +177,7 @@ public class SelectLocationSteps {
 	}
 
 	@And("User enter {string} into text box")
-	public void user_enter_into_Textbox(String string) throws InterruptedException {
+	public void user_enter_into_Textbox(String string) {
 		HomePage homepage = new HomePage();
 		homepage.enterInvalidSpecialCharacterOnlyIntoSearchForAreaTextBox();
 
@@ -191,7 +191,7 @@ public class SelectLocationSteps {
 	}
 
 	@And("User enter {string} into select Location bar")
-	public void user_enter_into_select_Location_bar(String hjfhfjwehjdwjdsooudiqwufiyf) throws InterruptedException {
+	public void user_enter_into_select_Location_bar(String hjfhfjwehjdwjdsooudiqwufiyf) {
 		HomePage homepage = new HomePage();
 		homepage.enterExtremelyLargeInvalidTextIntoearchForAreaTextBox();
 

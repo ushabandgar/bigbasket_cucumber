@@ -11,23 +11,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class SearchForProductsSteps {
-	@Given("Browser launched")
-	public void browserLaunchedAndUrlIsLoadedSuccessfully() throws IOException {
-		Keyword keyword = new Keyword();
-		keyword.openBrowser("Firefox");
-
-	}
 
 	@And("close browser")
 	public void closeBrowser() {
 		Keyword.driver.close();
 
-	}
-
-	@When("After enter url, User on HomePage")
-	public void userOnHomePageOrNot() {
-		Keyword keyword = new Keyword();
-		keyword.launchUrl("https://www.bigbasket.com/");
 	}
 
 	@Then("SearchTextBox should be displayed on HomePage")
