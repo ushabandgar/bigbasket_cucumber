@@ -93,7 +93,7 @@ public class ProductDetailPage {
 
 	@FindBy(css = "div.owl-next")
 	WebElement next;
-	
+
 	@FindBy(css = "li.dDBqny h3.flex-col a")
 	List<WebElement> brandList;
 
@@ -160,12 +160,14 @@ public class ProductDetailPage {
 		System.out.println(currentUrl);
 		assertTrue(currentUrl.contains("https://www.bigbasket.com/pd/"));
 	}
+
 	public void verifyHoverFeatureWorks() {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		WaitFor.elementToBeClickable(productImage);
 		keyword.mouseHoverOn(productImage);
 		assertTrue(productImage.isDisplayed(), "Hover effect did not make the zoomed image visible.");
 	}
+
 	public void verifyclickFucntinalityOnProductImageGallaryOnebyOne() throws InterruptedException {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd/");
 		for (int i = 0; i <= 4; i++) {
@@ -205,7 +207,7 @@ public class ProductDetailPage {
 		assertEquals(actualpacksizePrice, expectedPriceValue, "Price does not match for the pack size");
 	}
 
-	public void verifyProductAddedToTheBasket() throws InterruptedException{
+	public void verifyProductAddedToTheBasket() throws InterruptedException {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
 		Thread.sleep(1000);
@@ -231,7 +233,7 @@ public class ProductDetailPage {
 				"The confirmation message is incorrect.");
 	}
 
-	public void verifyconfirmationMsgShouldBeAppere(){
+	public void verifyconfirmationMsgShouldBeAppere() {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		WaitFor.visibilityOfElement(AddToBasket);
 		AddToBasket.click();
@@ -286,15 +288,17 @@ public class ProductDetailPage {
 		System.out.println(LoginSignup.getText());
 
 	}
-    public void clickOnMediaIcons() throws InterruptedException {
-		//Thread.sleep(1000);
-    	WaitFor.visibilityOfElements(SocialMediaIcons);
+
+	public void clickOnMediaIcons() throws InterruptedException {
+		// Thread.sleep(1000);
+		WaitFor.visibilityOfElements(SocialMediaIcons);
 		for (WebElement icons : SocialMediaIcons) {
 			Thread.sleep(1000);
 			icons.click();
 			assertTrue(icons.isEnabled(), "Icons not clickable");
 		}
 	}
+
 	public void clickOnFacebookIcon() throws InterruptedException {
 		Thread.sleep(1000);
 		facebookIcon.click();
@@ -359,6 +363,7 @@ public class ProductDetailPage {
 		jse.executeScript("window.scrollBy(0,800)");
 		assertTrue(otherProductInfo.getText().contains("EAN Code: 8901262260091"));
 	}
+
 	public void clickOnOtherProductInfoIcons() throws InterruptedException {
 		WaitFor.visibilityOfElement(otherProductInfoIcons);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
@@ -422,10 +427,8 @@ public class ProductDetailPage {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
 		Thread.sleep(1000);
 		WebDriverWait wait1 = new WebDriverWait(Keyword.driver, Duration.ofSeconds(10));
-		WebElement brandElement = wait1.until(ExpectedConditions.visibilityOfElementLocated(
-			        By.xpath("//a[contains(@class, 'Description___StyledLink') and contains(text(), '" + brandName + "')]")
-			    )
-			);
+		WebElement brandElement = wait1.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//a[contains(@class, 'Description___StyledLink') and contains(text(), '" + brandName + "')]")));
 		brandElement.click();
 		brandName = brandName.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
 		System.out.println("I click on: " + brandName);
@@ -461,6 +464,7 @@ public class ProductDetailPage {
 		softAssert.assertAll();
 
 	}
+
 	public void ExoticFruitsVeggiesBrandProduct() {
 		WaitFor.untilUrlLoad("exotic-fruits-veggies");
 		WaitFor.visibilityOfElement(footerSection);
@@ -481,6 +485,7 @@ public class ProductDetailPage {
 		softAssert.assertTrue(freshoFound, "Not found fresho! brand products!");
 		softAssert.assertAll();
 	}
+
 	public void ClickonteaProduct() {
 		WaitFor.visibilityOfElement(firstProduct);
 		firstProduct.click();
@@ -493,19 +498,26 @@ public class ProductDetailPage {
 		WaitFor.visibilityOfElements(brandList);
 
 		SoftAssert softAssert = new SoftAssert();
-		boolean gheeFound = false;
+//		boolean gheeFound = false;
+//		for (WebElement list : brandList) {
+//			String brandLists = list.getText();
+//			System.out.println(brandLists);
+//
+//			if (brandLists.contains("Ghee")) {
+//				gheeFound = true;
+//				break;
+//			}
+//		}
+//		softAssert.assertTrue(gheeFound, "Not found Ghee brand products!");
+//		softAssert.assertAll();
 		for (WebElement list : brandList) {
 			String brandLists = list.getText();
 			System.out.println(brandLists);
-
-			if (brandLists.contains("Ghee")) {
-				gheeFound = true;
-				break;
-			}
+			assertTrue(list.getText().contains("Ghee"));
 		}
-		softAssert.assertTrue(gheeFound, "Not found Ghee brand products!");
-		softAssert.assertAll();
 		
+		
+
 	}
 
 	public void nandiniBrandProduct() {
@@ -528,11 +540,12 @@ public class ProductDetailPage {
 		softAssert.assertTrue(brandNameFound, "Not found Nandini brand products!");
 		softAssert.assertAll();
 	}
+
 	public void verifyPIPpage() {
 		WaitFor.untilUrlLoad("https://www.bigbasket.com/pd");
 		String currentURL = Keyword.driver.getCurrentUrl();
 		System.out.println("Current Title: " + currentURL);
-		assertTrue(currentURL.contains("pd"));	
+		assertTrue(currentURL.contains("pd"));
 	}
 
 }
