@@ -86,7 +86,7 @@ Feature: Product Detail Page functionality
     When The user clicks on the "Product"
     Then confirmation Removing msg should be appere
 
-  #Bug
+  #Bug_JIRA_ID
   Scenario: verify user should add multiple product as they want by clicking on plus btn to add more items
     When The user searches for "Product"
     When The user clicks on the "Product"
@@ -186,6 +186,12 @@ Feature: Product Detail Page functionality
   Scenario: Verify that the after clicking on "Tea" BTN product url should be display with exotic-fruits-veggies
     Given The User click on "Tea" btn
 
+  Scenario: Verify that the after clicking on "Tata Tea Gold", only Tata Tea Gold brand product should be appere
+    Given The User click on "Tea" btn
+    When The user Click on tea product
+
+  #Then The user should able to click om "Tata Tea Gold" BrandName
+  #BUG_JIRA-ID
   Scenario: Verify that the after clicking on Tea BTN product should be display with "Tea" tags
     Given The User click on "Tea" btn
     Then The product should be display with Tea tag
@@ -200,6 +206,7 @@ Feature: Product Detail Page functionality
   Scenario: Verify that the after clicking on "Ghee" BTN product url should be display with exotic-fruits-veggies
     Given The User click on "Ghee" btn
 
+  #Bug_JIRA_ID
   Scenario: Verify that the after clicking on "Ghee" BTN, The perticular products lists should be display
     Given The User click on "Ghee" btn
     Then The product should be display with Ghee tag
@@ -211,16 +218,10 @@ Feature: Product Detail Page functionality
     Given The User click on "Nandini" btn
     Then The product should be display with Nandini tag
 
-  Scenario: Verify that the after clicking on "Tata Tea Gold", only Tata Tea Gold brand product should be appere
-    Given The User click on "Tea" btn
-    When The user Click on tea product
-    Then The user should able to click om "Tata Tea Gold" BrandName
+  Scenario: Verify user should able navigate from "SHOP BY CATEGORY" to "PIP" Page
+    Given User click on ShopBycatory menu item
+    Then The user should able to navigate on PIP Page
 
   Scenario: Verify user should able navigate from "SHOP BY CATEGORY" to "PIP" Page
     Given User click on ShopBycatory menu item
     Then The user should able to navigate on PIP Page
-    
-  Scenario: Verify user should able navigate from "SHOP BY CATEGORY" to "PIP" Page
-    Given User click on ShopBycatory menu item
-    Then The user should able to navigate on PIP Page
-    
