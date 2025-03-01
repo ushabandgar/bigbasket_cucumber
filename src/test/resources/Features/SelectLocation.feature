@@ -9,7 +9,7 @@ Feature: This feature file test Select Location functionality
     When User click on select location bar
     And User enter "Pune" into Search For Area TextBox
     Then verify User can able to enter text into Search For Area TextBox
-@todays1
+
   Scenario: Verify the placeholder text "Search for area or street name" is displayed when the select loaction bar is empty
   
     When User click on select location bar

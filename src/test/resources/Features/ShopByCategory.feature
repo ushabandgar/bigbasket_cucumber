@@ -25,6 +25,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "fashion" category
     Then I should see Fashion category page
 
+
   Scenario: verify All the Categories Are Clickable
     
     When I scroll down
@@ -364,6 +365,7 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     Then User should see the sorting options available
 
   #bug
+  
   Scenario: Verify that Relevance option sorts products by Price - Low to High
     
     When I click on SHOP BY CATEGORY menu
@@ -372,7 +374,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And I click on "Price - Low to High" relevance option
     Then User should see product list sorting from low to high price
 
-  #TC: 47
   Scenario: Verify that Relevance option sorts products by Price - Low to High
     
     When I click on SHOP BY CATEGORY menu
