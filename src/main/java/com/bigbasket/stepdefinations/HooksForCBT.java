@@ -1,6 +1,6 @@
-package com.bigbasket.stepdefinations;
+//package com.bigbasket.stepdefinations;
 
-import java.io.IOException;
+/*import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ import com.propUtils.App;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
-public class HooksForCBT {
+public class HooksForCBT {*/
 
 	//static ThreadLocal<String> browser = new ThreadLocal<String>();
 	//Keyword keyword = new Keyword();
@@ -48,6 +48,6 @@ public class HooksForCBT {
 		keyword.quitBrowser();
 		System.out.println("close browser");
 
-	}*/
+	}
 
-}
+}*/

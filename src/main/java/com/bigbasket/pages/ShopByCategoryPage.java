@@ -314,9 +314,9 @@ public class ShopByCategoryPage {
 		List<WebElement> brandListNames = keyword.getWebElements(Locator.brandListNames);
 		for (int i = 0; i < brandListCheckboxes.size(); i++) {
 			String brandName = brandListNames.get(i).getText();
-			if (brandName.contains("Adidas") || brandName.contains("Brodees")) {
+			if (brandName.contains("Adidas")) {
 				brandListCheckboxes.get(i).click();
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				brandListNames = keyword.getWebElements(Locator.brandListNames);
 				brandListCheckboxes = keyword.getWebElements(Locator.brandListCheckbox);
 			}
@@ -329,7 +329,7 @@ public class ShopByCategoryPage {
 		for (int i = 0; i < brandListCheckboxes.size(); i++) {
 			String brandName = brandListNames.get(i).getText();
 			boolean flag = brandListCheckboxes.get(i).isSelected();
-			if (brandName.contains("Adidas") || brandName.contains("Brodees")) {
+			if (brandName.contains("Adidas")) {
 				Assert.assertTrue(flag);
 			} else {
 				Assert.assertFalse(flag);

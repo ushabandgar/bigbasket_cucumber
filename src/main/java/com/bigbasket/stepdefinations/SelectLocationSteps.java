@@ -3,10 +3,7 @@ package com.bigbasket.stepdefinations;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import com.bigbasket.base.Keyword;
-import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 
 import io.cucumber.datatable.DataTable;
