@@ -2,8 +2,6 @@ package com.bigbasket.base;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;

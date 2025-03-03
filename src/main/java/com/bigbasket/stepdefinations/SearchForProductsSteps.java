@@ -1,12 +1,10 @@
 package com.bigbasket.stepdefinations;
 
-import java.io.IOException;
 
 import com.bigbasket.base.Keyword;
 import com.bigbasket.pages.HomePage;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 

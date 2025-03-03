@@ -1,11 +1,9 @@
 package com.bigbasket.stepdefinations;
 
-import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
 
 import com.bigbasket.base.Keyword;
-import com.bigbasket.base.WaitFor;
 import com.bigbasket.pages.HomePage;
 import com.bigbasket.pages.ProductDetailPage;
 import com.bigbasket.pages.ProductSearchPage;

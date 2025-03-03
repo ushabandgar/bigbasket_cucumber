@@ -1,6 +1,5 @@
 package com.bigbasket.stepdefinations;
 
-import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -28,19 +27,19 @@ public class ShopByCategorySteps {
 
 	}
 
-	@When("I click on SHOP BY CATEGORY menu")
+	@When("User click on SHOP BY CATEGORY menu")
 	public void clickOnShopByCatgeoryMenuBeforeExpand() {
 		HomePage homepage = new HomePage();
 		homepage.clickOnShopByCategoryMenu();
 	}
 
-	@When("I scroll down")
+	@When("User scroll down")
 	public void scrollDown() {
 		Keyword keyword = new Keyword();
 		keyword.mouseScrollDown();
 	}
 
-	@And("I click on all the categories one by one")
+	@And("User click on all the categories one by one")
 	public void clickOnAllCatgeoriesOneByOne() throws InterruptedException {
 		HomePage homepage = new HomePage();
 		homepage.clickOnAllCategoriesOneByOne();
@@ -52,56 +51,56 @@ public class ShopByCategorySteps {
 		homepage.verifyAllCategoriesAreClickable();
 	}
 
-	@When("I click on {string} menu after expand")
+	@When("User click on {string} menu after expand")
 	public void clickOnShopByCatgeoryMenuAfterExpand(String ShopByCategory) {
 		HomePage homepage = new HomePage();
 		homepage.clickOnShopByCategoryMenu();
 	}
 
-	@Then("I should see a catgories list like {string}, {string}, {string} etc")
+	@Then("User should see a catgories list like {string}, {string}, {string} etc")
 	public void verifyCategoryListShouldBeDisplayed(String category1, String category2, String category3) {
 		HomePage homepage = new HomePage();
 		homepage.verifyAllCatgoriesAreDisplayedProperly();
 	}
 
-	@Then("I should see {string} menu collapses")
+	@Then("User should see {string} menu collapses")
 	public void verifyShopByCategoryShouldCollapseAfterExpand(String ShopByCategory) {
 		HomePage homepage = new HomePage();
 		homepage.verifyShopByCategoryCollapsesOnClickAfterExapands();
 	}
 
-	@And("I click outside the dropdwon")
+	@And("User click outside the dropdwon")
 	public void clickOutsideTheDropDown() {
 		Keyword keyword = new Keyword();
 		keyword.mouseHoverOn();
 	}
 
-	@And("I click on {string} category")
+	@And("User click on {string} category")
 	public void clickOnCategory(String catgeoryName) throws InterruptedException {
 		HomePage homepage = new HomePage();
 		String catgeoryNameLowerCase=catgeoryName.toLowerCase();
 		homepage.clickOnCategory(catgeoryNameLowerCase);
 	}
 
-	@Then("I should see Fashion category page")
+	@Then("User should see Fashion category page")
 	public void respectiveCategoryPageAfterClick() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifySpecificCatgeoryPageOpens();
 	}
 
-	@And("I click on Home button")
+	@And("User click on Home button")
 	public void clickOnHomeButton() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnHomeButton();
 	}
 
-	@Then("I should navigated to home Page")
+	@Then("User should navigated to home Page")
 	public void verifyNavigationToHomePageBytappingOnHomeButton() {
 		HomePage homepage = new HomePage();
 		homepage.verifyNavigatedToHomePageFromCategoryPage();
 	}
 
-	@And("I click on Back button of the browser")
+	@And("User click on Back button of the browser")
 	public void clickOnBackButtonOfBrowser() {
 		Keyword keyword = new Keyword();
 		keyword.clickOnBackButtonOfBrowser();
@@ -109,13 +108,13 @@ public class ShopByCategorySteps {
 		homepage.verifyNavigatedToHomePageFromCategoryPage();
 	}
 
-	@Then("I should see {string} message")
+	@Then("User should see {string} message")
 	public void noProductMessageOfCategory(String NoProductMessage) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyNoProductMessgae();
 	}
 
-	@Then("I should see Shop By Category Section on Catgeory page")
+	@Then("User should see Shop By Category Section on Catgeory page")
 	public void verifyShopByCategorySectionOnCategoryPage() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyShopByCategorySectionAvailableOnCategoryPage();
@@ -135,14 +134,14 @@ public class ShopByCategorySteps {
 		categoryPage.verifyShowMoreLinksDisplays();
 	}
 
-	@And("I get the text before click on Show more +")
+	@And("User get the text before click on Show more +")
 	public void getTextBeforeClickOnshowMore() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.getTextBeforeClickOnShowMore();
 
 	}
 
-	@And("I click on {string} link")
+	@And("User click on {string} link")
 	public void clickOnShowMore(String ShowMore) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnShowMoreLink();
@@ -167,7 +166,7 @@ public class ShopByCategorySteps {
 
 	}
 
-	@Then("I click on Show less - link additional categories should be collpased")
+	@Then("User click on Show less - link additional categories should be collpased")
 	public void additionalCategoriesCollapsed() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyAdditionalCategoriesAreCollapsed();
@@ -179,7 +178,7 @@ public class ShopByCategorySteps {
 		categoryPage.verifyListOfFilter();
 	}
 
-	@When("I check if the filter section is scrollable")
+	@When("User check if the filter section is scrollable")
 	public void filterSectionScrollable() throws InterruptedException {
 
 		Keyword keyword = new Keyword();
@@ -190,46 +189,46 @@ public class ShopByCategorySteps {
 
 	}
 
-	@When("I select the brand {string} from the brand filter")
+	@When("User select the brand {string} from the brand filter")
 	public void selectBrand(String filterNameFromList) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnYourFilter(filterNameFromList);
 
 	}
 
-	@And("I click on checkbox of already selcted brand {string}")
+	@And("User click on checkbox of already selcted brand {string}")
 	public void clickOnAlreadySelctedBrandToDeselct(String brandNameFromList) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.deSelectBrand(brandNameFromList);
 	}
 
-	@Then("I should see {string} brand is selected")
+	@Then("User should see {string} brand is selected")
 	public void isBrandSelected(String brandNameFromList) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyBrandIsSelected(brandNameFromList);
 
 	}
 
-	@Then("I should see {string} brand is deselected")
+	@Then("User should see {string} brand is deselected")
 	public void isBrandDeselected(String brandNameFromList) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyBrandIsDeselected(brandNameFromList);
 
 	}
 
-	@Then("I should only see products from {string}")
+	@Then("User should only see products from {string}")
 	public void verifyProductListOfSelectedBrand(String brandNameFromList) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyProductListIsOfSelectedBrandOnly(brandNameFromList);
 	}
 
-	@When("I select the multiple brands from the brand filter")
+	@When("User select the multiple brands from the brand filter")
 	public void selectMultipleBrands() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.selectMultipleBrands();
 	}
 
-	@Then("I should see multiple brands are selected")
+	@Then("User should see multiple brands are selected")
 	public void verifyMultipleBrandsSelected() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyMultipleBrandsAreSelected();
@@ -242,41 +241,41 @@ public class ShopByCategorySteps {
 		categoryPage.verifyProductListForMultipleBrands();
 	}
 
-	@Then("I should see {string} section should be displayed and enabled")
+	@Then("User should see {string} section should be displayed and enabled")
 	public void verifyFiltersSectionDisplayedAfterApplyingFilter(String Filters) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyFiltersSectionEnabledAfterApplyingFilter(Filters);
 	}
 
-	@Then("I should see {string} button should be displayed in Filters Section.")
+	@Then("User should see {string} button should be displayed in Filters Section.")
 	public void verifyClearButtonIsDisplayedInFiltersSection(String Clear) {
 
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyClearButtonDisplayed(Clear);
 	}
 
-	@Then("I should see {string} as applied Filters in Filter section.")
+	@Then("User should see {string} as applied Filters in Filter section.")
 	public void verifyAppliedFiltersListInFiltersSection(String AdidasTShirt) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		// categoryPage.getAppliedFilterListInFilterSection();
 		categoryPage.AppliedFilterInFilterSection(AdidasTShirt);
 	}
 
-	@And("I click on {string} button in Filter Section")
+	@And("User click on {string} button in Filter Section")
 	public void clearFilter(String Clear) throws InterruptedException {
 
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.clickOnClearButton();
 	}
 
-	@Then("I should see all filters should be cleared.")
+	@Then("User should see all filters should be cleared.")
 	public void verifyClearedAllTheFiltersInFilterSection() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyClearAllFilters();
 
 	}
 
-	@And("I scroll until all products are loaded")
+	@And("User scroll until all products are loaded")
 	public void scrollDownUntillProductsLoaded() throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		Keyword keyword = new Keyword();
@@ -292,7 +291,7 @@ public class ShopByCategorySteps {
 		categoryPage.getProductCountShowingWithCatgeoryNames();
 	}
 
-	@And("i get count of product for that category")
+	@And("User get count of product for that category")
 	public void originalProductCountAfterClickOnCategory() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.getOriginalProductCountAfterClickingOnCategory();
@@ -304,13 +303,13 @@ public class ShopByCategorySteps {
 		categoryPage.verifyActualProductCountAndCountShowingWithCategoryName();
 	}
 
-	@And("i get product count for applied filter")
+	@And("User get product count for applied filter")
 	public void getProductCountAfterApplyingFilter() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		countAfterFilter = categoryPage.getProductCountAfterApplyingFilter();
 	}
 
-	@Then("I should see original product list.")
+	@Then("User should see original product list.")
 	public void getOriginalProductListWithoutFilter() throws InterruptedException {
 		scrollDownUntillProductsLoaded();
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
@@ -318,45 +317,45 @@ public class ShopByCategorySteps {
 		Assert.assertNotEquals(countAfterFilter, countOriginal);
 	}
 
-	@And("I click on {string} subcategory")
+	@And("User click on {string} subcategory")
 	public void clickOnYourSubCategory(String SubCategoryName) throws InterruptedException {
 		Keyword keyword = new Keyword();
 		keyword.clickOnYourSubCategory(SubCategoryName);
 	}
 
-	@Then("I should see that subcategory should be added in Category hierarchy.")
+	@Then("User should see that subcategory should be added in Category hierarchy.")
 	public void verifySubCategoryAddedInCategoryHierarchy() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyCategoryTagsAfterClickingOnSubActegory();
 	}
 
-	@And("I click on {string}")
+	@And("User click on {string}")
 	public void clickOnHideFilters(String HideFilters) throws InterruptedException {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		classNameBeforeHideFilter = categoryPage.getClassNameBeforeHideFilter();
 		categoryPage.clickOnHideFiltersButton();
 	}
 
-	@Then("I should see All Filters should get hided.")
+	@Then("User should see All Filters should get hided.")
 	public void verifyAllFiltersAreHidedAfterTapOnHideFilters() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		String classNameAfterHideFilter = categoryPage.getClassNameAfterHideFilter();
 		Assert.assertNotEquals(classNameBeforeHideFilter, classNameAfterHideFilter);
 	}
 
-	@Then("I should see Hide Filter text replaces with {string}.")
+	@Then("User should see Hide Filter text replaces with {string}.")
 	public void verifyHideFiltersReplacesWithShowFiltersOnTapOfIt(String ExpectedText) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
 	}
 
-	@Then("I should see Show Filter text replaces with {string}.")
+	@Then("User should see Show Filter text replaces with {string}.")
 	public void verifyShowFiltersReplacesWithHideFiltersOnTapOfIt(String ExpectedText) {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		categoryPage.verifyHideFiltersTextReplacesWithShowFiltersAfterClick(ExpectedText);
 	}
 
-	@Then("I should see All Filters should be shown.")
+	@Then("User should see All Filters should be shown.")
 	public void verifyAllFiltersShownAfterTapOnShowFilters() {
 		ShopByCategoryPage categoryPage = new ShopByCategoryPage();
 		String classNameAfterHideFilter = categoryPage.getClassNameAfterHideFilter();
@@ -473,7 +472,7 @@ public class ShopByCategorySteps {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.verifyRelevanceFiltersDisplayed(relevanceFilter);
     }
-    @And("I click on {string} button")
+    @And("User click on {string} button")
     public void clickOnRelevanceButton(String relevanceButton) throws InterruptedException {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.clickOnRelevanceButton();
@@ -485,7 +484,7 @@ public class ShopByCategorySteps {
     	categoryPage.verifyRelevanceFilAdnSortingOptionsAvaialble();
     }
 
-    @And("I click on {string} relevance option")
+    @And("User click on {string} relevance option")
     public void clickOnYourRelevenaceOption(String relevanceOptionSelected) throws InterruptedException {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.clickOnAnyRelevanceOption(relevanceOptionSelected);
@@ -503,13 +502,13 @@ public class ShopByCategorySteps {
     	categoryPage.verifyProductListPriceIsSortingFromHighToLow();
     }
     
-    @And("I click on {string} icon")
+    @And("User click on {string} icon")
     public void clickOnSaveForLaterButton(String SaveForLater) throws InterruptedException {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.clickOnSaveForLater();
     }
 
-    @Then("I should see opening login or signup popup")
+    @Then("User should see opening login or signup popup")
     public void verifyLoginOrSignupPopupOpens() {
     	ShopByCategoryPage categoryPage = new ShopByCategoryPage();
     	categoryPage.verifyLoginTextAfterSaveForLaterClick();

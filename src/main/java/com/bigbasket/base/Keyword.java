@@ -1,8 +1,6 @@
 package com.bigbasket.base;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -21,7 +18,6 @@ import org.testng.annotations.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.bigbasket.pages.HomePage;
-import com.propUtils.App;
 
 public class Keyword {
 
@@ -30,7 +26,7 @@ public class Keyword {
     private static final Logger LOG = LogManager.getLogger(Keyword.class);
     
 	public void openBrowser(@Optional String browserName) throws IOException {
-		boolean isOnGrid=true;
+//		boolean isOnGrid=true;
 //		if(isOnGrid) {
 //			String hubUrl=" http://192.168.1.6:4444";
 //			ChromeOptions option=new ChromeOptions();

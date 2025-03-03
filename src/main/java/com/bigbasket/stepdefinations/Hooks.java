@@ -7,14 +7,9 @@ import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.util.FileUtils;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.testng.reporters.Files;
-
 import com.bigbasket.base.Keyword;
 import com.propUtils.App;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -26,15 +21,11 @@ public class Hooks {
 	@Before
 	public void setUp() throws Exception {
 		keyword.openBrowser(App.getBrowserName());
-		System.out.println("launching browser from proeprties file");
+		LOG.info("Launched browser from proeprties file.");
 		keyword.launchUrl(App.getUrl("qa"));
 		keyword.maximizeBrowser();
 	}
 
-	/*
-	 * @After public void tearDown() { keyword.quitBrowser();
-	 * LOG.info("close browser"); }
-	 */
 	@After
 	public void afterScenario(Scenario scenario) throws IOException {
 		if (scenario.isFailed()) {
@@ -45,6 +36,6 @@ public class Hooks {
 			com.google.common.io.Files.copy(screenshotFile, fileLocation);
 		}
 		keyword.quitBrowser();
-
+		LOG.info("Browser Closed.");
 	}
 }
