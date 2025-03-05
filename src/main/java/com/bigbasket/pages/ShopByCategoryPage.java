@@ -675,10 +675,11 @@ public class ShopByCategoryPage {
 	}
 
 	public void verifyRelevanceFilAdnSortingOptionsAvaialble() {
-		WebElement sortingOption = Keyword.driver.findElement(By.id("headlessui-listbox-button-:r12:"));
-		String expandedValue = sortingOption.getAttribute("aria-expanded");
+		WebElement sortingOption = Keyword.driver.findElement(By.xpath("//button[contains(@id,\"headlessui-listbox-button\")]"));
+		String expandedValue = sortingOption.getAttribute("data-headlessui-state");
 		if (sortingOption.isDisplayed()) {
-			Assert.assertTrue(expandedValue.equals("true"));
+			Assert.assertTrue(expandedValue.equals("open"));
+			System.out.println("Relavance options expanded.");
 		}
 	}
 

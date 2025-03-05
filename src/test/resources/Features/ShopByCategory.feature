@@ -309,14 +309,16 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     Then "Relevance" filter button should be displayed
+    
 
-  Scenario: Verify that Relevance button is displayed on category page
+  Scenario: Verify that sorting options  is displayed on click of Relevance button
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     And User click on "Relevance" button
     Then User should see the sorting options available
 
   #bug
+  
   Scenario: Verify that Relevance option sorts products by Price - Low to High
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
@@ -324,7 +326,8 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     And User click on "Price - Low to High" relevance option
     Then User should see product list sorting from low to high price
 
-  Scenario: Verify that Relevance option sorts products by Price - Low to High
+
+  Scenario: Verify that Relevance option sorts products by Price - High to Low
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     And User click on "Relevance" button

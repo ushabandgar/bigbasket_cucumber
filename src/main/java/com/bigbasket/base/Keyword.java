@@ -1,6 +1,7 @@
 package com.bigbasket.base;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -23,37 +25,33 @@ public class Keyword {
 
 	public static RemoteWebDriver driver;
 
-    private static final Logger LOG = LogManager.getLogger(Keyword.class);
-    
-	public void openBrowser(@Optional String browserName) throws IOException {
-//		boolean isOnGrid=true;
-//		if(isOnGrid) {
-//			String hubUrl=" http://192.168.1.6:4444";
-//			ChromeOptions option=new ChromeOptions();
-//			option.addArguments("--start-maximized");
-//			driver=new RemoteWebDriver(new URL(hubUrl),option);
-//			
-//		}else {
-		if (browserName == null) {
-				System.out.println("Launching Chrome by default");
-				driver = new ChromeDriver();
-			} else if (browserName.equalsIgnoreCase("Chrome")) {
-				driver = new ChromeDriver();
-			} else if (browserName.equalsIgnoreCase("Firefox")) {
-				driver = new FirefoxDriver();
-			} else if (browserName.equalsIgnoreCase("Safari")) {
-				driver = new SafariDriver();
-			} else if (browserName.equalsIgnoreCase("edge")) {
-				driver = new EdgeDriver();
-			} else {
+	private static final Logger LOG = LogManager.getLogger(Keyword.class);
 
-				LOG.error("Invalid browser name");
-				//System.err.println("Invalid browser name");
-			}
-			//System.out.println("Launched " + browserName + " browser");
-			LOG.info("Launched " + browserName + " browser");
+	public void openBrowser(@Optional String browserName) throws IOException {
+		boolean isOnGrid=false;
+		if(isOnGrid) {
+			String hubUrl=" http://192.168.1.6:4444";
+			ChromeOptions option=new ChromeOptions();
+			option.addArguments("--start-maximized");
+			driver=new RemoteWebDriver(new URL(hubUrl),option);
+			
+		}else if (browserName == null) {
+			System.out.println("Launching Chrome by default");
+			driver = new ChromeDriver();
+		} else if (browserName.equalsIgnoreCase("Chrome")) {
+			driver = new ChromeDriver();
+		} else if (browserName.equalsIgnoreCase("Firefox")) {
+			driver = new FirefoxDriver();
+		} else if (browserName.equalsIgnoreCase("Safari")) {
+			driver = new SafariDriver();
+		} else if (browserName.equalsIgnoreCase("edge")) {
+			driver = new EdgeDriver();
+		} else {
+
+			LOG.error("Invalid browser name");
 		}
-		//}
+		LOG.info("Launched " + browserName + " browser");
+	}
 
 	public void launchUrl(String url) {
 		driver.get(url);
@@ -62,7 +60,7 @@ public class Keyword {
 
 	public void clickOn(WebElement element) {
 		element.click();
-		System.out.println("Clicked on: "+element.getText());
+		System.out.println("Clicked on: " + element.getText());
 
 	}
 
@@ -84,7 +82,6 @@ public class Keyword {
 
 	}
 
-	// it take webelement and text
 	public static void sendkeys(WebElement element, String text) {
 		element.sendKeys(text);
 	}
@@ -195,7 +192,8 @@ public class Keyword {
 	}
 
 	public void clickOnYourCategory(String categoryNameInLowerCaseOnly) throws InterruptedException {
-		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
+		categoryNameInLowerCaseOnly = categoryNameInLowerCaseOnly.replace(" & ", "-").replace(", ", "-").replace(" ",
+				"-");
 		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(
 				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul/li/a[@href=\"/cl/"
 						+ categoryNameInLowerCaseOnly + "/?nc=nb\"]"));
@@ -226,8 +224,9 @@ public class Keyword {
 
 	public void mouseHoverOnYourSubCategory(String categoryNameToHoverOn) throws InterruptedException {
 		categoryNameToHoverOn = categoryNameToHoverOn.replace(" & ", "-").replace(", ", "-").replace(" ", "-");
-		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(
-				By.xpath("//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul[2]/li/a[@href=\"/pc/fruits-vegetables/"+categoryNameToHoverOn+"/?nc=nb\"]"));
+		WebElement categoryName = HomePage.shopByCategoryMenu.findElement(By.xpath(
+				"//div[@class=\"CategoryMenu___StyledMenuItems-sc-d3svbp-4 fpskRu\"]/nav/ul[2]/li/a[@href=\"/pc/fruits-vegetables/"
+						+ categoryNameToHoverOn + "/?nc=nb\"]"));
 		WaitFor.elementToBeClickable(categoryName);
 		mouseHoverOn(categoryName);
 		Thread.sleep(3000);
@@ -243,6 +242,5 @@ public class Keyword {
 		Thread.sleep(3000);
 
 	}
-
 
 }
