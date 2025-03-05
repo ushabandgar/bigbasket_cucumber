@@ -50,3 +50,17 @@ Feature: This feature file test Search For Produtcs functionality
   	Scenario: verify when user enter invalid large text "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" into Search Bar
     When User enter invalid extremely lagre text into search text box
     Then "No Result found" message should be displayed on Homepage
+
+    Scenario Outline: Verify search with different inputs
+    Given User is on the search page
+    When User searches for "<searchInput>"
+    Then Search results should be displayed as per "<searchInput>"
+
+    Examples: 
+      | searchInput |
+      | Laptop      |
+      | Smartphone  |
+      | banana      |
+      | Mango       |
+      | milk        |
+    
