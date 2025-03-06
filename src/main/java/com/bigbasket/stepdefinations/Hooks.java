@@ -1,9 +1,9 @@
 package com.bigbasket.stepdefinations;
 
-import java.io.File;
+//import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,13 +27,17 @@ public class Hooks {
 	}
 
 	@After
-	public void afterScenario(Scenario scenario) throws IOException {
+	public void tearDown(Scenario scenario) throws IOException {
 		if (scenario.isFailed()) {
+			/*to save screenshot in project folder
 			String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-			File screenshotFile = Keyword.driver.getScreenshotAs(OutputType.FILE);
-			File fileLocation = new File(
-					System.getProperty("user.dir") + "/target/screenshots/" + scenario.getName() + timestamp + ".png");
-			com.google.common.io.Files.copy(screenshotFile, fileLocation);
+			File fileLocation = new File(System.getProperty("user.dir") + "/target/screenshots/" + scenario.getName().replace(" ", "_") +".png");
+			com.google.common.io.Files.copy(screenshotFile, fileLocation);*/
+			
+			//to attach screenshot to allure report
+			String screenshotName=scenario.getName().replace(" ", "_");
+			byte[] screenshotFile = Keyword.driver.getScreenshotAs(OutputType.BYTES);		
+			scenario.attach(screenshotFile, "image/png", screenshotName);
 		}
 		keyword.quitBrowser();
 		LOG.info("Browser Closed.");

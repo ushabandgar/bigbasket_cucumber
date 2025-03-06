@@ -1,4 +1,4 @@
-Feature: This feature file test the "SHOP BY CATEGORY" functionality
+Feature: "Shop by Category and Filters" functionality
 
   Scenario: verify "SHOP BY CATEGORY" menu displayed on HomePage
     Then SHOP BY CATEGORY should be displayed on HomePage
@@ -20,7 +20,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     Then User should see Fashion category page
-
 
   Scenario: verify All the Categories Are Clickable
     When User scroll down
@@ -309,7 +308,6 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     Then "Relevance" filter button should be displayed
-    
 
   Scenario: Verify that sorting options  is displayed on click of Relevance button
     When User click on SHOP BY CATEGORY menu
@@ -318,22 +316,19 @@ Feature: This feature file test the "SHOP BY CATEGORY" functionality
     Then User should see the sorting options available
 
   #bug
-  
   Scenario: Verify that Relevance option sorts products by Price - Low to High
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     And User click on "Relevance" button
     And User click on "Price - Low to High" relevance option
     Then User should see product list sorting from low to high price
-
-
+ #bug
   Scenario: Verify that Relevance option sorts products by Price - High to Low
     When User click on SHOP BY CATEGORY menu
     And User click on "fashion" category
     And User click on "Relevance" button
     And User click on "Price - High to Low" relevance option
     Then User should see product list sorting from high to low price
-
 
   Scenario: Verify that on click of Save For Later opening login popup
     When User click on SHOP BY CATEGORY menu

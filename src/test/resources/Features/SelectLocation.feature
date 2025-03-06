@@ -1,5 +1,5 @@
 
-Feature: This feature file test Select Location functionality
+Feature: "Select Location" functionality
 
   Scenario: Verify that "Select Location" bar is visible on the Homepage
     Then "Select Location" bar should be display on HomePage

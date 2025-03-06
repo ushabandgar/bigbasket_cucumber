@@ -1,5 +1,5 @@
 
-Feature: This feature file test Search For Produtcs functionality
+Feature: "Search For Produtcs" functionality
 
 
   Scenario: verify "Search Text Box" displayed on HomePage
