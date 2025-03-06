@@ -358,7 +358,7 @@ public class HomePage {
 	}
 
 	public String enterTextIntoTextBox() {
-		keyword.sendkeys(searchTextBox, "Tomato");
+		Keyword.sendkeys(searchTextBox, "Tomato");
 		WaitFor.elementToBeDisplayed(searchTextBox);
 		String valueAfterEnterText = searchTextBox.getAttribute("value");
 		return valueAfterEnterText;
@@ -379,7 +379,7 @@ public class HomePage {
 	}
 
 	public void enterSpecialCharacterOnlyIntoSearchTextBox(){
-		keyword.sendkeys(searchTextBox, "!@#");
+		Keyword.sendkeys(searchTextBox, "!@#");
 		WaitFor.elementToBeDisplayed(searchTextBox);
 		//Thread.sleep(3000);
 
@@ -392,7 +392,7 @@ public class HomePage {
 	}
 
 	public void enterNumberOnlyIntoSearchTextBox() {
-		keyword.sendkeys(searchTextBox, "01234569746");
+		Keyword.sendkeys(searchTextBox, "01234569746");
 		WaitFor.elementToBeDisplayed(searchTextBox);
 		//Thread.sleep(3000);
 
@@ -405,7 +405,7 @@ public class HomePage {
 	}
 
 	public void enterInvalidSpecialCharacterOnlyIntoSearchTextBox(){
-		keyword.sendkeys(searchTextBox, "<:>/{};");
+		Keyword.sendkeys(searchTextBox, "<:>/{};");
 		WaitFor.elementToBeDisplayed(searchTextBox);
 		//Thread.sleep(3000);
 
@@ -418,7 +418,7 @@ public class HomePage {
 	}
 
 	public void enterExtremelyLargeInvalidTextIntoSearchTextBox()  {
-		keyword.sendkeys(searchTextBox, "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		Keyword.sendkeys(searchTextBox, "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		WaitFor.elementToBeDisplayed(searchTextBox);
 		//Thread.sleep(3000);
 

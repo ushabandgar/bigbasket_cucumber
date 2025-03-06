@@ -353,7 +353,7 @@ public class ProductDetailPage {
 		WaitFor.visibilityOfElement(aboutTheProductDesceiption);
 		JavascriptExecutor jse = (JavascriptExecutor) Keyword.driver;
 		jse.executeScript("window.scrollBy(0,800)");
-		String description = "Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
+		//String description = "Known for its dairy, confectionary and other products, Amul is one of the best brands in the Indian food industry. It brings in pure products that are also filled with flavour and good health. Amul Taazas Toned Milk is one such product that is made for the health conscious consumer.";
 		assertTrue(aboutTheProductDesceiption.getText().contains("dairy"), "About the product description Not match");
 	}
 
@@ -408,7 +408,7 @@ public class ProductDetailPage {
 		keyword.scrollDownTillSpecificElement(footerSection);
 		WaitFor.visibilityOfElements(brandList);
 		System.out.println("Total brandList brand products found: " + brandList.size());
-		JavascriptExecutor js = (JavascriptExecutor) Keyword.driver;
+	//	JavascriptExecutor js = (JavascriptExecutor) Keyword.driver;
 		SoftAssert softAssert = new SoftAssert();
 		boolean freshoFound = false;
 		for (WebElement list : brandList) {

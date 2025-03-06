@@ -1,4 +1,4 @@
-Feature: Product Detail Page functionality
+Feature: "Product Detail Page" functionality
 
   Scenario: verify User searches "Product", the URL will change on the same tab
     When The user searches for "Product"
