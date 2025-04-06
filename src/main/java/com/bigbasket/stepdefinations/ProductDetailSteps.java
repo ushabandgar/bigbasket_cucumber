@@ -362,4 +362,21 @@ public class ProductDetailSteps {
 		productDetailPage.switchWindowOnproductDetailPage();
 		productDetailPage.verifyPIPpage();
 	}
+	
+     @Given("user click on kelloggs")
+     public void ClickoncursorPointerButton() throws InterruptedException {
+    		ProductDetailPage productDetailPage = new ProductDetailPage();
+    		productDetailPage.clickoncursor();
+    		productDetailPage.clickOnkelloggs();
+    		
+     }
+     @When("the user should able to see all kelloggs product")
+     public void kellogsBrandproducts() throws InterruptedException {
+    	 ProductDetailPage productDetailPage = new ProductDetailPage();
+    	 productDetailPage.kellogsBrandproducts(); 
+    	 
+    	 
+     }
+     
+     
 }
