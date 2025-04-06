@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import com.bigbasket.base.Keyword;
 import com.bigbasket.base.WaitFor;
@@ -101,6 +102,16 @@ public class ProductDetailPage {
 	WebElement footerSection;
 	@FindBy(css = "section.z-10  li:nth-child(1)")
 	WebElement firstProduct;
+	
+	@FindBy(xpath = "//div[@class=\"TopNav___StyledMotionDiv2-sc-1vxbycn-3 cQFtua\"]/span[text()='Kelloggs']")
+	WebElement Kellongs;
+	
+	@FindBy(xpath = "//button[@class=\"h-full px-0 py-1.5\"]")
+	WebElement corserPointer;
+	
+	@FindBy(xpath = "//div[@class=\"SKUDeck___StyledDiv-sc-1e5d9gk-0 eA-dmzP\"]/h3/a")
+	List<WebElement> kellogsProductList;
+	
 
 	public ProductDetailPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -497,7 +508,6 @@ public class ProductDetailPage {
 		keyword.scrollDownTillSpecificElement(footerSection);
 		WaitFor.visibilityOfElements(brandList);
 
-		SoftAssert softAssert = new SoftAssert();
 //		boolean gheeFound = false;
 //		for (WebElement list : brandList) {
 //			String brandLists = list.getText();
@@ -546,6 +556,34 @@ public class ProductDetailPage {
 		String currentURL = Keyword.driver.getCurrentUrl();
 		System.out.println("Current Title: " + currentURL);
 		assertTrue(currentURL.contains("pd"));
+	}
+
+	public void clickoncursor() {
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/");
+		corserPointer.click();
+		
+	}
+
+	public void clickOnkelloggs() throws InterruptedException {
+		WaitFor.elementToBeClickable(Kellongs);
+		Thread.sleep(4000);
+		Kellongs.click();
+		
+	}
+
+	public void kellogsBrandproducts() throws InterruptedException {
+		WaitFor.untilUrlLoad("https://www.bigbasket.com/pb/kelloggs/");
+		Thread.sleep(5000);
+		for(WebElement list:kellogsProductList) {
+	
+		String lists= list.getText();
+		System.out.println(lists);
+	
+		assertTrue(list.getText().contains("Kellogg's"));
+		}
+		
+		
+		
 	}
 
 }
